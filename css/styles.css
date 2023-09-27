@@ -498,6 +498,7 @@ progress {
 .lead-header {
   font-size: 1rem;
   font-weight: bold;
+  font-family: Inkfree;
 }
 
 .display-1 {
@@ -11230,7 +11231,13 @@ body {
 }
 
 .about-mf .about-img img {
-  margin-left: 10px;
+  margin-left: 140px;
+}
+@media (max-width: 767px) {
+  .about-mf .about-img {
+    margin-right: 70px;
+    max-width: 60%;
+  }
 }
 
 @media (min-width: 767px) {
