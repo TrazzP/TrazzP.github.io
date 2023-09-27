@@ -11241,7 +11241,7 @@ body {
 }
 @media (max-width: 767px) {
   .about-mf .about-img {
-    margin-right: 70px;
+    justify-content: center;
     max-width: 60%;
   }
 }
@@ -11273,7 +11273,7 @@ body {
 .about-header {
   font-family: Inkfree; 
   font-size: 19px; 
-  font-weight: bold; 
+  font-weight: 900; 
   text-transform: uppercase;
 }
 
