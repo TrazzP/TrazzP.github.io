@@ -224,7 +224,7 @@ strong {
 }
 
 small, .small {
-  font-size: 0.875em;
+  font-size: 1em;
 }
 
 mark, .mark {
@@ -11142,6 +11142,12 @@ body {
   padding: 3rem;
   font-size: 90%;
 }
+
+.projects-section .header{
+  text-decoration: none;
+  font-size: 160%;
+  font-family: Inkfree;
+}
 @media (min-width: 992px) {
   .projects-section .project-text {
     padding: 5rem;
@@ -11244,6 +11250,7 @@ body {
   .about-mf .box-pl2 {
     margin-top: 3rem;
     padding-left: 0rem;
+    max-width: 100%;
   }
 }
 
