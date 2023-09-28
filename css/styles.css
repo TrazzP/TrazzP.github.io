@@ -11237,20 +11237,18 @@ body {
 }
 
 .about-mf .about-img img {
-  margin-left: 140px;
-}
-@media (max-width: 767px) {
-  .about-mf .about-img {
-    justify-content: center;
-    max-width: 60%;
-  }
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
-@media (min-width: 767px) {
+
+@media (min-width: 768px) {
   .about-mf .box-pl2 {
     margin-top: 3rem;
     padding-left: 0rem;
-    max-width: 100%;
+    width: 200%;
   }
 }
 
