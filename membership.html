@@ -53,57 +53,117 @@
 
       <section class="section" id="build">
         <div class="container signup-grid">
-          <form class="signup-card" id="membership-builder">
+          <form class="signup-card" id="membership-builder" data-stepper>
             <div>
+              <h3>Build your membership</h3>
+              <p class="muted">Move step-by-step and customize your care.</p>
+            </div>
+
+            <div class="stepper-nav" role="tablist">
+              <button class="stepper-tab is-active" type="button" data-step-index="0">Plan</button>
+              <button class="stepper-tab" type="button" data-step-index="1">Rx</button>
+              <button class="stepper-tab" type="button" data-step-index="2">Dental</button>
+              <button class="stepper-tab" type="button" data-step-index="3">Vision</button>
+              <button class="stepper-tab" type="button" data-step-index="4">Details</button>
+            </div>
+
+            <div class="stepper-panel is-active" data-step-index="0">
               <h3>1. Choose your plan</h3>
               <p class="muted">Pick the membership that fits your household.</p>
-            </div>
-            <fieldset class="form-row">
-              <label>
-                <input type="radio" name="plan" data-price="100" data-label="Individual membership" checked />
-                Individual - $100/month
-              </label>
-              <label>
-                <input type="radio" name="plan" data-price="260" data-label="Family membership" />
-                Family bundle - $260/month
-              </label>
-            </fieldset>
-            <p class="muted">Family plans can add Rx, Dental, and Vision for even more value.</p>
-
-            <div id="addons">
-              <h3>2. Add services</h3>
-              <p class="muted">Most members add Onevia Rx for medication savings.</p>
-              <div class="upsell-grid">
-                <div class="upsell-item">
-                  <label>
-                    <input type="checkbox" name="addon" data-price="25" data-label="Onevia Rx" />
-                    Onevia Rx - $25/month
-                  </label>
-                  <span class="muted">Medication optimization and at-cost pricing.</span>
-                </div>
-                <div class="upsell-item">
-                  <label>
-                    <input type="checkbox" name="addon" data-price="40" data-label="Dental membership" />
-                    Dental membership - $40/month
-                  </label>
-                  <span class="muted">Preventive-first dentistry with transparent pricing.</span>
-                </div>
-                <div class="upsell-item">
-                  <label>
-                    <input type="checkbox" name="addon" data-contact="true" data-label="Vision membership" />
-                    Vision membership - call for pricing
-                  </label>
-                  <span class="muted">Annual eye care and proactive screening.</span>
-                </div>
+              <p class="muted stepper-hint">Family plans are ideal for households with 2 or more adults.</p>
+              <fieldset class="form-row">
+                <label>
+                  <input type="radio" name="plan" data-price="100" data-label="Individual membership" checked />
+                  Individual - $100/month
+                </label>
+                <label>
+                  <input type="radio" name="plan" data-price="260" data-label="Family membership" />
+                  Family bundle - $260/month
+                </label>
+              </fieldset>
+              <p class="muted">Family plans can add Rx, Dental, and Vision for even more value.</p>
+              <div class="stepper-actions">
+                <span></span>
+                <button class="btn btn-primary" type="button" data-next>Next: Onevia Rx</button>
               </div>
+            </div>
+
+            <div class="stepper-panel" data-step-index="1">
+              <h3>2. Add Onevia Rx</h3>
+              <p class="muted">Most members add Rx for medication savings and optimization.</p>
+              <p class="muted stepper-hint">If you take regular medications, Rx is often the most valuable add-on.</p>
+              <div class="upsell-item">
+                <label>
+                  <input type="checkbox" name="addon" data-price="25" data-label="Onevia Rx" />
+                  Onevia Rx - $25/month
+                </label>
+                <span class="muted">Pharmacist-led medication optimization and at-cost pricing.</span>
+              </div>
+              <ul class="service-list">
+                <li>Medication reviews and optimization</li>
+                <li>Chronic disease medication support</li>
+                <li>Refill coordination with your physician</li>
+                <li>At-cost medication pricing</li>
+              </ul>
               <div class="note-box">
-                <p>Our members typically add Onevia Rx to maximize savings and care continuity.</p>
+                <p>Our members typically add Onevia Rx to maximize savings.</p>
                 <a class="text-link" href="services.html#rx">See how Onevia Rx works -></a>
               </div>
+              <div class="stepper-actions">
+                <button class="btn btn-secondary" type="button" data-prev>Back</button>
+                <button class="btn btn-primary" type="button" data-next>Next: Dental</button>
+              </div>
             </div>
 
-            <div>
-              <h3>3. Your details</h3>
+            <div class="stepper-panel" data-step-index="2">
+              <h3>3. Add Dental</h3>
+              <p class="muted">Preventive-first dentistry with transparent pricing.</p>
+              <p class="muted stepper-hint">Routine care now helps avoid bigger procedures later.</p>
+              <div class="upsell-item">
+                <label>
+                  <input type="checkbox" name="addon" data-price="40" data-label="Dental membership" />
+                  Dental membership - $40/month
+                </label>
+                <span class="muted">Routine exams, cleanings, and at-cost restorative care.</span>
+              </div>
+              <ul class="service-list">
+                <li>Routine exams and cleanings</li>
+                <li>Basic imaging and screenings</li>
+                <li>At-cost restorative procedures</li>
+                <li>Coordinated care with your primary team</li>
+              </ul>
+              <div class="stepper-actions">
+                <button class="btn btn-secondary" type="button" data-prev>Back</button>
+                <button class="btn btn-primary" type="button" data-next>Next: Vision</button>
+              </div>
+            </div>
+
+            <div class="stepper-panel" data-step-index="3">
+              <h3>4. Add Vision</h3>
+              <p class="muted">Early detection and long-term eye health.</p>
+              <p class="muted stepper-hint">We will confirm pricing and availability before activation.</p>
+              <div class="upsell-item">
+                <label>
+                  <input type="checkbox" name="addon" data-contact="true" data-label="Vision membership" />
+                  Vision membership - call for pricing
+                </label>
+                <span class="muted">Comprehensive eye health reviews and preventive screenings.</span>
+              </div>
+              <ul class="service-list">
+                <li>Comprehensive eye health reviews</li>
+                <li>Preventive screenings and monitoring</li>
+                <li>Coordinated referrals when needed</li>
+                <li>Transparent membership pricing</li>
+              </ul>
+              <div class="stepper-actions">
+                <button class="btn btn-secondary" type="button" data-prev>Back</button>
+                <button class="btn btn-primary" type="button" data-next>Next: Your details</button>
+              </div>
+            </div>
+
+            <div class="stepper-panel" data-step-index="4">
+              <h3>5. Your details</h3>
+              <p class="muted stepper-hint">We will follow up to confirm your selections and next steps.</p>
               <div class="form-row">
                 <label>
                   Full name
@@ -122,10 +182,12 @@
                   <input type="tel" name="phone" placeholder="(555) 555-5555" />
                 </label>
               </div>
+              <div class="stepper-actions">
+                <button class="btn btn-secondary" type="button" data-prev>Back</button>
+                <button class="btn btn-primary" type="button">Proceed to checkout</button>
+              </div>
+              <p class="form-note">Template only. No charges will be made.</p>
             </div>
-
-            <button class="btn btn-primary" type="button">Continue to payment</button>
-            <p class="form-note">Template only. No charges will be made.</p>
           </form>
 
           <aside class="order-summary" data-order-summary>
@@ -135,88 +197,10 @@
               <span class="muted">Estimated monthly total</span>
               <div class="order-total" id="order-total">$0 / month</div>
             </div>
+            <button class="btn btn-primary" type="button">Checkout</button>
             <button class="btn btn-secondary" type="button">Apply promo code</button>
             <p class="order-note">Need help? Email hello@onevia.health</p>
           </aside>
-        </div>
-      </section>
-
-      <section class="section" id="services">
-        <div class="container">
-          <div class="section-title" data-reveal>
-            <span class="eyebrow">Services</span>
-            <h2>Explore Onevia services.</h2>
-            <p>See what is included with primary care, Rx, dental, and vision memberships.</p>
-          </div>
-          <div class="care-grid" data-reveal>
-            <article class="care-card">
-              <h3>Primary Care</h3>
-              <p>Direct access, longer visits, and proactive care planning.</p>
-              <span class="tag">Live now</span>
-              <a class="text-link" href="services.html#primary-care">Primary care details -></a>
-            </article>
-            <article class="care-card">
-              <h3>Onevia Rx</h3>
-              <p>Pharmacist-led medication optimization and at-cost pricing.</p>
-              <span class="tag">Live now</span>
-              <a class="text-link" href="services.html#rx">Onevia Rx details -></a>
-            </article>
-            <article class="care-card">
-              <h3>Dental</h3>
-              <p>Preventive-first dentistry with transparent pricing.</p>
-              <span class="tag">Planned</span>
-              <a class="text-link" href="services.html#dental">Dental details -></a>
-            </article>
-            <article class="care-card">
-              <h3>Vision</h3>
-              <p>Long-term eye care focused on early detection.</p>
-              <span class="tag">Planned</span>
-              <a class="text-link" href="services.html#vision">Vision details -></a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section comparison" id="savings">
-        <div class="container">
-          <div class="section-title" data-reveal>
-            <span class="eyebrow">Savings</span>
-            <h2>See the difference when you pay at cost.</h2>
-            <p>
-              Onevia removes markups on common medications, labs, and imaging. Below is a simple comparison of
-              illustrative cash prices to show how at-cost pricing can change the experience.
-            </p>
-            <p class="muted">Example pricing only. Actual costs vary by market and supply.</p>
-          </div>
-          <div class="comparison-grid" data-reveal>
-            <div class="comparison-card">
-              <h4>Service</h4>
-              <ul>
-                <li>Basic metabolic panel</li>
-                <li>HbA1c test</li>
-                <li>X-ray</li>
-                <li>Common generic Rx</li>
-              </ul>
-            </div>
-            <div class="comparison-card">
-              <h4>Typical cash price</h4>
-              <ul>
-                <li>$80-120</li>
-                <li>$60-100</li>
-                <li>$150-300</li>
-                <li>$25-60</li>
-              </ul>
-            </div>
-            <div class="comparison-card accent">
-              <h4>Onevia at cost</h4>
-              <ul>
-                <li>$15-25</li>
-                <li>$10-20</li>
-                <li>$30-60</li>
-                <li>$3-10</li>
-              </ul>
-            </div>
-          </div>
         </div>
       </section>
 

@@ -95,19 +95,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  planButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      planButtons.forEach((btn) => {
-        btn.classList.remove('is-active');
-        btn.setAttribute('aria-selected', 'false');
+  if (planButtons.length) {
+    planButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        planButtons.forEach((btn) => {
+          btn.classList.remove('is-active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+        button.classList.add('is-active');
+        button.setAttribute('aria-selected', 'true');
+        setPlan(button.dataset.plan);
       });
-      button.classList.add('is-active');
-      button.setAttribute('aria-selected', 'true');
-      setPlan(button.dataset.plan);
     });
-  });
 
-  setPlan('individual');
+    setPlan('individual');
+  }
 
   const orderSummary = document.querySelector('[data-order-summary]');
   if (orderSummary) {
@@ -178,5 +180,34 @@ document.addEventListener('DOMContentLoaded', () => {
     planInputs.forEach((input) => input.addEventListener('change', updateOrder));
     addonInputs.forEach((input) => input.addEventListener('change', updateOrder));
     updateOrder();
+  }
+
+  const stepper = document.querySelector('[data-stepper]');
+  if (stepper) {
+    const panels = Array.from(stepper.querySelectorAll('.stepper-panel'));
+    const tabs = Array.from(stepper.querySelectorAll('.stepper-tab'));
+    let currentIndex = panels.findIndex((panel) => panel.classList.contains('is-active'));
+    if (currentIndex < 0) currentIndex = 0;
+
+    const showStep = (index) => {
+      if (index < 0 || index >= panels.length) return;
+      panels.forEach((panel, i) => panel.classList.toggle('is-active', i === index));
+      tabs.forEach((tab, i) => tab.classList.toggle('is-active', i === index));
+      currentIndex = index;
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => showStep(index));
+    });
+
+    stepper.querySelectorAll('[data-next]').forEach((button) => {
+      button.addEventListener('click', () => showStep(currentIndex + 1));
+    });
+
+    stepper.querySelectorAll('[data-prev]').forEach((button) => {
+      button.addEventListener('click', () => showStep(currentIndex - 1));
+    });
+
+    showStep(currentIndex);
   }
 });
