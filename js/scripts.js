@@ -1,54 +1,111 @@
-/*!
-* Start Bootstrap - Grayscale v7.0.6 (https://startbootstrap.com/theme/grayscale)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-grayscale/blob/master/LICENSE)
-*/
-//
-// Scripts
-// 
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
 
-window.addEventListener('DOMContentLoaded', event => {
-
-    // Navbar shrink function
-    var navbarShrink = function () {
-        const navbarCollapsible = document.body.querySelector('#mainNav');
-        if (!navbarCollapsible) {
-            return;
-        }
-        if (window.scrollY === 0) {
-            navbarCollapsible.classList.remove('navbar-shrink')
-        } else {
-            navbarCollapsible.classList.add('navbar-shrink')
-        }
-
-    };
-
-    // Shrink the navbar 
-    navbarShrink();
-
-    // Shrink the navbar when page is scrolled
-    document.addEventListener('scroll', navbarShrink);
-
-    // Activate Bootstrap scrollspy on the main nav element
-    const mainNav = document.body.querySelector('#mainNav');
-    if (mainNav) {
-        new bootstrap.ScrollSpy(document.body, {
-            target: '#mainNav',
-            rootMargin: '0px 0px -40%',
-        });
-    };
-
-    // Collapse responsive navbar when toggler is visible
-    const navbarToggler = document.body.querySelector('.navbar-toggler');
-    const responsiveNavItems = [].slice.call(
-        document.querySelectorAll('#navbarResponsive .nav-link')
-    );
-    responsiveNavItems.map(function (responsiveNavItem) {
-        responsiveNavItem.addEventListener('click', () => {
-            if (window.getComputedStyle(navbarToggler).display !== 'none') {
-                navbarToggler.click();
-            }
-        });
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('is-open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('is-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  const revealElements = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealElements.forEach((el) => observer.observe(el));
+  } else {
+    revealElements.forEach((el) => el.classList.add('is-visible'));
+  }
+
+  const planButtons = document.querySelectorAll('[data-plan]');
+  const planLabel = document.getElementById('plan-label');
+  const planPrice = document.getElementById('plan-price');
+  const planNote = document.getElementById('plan-note');
+  const planFeatures = document.getElementById('plan-features');
+
+  const plans = {
+    individual: {
+      label: 'Individual membership',
+      price: '$100 / month',
+      note: 'Per adult. Transparent, predictable pricing.',
+      features: [
+        'Same- or next-day access',
+        'Longer visits when you need them',
+        'Direct physician messaging',
+        'At-cost labs and medications',
+      ],
+    },
+    family: {
+      label: 'Family membership',
+      price: 'Family bundle',
+      note: 'Custom pricing for households. Ask about pediatric add-ons.',
+      features: [
+        'One shared care plan for the whole family',
+        'Unlimited primary care visits',
+        'Direct messaging for parents and caregivers',
+        'Transparent monthly pricing',
+      ],
+    },
+    employer: {
+      label: 'Employer membership',
+      price: 'Per-member monthly fee',
+      note: 'Predictable costs for teams, with on-site and virtual options.',
+      features: [
+        'Improved access and retention',
+        'Reduced time away from work',
+        'Dedicated onboarding for teams',
+        'Clear reporting and shared outcomes',
+      ],
+    },
+  };
+
+  const setPlan = (key) => {
+    const plan = plans[key];
+    if (!plan) return;
+
+    if (planLabel) planLabel.textContent = plan.label;
+    if (planPrice) planPrice.textContent = plan.price;
+    if (planNote) planNote.textContent = plan.note;
+
+    if (planFeatures) {
+      planFeatures.innerHTML = '';
+      plan.features.forEach((feature) => {
+        const li = document.createElement('li');
+        li.textContent = feature;
+        planFeatures.appendChild(li);
+      });
+    }
+  };
+
+  planButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      planButtons.forEach((btn) => {
+        btn.classList.remove('is-active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      button.classList.add('is-active');
+      button.setAttribute('aria-selected', 'true');
+      setPlan(button.dataset.plan);
+    });
+  });
+
+  setPlan('individual');
 });
