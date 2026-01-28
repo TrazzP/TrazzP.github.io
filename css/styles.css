@@ -166,6 +166,17 @@ img {
   white-space: nowrap;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-question {
+  font-weight: 600;
+  color: var(--accent);
+}
+
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -885,6 +896,10 @@ img {
   }
 
   .nav-cta {
+    display: none;
+  }
+
+  .nav-actions {
     display: none;
   }
 
