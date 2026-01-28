@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Onevia | Membership Details</title>
+    <meta
+      name="description"
+      content="Explore Onevia membership options, pricing, add-ons, and at-cost care details."
+    />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="topbar" id="top">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="Onevia">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text brand-text-lg">Onevia</span>
+        </a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav-links" id="nav-links">
+          <a href="index.html">Home</a>
+          <a href="#plans">Plans</a>
+          <a href="#addons">Add-ons</a>
+          <a href="#comparison">At-cost pricing</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a class="btn btn-primary nav-cta" href="signup.html">Start Membership</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="signup-hero" id="membership">
+        <div class="container">
+          <span class="badge">Membership details</span>
+          <h1>Everything included with Onevia membership</h1>
+          <p class="muted">
+            Transparent pricing, proactive care, and optional add-ons that make your membership feel complete.
+          </p>
+        </div>
+      </section>
+
+      <section class="section membership" id="plans">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Plans</span>
+            <h2>Choose the membership that fits your life.</h2>
+            <p>
+              Membership covers primary care visits, chronic disease management, preventive care, and direct access to
+              your care team.
+            </p>
+          </div>
+          <div class="plan-toggle" role="tablist" data-reveal>
+            <button class="is-active" data-plan="individual" role="tab" aria-selected="true">Individual</button>
+            <button data-plan="family" role="tab" aria-selected="false">Family</button>
+            <button data-plan="employer" role="tab" aria-selected="false">Employer</button>
+          </div>
+          <div class="plan-grid" data-reveal>
+            <div class="plan-card">
+              <div>
+                <p class="eyebrow" id="plan-label">Individual membership</p>
+                <h3 id="plan-price">$100 / month</h3>
+                <p class="muted" id="plan-note">Per adult. Transparent, predictable pricing.</p>
+              </div>
+              <ul id="plan-features">
+                <li>Same- or next-day access</li>
+                <li>Longer visits when you need them</li>
+                <li>Direct physician messaging</li>
+                <li>At-cost labs and medications</li>
+              </ul>
+              <a class="btn btn-primary" href="signup.html">Start membership</a>
+            </div>
+            <div class="plan-details">
+              <h4>Membership includes</h4>
+              <div class="pill-grid">
+                <span class="pill">Annual wellness planning</span>
+                <span class="pill">Chronic disease management</span>
+                <span class="pill">Behavioral and lifestyle coaching</span>
+                <span class="pill">Telemedicine + in-person visits</span>
+                <span class="pill">Coordination with specialists</span>
+                <span class="pill">Transparent in-house pricing</span>
+              </div>
+              <div class="note-box">
+                <p>
+                  Most members add Onevia Rx for $25/month to get medication optimization and at-cost pricing.
+                </p>
+                <a class="text-link" href="#addons">See add-ons -></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="addons">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Add-ons</span>
+            <h2>Build your complete Onevia membership.</h2>
+            <p>Add optional services for a full-stack care experience.</p>
+          </div>
+          <div class="upsell-cards" data-reveal>
+            <div class="upsell-card">
+              <h4>Onevia Rx</h4>
+              <p>Medication optimization, pharmacist support, and at-cost pricing.</p>
+              <p class="muted">$25/month</p>
+              <a class="text-link" href="signup.html">Add Rx in checkout -></a>
+            </div>
+            <div class="upsell-card">
+              <h4>Dental Membership</h4>
+              <p>Preventive-first dentistry with simple monthly pricing.</p>
+              <p class="muted">$40/month per member</p>
+              <a class="text-link" href="signup.html">Pre-enroll -></a>
+            </div>
+            <div class="upsell-card">
+              <h4>Vision Membership</h4>
+              <p>Annual eye care and proactive screening.</p>
+              <p class="muted">Call for pricing</p>
+              <a class="text-link" href="signup.html">Join the waitlist -></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section comparison" id="comparison">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">At-cost pricing</span>
+            <h2>See the difference when you pay at cost.</h2>
+            <p>
+              Onevia removes markups on common medications, labs, and imaging. Below is a simple comparison of
+              illustrative cash prices to show how at-cost pricing can change the experience.
+            </p>
+            <p class="muted">Example pricing only. Actual costs vary by market and supply.</p>
+          </div>
+          <div class="comparison-grid" data-reveal>
+            <div class="comparison-card">
+              <h4>Service</h4>
+              <ul>
+                <li>Basic metabolic panel</li>
+                <li>HbA1c test</li>
+                <li>X-ray</li>
+                <li>Common generic Rx</li>
+              </ul>
+            </div>
+            <div class="comparison-card">
+              <h4>Typical cash price</h4>
+              <ul>
+                <li>$80-120</li>
+                <li>$60-100</li>
+                <li>$150-300</li>
+                <li>$25-60</li>
+              </ul>
+            </div>
+            <div class="comparison-card accent">
+              <h4>Onevia at cost</h4>
+              <ul>
+                <li>$15-25</li>
+                <li>$10-20</li>
+                <li>$30-60</li>
+                <li>$3-10</li>
+              </ul>
+            </div>
+          </div>
+          <div class="cta-banner" data-reveal>
+            <div>
+              <h3>Ready to see your savings?</h3>
+              <p>Join Onevia and add Onevia Rx in checkout.</p>
+            </div>
+            <a class="btn btn-primary" href="signup.html">Build my plan</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq" id="faq">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">FAQ</span>
+            <h2>Answers for new members.</h2>
+          </div>
+          <div class="faq-grid" data-reveal>
+            <details>
+              <summary>Is Onevia insurance?</summary>
+              <p>No. Onevia is a membership-based clinic. You can pair membership with a high-deductible plan for major events.</p>
+            </details>
+            <details>
+              <summary>What does membership include?</summary>
+              <p>All primary care visits, preventive care, chronic disease management, telemedicine, and direct access.</p>
+            </details>
+            <details>
+              <summary>How quickly can I be seen?</summary>
+              <p>Members typically receive same- or next-day appointments with extended visit times.</p>
+            </details>
+            <details>
+              <summary>Do you offer employer plans?</summary>
+              <p>Yes. Employer pricing depends on team size and access needs.</p>
+            </details>
+            <details>
+              <summary>Is Onevia Rx available now?</summary>
+              <p>Yes. Pharmacy membership is live and can be added during enrollment.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="container">
+          <div class="cta-banner" data-reveal>
+            <div>
+              <h3>Enroll today and lock in founding member access.</h3>
+              <p>Have questions? Email hello@onevia.health</p>
+            </div>
+            <a class="btn btn-primary" href="signup.html">Start membership</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <span class="brand-text">Onevia</span>
+          <p>One Membership. Complete Care.</p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>Missoula, MT</p>
+          <p>Email: hello@onevia.health</p>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>(c) 2026 Onevia. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     employer: {
       label: 'Employer membership',
-      price: 'Per-member monthly fee',
-      note: 'Predictable costs for teams, with on-site and virtual options.',
+      price: 'Call for pricing',
+      note: 'Pricing depends on team size and access needs. Contact us for a quote.',
       features: [
         'Improved access and retention',
         'Reduced time away from work',
@@ -120,26 +120,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateOrder = () => {
       let total = 0;
+      let hasContactPricing = false;
       const items = [];
 
       planInputs.forEach((input) => {
         if (input.checked) {
+          const contact = input.dataset.contact === 'true';
           const price = Number(input.dataset.price || 0);
-          total += price;
+          if (contact) {
+            hasContactPricing = true;
+          } else {
+            total += price;
+          }
           items.push({
             label: input.dataset.label || 'Membership',
             price,
+            contact,
           });
         }
       });
 
       addonInputs.forEach((input) => {
         if (input.checked) {
+          const contact = input.dataset.contact === 'true';
           const price = Number(input.dataset.price || 0);
-          total += price;
+          if (contact) {
+            hasContactPricing = true;
+          } else {
+            total += price;
+          }
           items.push({
             label: input.dataset.label || 'Add-on',
             price,
+            contact,
           });
         }
       });
@@ -151,14 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
           const label = document.createElement('span');
           const value = document.createElement('span');
           label.textContent = item.label;
-          value.textContent = `$${item.price}`;
+          value.textContent = item.contact ? 'Call' : `$${item.price}`;
           li.append(label, value);
           orderItems.appendChild(li);
         });
       }
 
       if (orderTotal) {
-        orderTotal.textContent = formatPrice(total);
+        orderTotal.textContent = hasContactPricing ? 'Call for pricing' : formatPrice(total);
       }
     };
 
