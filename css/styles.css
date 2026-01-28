@@ -53,6 +53,10 @@ img {
   font-weight: 600;
 }
 
+.muted {
+  color: #5b6a72;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -128,6 +132,15 @@ img {
   gap: 0.75rem;
   font-weight: 700;
   font-size: 1.1rem;
+}
+
+.brand-text {
+  font-family: var(--font-heading);
+  letter-spacing: 0.04em;
+}
+
+.brand-text-lg {
+  font-size: 1.6rem;
 }
 
 .brand-mark {
@@ -396,6 +409,26 @@ img {
   gap: 1.5rem;
 }
 
+.upsell-section {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.upsell-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.upsell-card {
+  background: var(--white);
+  padding: 1.4rem;
+  border-radius: 18px;
+  border: 1px solid rgba(20, 42, 58, 0.08);
+  box-shadow: 0 16px 32px rgba(13, 27, 42, 0.08);
+}
+
 .pill-grid {
   display: flex;
   flex-wrap: wrap;
@@ -416,6 +449,29 @@ img {
   border-radius: 18px;
   padding: 1rem 1.2rem;
   border: 1px solid rgba(15, 25, 30, 0.1);
+}
+
+.cta-banner {
+  margin-top: 2.5rem;
+  padding: 2rem;
+  border-radius: var(--radius);
+  background: #101f2c;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.cta-banner p {
+  margin: 0.4rem 0 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.cta-banner .btn {
+  background: var(--accent-2);
+  color: #121212;
 }
 
 .care-grid {
@@ -446,6 +502,52 @@ img {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2.5rem;
   align-items: center;
+}
+
+.comparison {
+  background: #f4efe7;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.comparison-card {
+  padding: 1.6rem;
+  border-radius: 20px;
+  background: var(--white);
+  border: 1px solid rgba(20, 42, 58, 0.08);
+}
+
+.comparison-card h4 {
+  margin: 0 0 1rem;
+}
+
+.comparison-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comparison-card li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(20, 42, 58, 0.08);
+}
+
+.comparison-card li:last-child {
+  border-bottom: none;
+}
+
+.comparison-card.accent {
+  background: linear-gradient(140deg, #1f8a8a 0%, #115e65 100%);
+  color: var(--white);
+}
+
+.comparison-card.accent li {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
 }
 
 .experience-steps {
@@ -610,6 +712,115 @@ img {
   margin-right: 0.4rem;
 }
 
+.signup-hero {
+  padding: 4rem 0 2rem;
+}
+
+.signup-hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  margin-bottom: 1rem;
+}
+
+.signup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+
+.signup-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 1.2rem;
+}
+
+.signup-card h3 {
+  margin: 0;
+}
+
+.signup-card .form-row {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(31, 138, 138, 0.12);
+  color: #0f5658;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.order-summary {
+  background: #101f2c;
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.order-summary .btn-secondary {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.order-summary .btn-secondary:hover {
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.25);
+}
+
+.order-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.order-summary li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.order-total {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.upsell-grid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.upsell-item {
+  border: 1px solid rgba(20, 42, 58, 0.12);
+  border-radius: 14px;
+  padding: 0.8rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.upsell-item label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+}
+
+.order-note {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 [data-reveal] {
   opacity: 0;
   transform: translateY(20px);
@@ -657,6 +868,11 @@ img {
 
   .nav-cta {
     display: none;
+  }
+
+  .cta-banner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

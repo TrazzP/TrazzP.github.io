@@ -108,4 +108,62 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   setPlan('individual');
+
+  const orderSummary = document.querySelector('[data-order-summary]');
+  if (orderSummary) {
+    const orderItems = document.getElementById('order-items');
+    const orderTotal = document.getElementById('order-total');
+    const planInputs = document.querySelectorAll('input[name=\"plan\"]');
+    const addonInputs = document.querySelectorAll('input[name=\"addon\"]');
+
+    const formatPrice = (value) => `$${value} / month`;
+
+    const updateOrder = () => {
+      let total = 0;
+      const items = [];
+
+      planInputs.forEach((input) => {
+        if (input.checked) {
+          const price = Number(input.dataset.price || 0);
+          total += price;
+          items.push({
+            label: input.dataset.label || 'Membership',
+            price,
+          });
+        }
+      });
+
+      addonInputs.forEach((input) => {
+        if (input.checked) {
+          const price = Number(input.dataset.price || 0);
+          total += price;
+          items.push({
+            label: input.dataset.label || 'Add-on',
+            price,
+          });
+        }
+      });
+
+      if (orderItems) {
+        orderItems.innerHTML = '';
+        items.forEach((item) => {
+          const li = document.createElement('li');
+          const label = document.createElement('span');
+          const value = document.createElement('span');
+          label.textContent = item.label;
+          value.textContent = `$${item.price}`;
+          li.append(label, value);
+          orderItems.appendChild(li);
+        });
+      }
+
+      if (orderTotal) {
+        orderTotal.textContent = formatPrice(total);
+      }
+    };
+
+    planInputs.forEach((input) => input.addEventListener('change', updateOrder));
+    addonInputs.forEach((input) => input.addEventListener('change', updateOrder));
+    updateOrder();
+  }
 });
