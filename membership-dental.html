@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Onevia | Membership Step 1</title>
-    <meta name="description" content="Choose your Onevia membership plan and start building your care." />
+    <title>Onevia | Membership Step 3</title>
+    <meta name="description" content="Add Dental to your Onevia membership for preventive care and predictable pricing." />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,45 +31,43 @@
         </nav>
         <div class="nav-actions">
           <a class="text-link nav-question" href="mailto:hello@onevia.health">Ask a question</a>
-          <a class="btn btn-primary nav-cta" href="#build">Start Membership</a>
+          <a class="btn btn-primary nav-cta" href="membership.html">Start Membership</a>
         </div>
       </div>
     </header>
 
     <main>
-      <section class="signup-hero" id="membership">
+      <section class="signup-hero">
         <div class="container">
-          <span class="badge">Step 1 of 5</span>
-          <h1>Choose your membership plan.</h1>
-          <p class="muted">Pick the plan that fits your household. You can add services next.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#build">Start building</a>
-            <a class="btn btn-secondary" href="mailto:hello@onevia.health">Ask a question</a>
-          </div>
+          <span class="badge">Step 3 of 5</span>
+          <h1>Add Dental</h1>
+          <p class="muted">Preventive-first dentistry keeps care predictable and affordable.</p>
         </div>
       </section>
 
-      <section class="section" id="build">
+      <section class="section">
         <div class="container signup-grid">
-          <form class="signup-card" id="plan-step">
+          <form class="signup-card">
             <div>
-              <h3>Membership plan</h3>
-              <p class="muted">Family plans are ideal for households with 2 or more adults.</p>
+              <h3>Dental membership - $40/month</h3>
+              <p class="muted">Routine care now helps avoid bigger procedures later.</p>
             </div>
-            <fieldset class="form-row">
+            <div class="upsell-item">
               <label>
-                <input type="radio" name="plan" data-plan-key="individual" data-price="100" data-label="Individual membership" checked />
-                Individual - $100/month
+                <input type="checkbox" name="addon" data-addon-key="dental" data-price="40" data-label="Dental membership" />
+                Add Dental to my membership
               </label>
-              <label>
-                <input type="radio" name="plan" data-plan-key="family" data-price="260" data-label="Family membership" />
-                Family bundle - $260/month
-              </label>
-            </fieldset>
-            <p class="muted">Employer plans are available at the end of the flow.</p>
+              <span class="muted">Routine exams, cleanings, and at-cost restorative care.</span>
+            </div>
+            <ul class="service-list">
+              <li>Routine exams and cleanings</li>
+              <li>Basic imaging and screenings</li>
+              <li>At-cost restorative procedures</li>
+              <li>Coordinated care with your primary team</li>
+            </ul>
             <div class="stepper-actions">
-              <span></span>
-              <a class="btn btn-primary" href="membership-rx.html">Next: Onevia Rx</a>
+              <a class="btn btn-secondary" href="membership-rx.html">Back</a>
+              <a class="btn btn-primary" href="membership-vision.html">Next: Vision</a>
             </div>
           </form>
 

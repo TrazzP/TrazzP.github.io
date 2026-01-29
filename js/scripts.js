@@ -111,103 +111,102 @@ document.addEventListener('DOMContentLoaded', () => {
     setPlan('individual');
   }
 
-  const orderSummary = document.querySelector('[data-order-summary]');
-  if (orderSummary) {
+  const STORAGE_KEY = 'oneviaMembership';
+  const defaultMembership = {
+    plan: {
+      key: 'individual',
+      label: 'Individual membership',
+      price: 100,
+    },
+    addons: {
+      rx: { label: 'Onevia Rx', price: 25, selected: false },
+      dental: { label: 'Dental membership', price: 40, selected: false },
+      vision: { label: 'Vision membership', price: 10, selected: false },
+    },
+  };
+
+  const loadMembership = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (!stored) return { ...defaultMembership };
+      return {
+        plan: {
+          ...defaultMembership.plan,
+          ...stored.plan,
+        },
+        addons: {
+          rx: { ...defaultMembership.addons.rx, ...(stored.addons || {}).rx },
+          dental: { ...defaultMembership.addons.dental, ...(stored.addons || {}).dental },
+          vision: { ...defaultMembership.addons.vision, ...(stored.addons || {}).vision },
+        },
+      };
+    } catch (error) {
+      return { ...defaultMembership };
+    }
+  };
+
+  const saveMembership = (data) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  };
+
+  const updateSummary = (data) => {
     const orderItems = document.getElementById('order-items');
     const orderTotal = document.getElementById('order-total');
-    const planInputs = document.querySelectorAll('input[name=\"plan\"]');
-    const addonInputs = document.querySelectorAll('input[name=\"addon\"]');
+    if (!orderItems || !orderTotal) return;
 
-    const formatPrice = (value) => `$${value} / month`;
+    orderItems.innerHTML = '';
+    let total = 0;
 
-    const updateOrder = () => {
-      let total = 0;
-      let hasContactPricing = false;
-      const items = [];
+    if (data.plan) {
+      total += Number(data.plan.price || 0);
+      const li = document.createElement('li');
+      li.innerHTML = `<span>${data.plan.label}</span><span>$${data.plan.price}</span>`;
+      orderItems.appendChild(li);
+    }
 
-      planInputs.forEach((input) => {
-        if (input.checked) {
-          const contact = input.dataset.contact === 'true';
-          const price = Number(input.dataset.price || 0);
-          if (contact) {
-            hasContactPricing = true;
-          } else {
-            total += price;
-          }
-          items.push({
-            label: input.dataset.label || 'Membership',
-            price,
-            contact,
-          });
-        }
-      });
-
-      addonInputs.forEach((input) => {
-        if (input.checked) {
-          const contact = input.dataset.contact === 'true';
-          const price = Number(input.dataset.price || 0);
-          if (contact) {
-            hasContactPricing = true;
-          } else {
-            total += price;
-          }
-          items.push({
-            label: input.dataset.label || 'Add-on',
-            price,
-            contact,
-          });
-        }
-      });
-
-      if (orderItems) {
-        orderItems.innerHTML = '';
-        items.forEach((item) => {
-          const li = document.createElement('li');
-          const label = document.createElement('span');
-          const value = document.createElement('span');
-          label.textContent = item.label;
-          value.textContent = item.contact ? 'Call' : `$${item.price}`;
-          li.append(label, value);
-          orderItems.appendChild(li);
-        });
-      }
-
-      if (orderTotal) {
-        orderTotal.textContent = hasContactPricing ? 'Call for pricing' : formatPrice(total);
-      }
-    };
-
-    planInputs.forEach((input) => input.addEventListener('change', updateOrder));
-    addonInputs.forEach((input) => input.addEventListener('change', updateOrder));
-    updateOrder();
-  }
-
-  const stepper = document.querySelector('[data-stepper]');
-  if (stepper) {
-    const panels = Array.from(stepper.querySelectorAll('.stepper-panel'));
-    const tabs = Array.from(stepper.querySelectorAll('.stepper-tab'));
-    let currentIndex = panels.findIndex((panel) => panel.classList.contains('is-active'));
-    if (currentIndex < 0) currentIndex = 0;
-
-    const showStep = (index) => {
-      if (index < 0 || index >= panels.length) return;
-      panels.forEach((panel, i) => panel.classList.toggle('is-active', i === index));
-      tabs.forEach((tab, i) => tab.classList.toggle('is-active', i === index));
-      currentIndex = index;
-    };
-
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => showStep(index));
+    Object.values(data.addons || {}).forEach((addon) => {
+      if (!addon.selected) return;
+      total += Number(addon.price || 0);
+      const li = document.createElement('li');
+      li.innerHTML = `<span>${addon.label}</span><span>$${addon.price}</span>`;
+      orderItems.appendChild(li);
     });
 
-    stepper.querySelectorAll('[data-next]').forEach((button) => {
-      button.addEventListener('click', () => showStep(currentIndex + 1));
-    });
+    orderTotal.textContent = `$${total} / month`;
+  };
 
-    stepper.querySelectorAll('[data-prev]').forEach((button) => {
-      button.addEventListener('click', () => showStep(currentIndex - 1));
-    });
+  const membershipData = loadMembership();
 
-    showStep(currentIndex);
-  }
+  const planInputs = document.querySelectorAll('[data-plan-key]');
+  planInputs.forEach((input) => {
+    if (input.dataset.planKey === membershipData.plan.key) {
+      input.checked = true;
+    }
+    input.addEventListener('change', () => {
+      if (!input.checked) return;
+      membershipData.plan = {
+        key: input.dataset.planKey,
+        label: input.dataset.label || 'Membership',
+        price: Number(input.dataset.price || 0),
+      };
+      saveMembership(membershipData);
+      updateSummary(membershipData);
+    });
+  });
+
+  const addonInputs = document.querySelectorAll('[data-addon-key]');
+  addonInputs.forEach((input) => {
+    const key = input.dataset.addonKey;
+    if (membershipData.addons[key]) {
+      input.checked = Boolean(membershipData.addons[key].selected);
+    }
+    input.addEventListener('change', () => {
+      if (!membershipData.addons[key]) return;
+      membershipData.addons[key].selected = input.checked;
+      saveMembership(membershipData);
+      updateSummary(membershipData);
+    });
+  });
+
+  updateSummary(membershipData);
 });

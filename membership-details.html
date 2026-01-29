@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Onevia | Membership Step 1</title>
-    <meta name="description" content="Choose your Onevia membership plan and start building your care." />
+    <title>Onevia | Membership Step 5</title>
+    <meta name="description" content="Provide your details to complete your Onevia membership." />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,46 +31,56 @@
         </nav>
         <div class="nav-actions">
           <a class="text-link nav-question" href="mailto:hello@onevia.health">Ask a question</a>
-          <a class="btn btn-primary nav-cta" href="#build">Start Membership</a>
+          <a class="btn btn-primary nav-cta" href="membership.html">Start Membership</a>
         </div>
       </div>
     </header>
 
     <main>
-      <section class="signup-hero" id="membership">
+      <section class="signup-hero">
         <div class="container">
-          <span class="badge">Step 1 of 5</span>
-          <h1>Choose your membership plan.</h1>
-          <p class="muted">Pick the plan that fits your household. You can add services next.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#build">Start building</a>
-            <a class="btn btn-secondary" href="mailto:hello@onevia.health">Ask a question</a>
-          </div>
+          <span class="badge">Step 5 of 5</span>
+          <h1>Your details</h1>
+          <p class="muted">We will confirm your selections and finalize your membership.</p>
         </div>
       </section>
 
-      <section class="section" id="build">
+      <section class="section">
         <div class="container signup-grid">
-          <form class="signup-card" id="plan-step">
+          <form class="signup-card">
             <div>
-              <h3>Membership plan</h3>
-              <p class="muted">Family plans are ideal for households with 2 or more adults.</p>
+              <h3>Contact information</h3>
+              <p class="muted">We will follow up to confirm your membership and onboarding visit.</p>
             </div>
-            <fieldset class="form-row">
+            <div class="form-row">
               <label>
-                <input type="radio" name="plan" data-plan-key="individual" data-price="100" data-label="Individual membership" checked />
-                Individual - $100/month
+                Full name
+                <input type="text" name="name" placeholder="Your name" required />
               </label>
+            </div>
+            <div class="form-row">
               <label>
-                <input type="radio" name="plan" data-plan-key="family" data-price="260" data-label="Family membership" />
-                Family bundle - $260/month
+                Email address
+                <input type="email" name="email" placeholder="you@email.com" required />
               </label>
-            </fieldset>
-            <p class="muted">Employer plans are available at the end of the flow.</p>
+            </div>
+            <div class="form-row">
+              <label>
+                Phone number
+                <input type="tel" name="phone" placeholder="(555) 555-5555" />
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                Notes or goals
+                <textarea name="message" rows="4" placeholder="Tell us what matters most to you"></textarea>
+              </label>
+            </div>
             <div class="stepper-actions">
-              <span></span>
-              <a class="btn btn-primary" href="membership-rx.html">Next: Onevia Rx</a>
+              <a class="btn btn-secondary" href="membership-vision.html">Back</a>
+              <button class="btn btn-primary" type="button">Proceed to checkout</button>
             </div>
+            <p class="form-note">Template only. No charges will be made.</p>
           </form>
 
           <aside class="order-summary" data-order-summary>
@@ -80,9 +90,22 @@
               <span class="muted">Estimated monthly total</span>
               <div class="order-total" id="order-total">$0 / month</div>
             </div>
+            <button class="btn btn-primary" type="button">Checkout</button>
             <button class="btn btn-secondary" type="button">Apply promo code</button>
             <p class="order-note">Need help? Email hello@onevia.health</p>
           </aside>
+        </div>
+      </section>
+
+      <section class="section" id="employer">
+        <div class="container">
+          <div class="cta-banner" data-reveal>
+            <div>
+              <h3>Employer plans and group memberships</h3>
+              <p>Pricing is based on team size and access needs. Contact us for a quote.</p>
+            </div>
+            <a class="btn btn-primary" href="mailto:hello@onevia.health">Talk to our team</a>
+          </div>
         </div>
       </section>
     </main>
