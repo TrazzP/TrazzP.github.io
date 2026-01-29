@@ -56,23 +56,41 @@
               <h3>Membership plan</h3>
               <p class="muted">Family plans are ideal for 2 adults + 2 kids. Call us for other arrangements.</p>
             </div>
-            <fieldset class="form-row">
-              <label>
-                <input type="radio" name="plan" data-plan-key="individual" data-price="100" data-label="Individual membership" checked />
-                Individual - $100/month
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="plan"
-                  data-plan-key="family"
-                  data-price="300"
-                  data-label="Family membership (2 adults + 2 kids)"
-                />
-                Family (2 adults + 2 kids) - $300/month
-              </label>
-            </fieldset>
-            <p class="muted">Family pricing reflects 25% savings vs. individual memberships.</p>
+            <div class="plan-options">
+              <div class="plan-option plan-option--featured">
+                <span class="plan-price">$100 / month</span>
+                <label>
+                  <input
+                    type="radio"
+                    name="plan"
+                    data-plan-key="individual"
+                    data-price="100"
+                    data-label="Individual membership"
+                    checked
+                  />
+                  Individual membership
+                </label>
+                <p class="plan-meta">Direct access, longer visits, and proactive care planning.</p>
+              </div>
+              <div class="plan-option">
+                <span class="plan-price">$300 / month</span>
+                <label>
+                  <input
+                    type="radio"
+                    name="plan"
+                    data-plan-key="family"
+                    data-price="300"
+                    data-label="Family membership (2 adults + 2 kids)"
+                  />
+                  Family (2 adults + 2 kids)
+                </label>
+                <p class="plan-meta">Save 25% vs four individual memberships. Call for other arrangements.</p>
+              </div>
+            </div>
+            <div class="note-box">
+              <p>Want to see what is included?</p>
+              <a class="text-link" href="services.html#primary-care">See how Primary Care works -></a>
+            </div>
             <div class="stepper-actions">
               <span></span>
               <a class="btn btn-primary" href="membership-rx.html">Next: Pharmacy</a>
