@@ -2,7 +2,7 @@
   --ink: #0b1e33;
   --ink-soft: #1c2a44;
   --accent: #1f6fb2;
-  --accent-2: #2bb673;
+  --accent-2: #1f6fb2;
   --sand: #f2f7fb;
   --mist: #e8f2fb;
   --white: #ffffff;
@@ -95,12 +95,12 @@ img {
 }
 
 .section {
-  padding: 4rem 0;
+  padding: 3.5rem 0;
 }
 
 .section-title {
   max-width: 640px;
-  margin-bottom: 2.2rem;
+  margin-bottom: 1.8rem;
 }
 
 .section-title h2 {
@@ -152,7 +152,7 @@ img {
   width: 36px;
   height: 36px;
   border-radius: 12px;
-  background: radial-gradient(circle at top, var(--accent), #0f6b6b);
+  background: radial-gradient(circle at top, var(--accent), #155a93);
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.7);
 }
 
@@ -204,7 +204,7 @@ img {
 }
 
 .hero {
-  padding: 5rem 0 4rem;
+  padding: 4.5rem 0 3.5rem;
   position: relative;
   overflow: hidden;
 }
@@ -215,7 +215,7 @@ img {
   inset: -10% -20% auto auto;
   width: 420px;
   height: 420px;
-  background: radial-gradient(circle, rgba(31, 138, 138, 0.3), transparent 70%);
+  background: radial-gradient(circle, rgba(31, 111, 178, 0.3), transparent 70%);
   z-index: 0;
 }
 
@@ -240,14 +240,14 @@ img {
 .hero-copy .lead {
   font-size: 1.1rem;
   color: #39464d;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.3rem;
 }
 
 .hero-bullets {
@@ -255,7 +255,7 @@ img {
   gap: 0.6rem;
   font-weight: 600;
   color: #22313a;
-  margin-bottom: 2rem;
+  margin-bottom: 1.4rem;
 }
 
 .bullet {
@@ -349,7 +349,7 @@ img {
 }
 
 .card.accent {
-  background: linear-gradient(140deg, #1f6fb2 0%, #1682a0 100%);
+  background: linear-gradient(140deg, #1f6fb2 0%, #2a7ccf 100%);
   color: var(--white);
 }
 
@@ -359,7 +359,7 @@ img {
 }
 
 .feature-grid {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
@@ -386,7 +386,7 @@ img {
 .service-list {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0;
+  margin: 1.1rem 0;
   display: grid;
   gap: 0.6rem;
 }
@@ -444,11 +444,11 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
 
 .service-savings {
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
   padding: 1.1rem 1.2rem;
   border-radius: 18px;
   background: #eef6fb;
@@ -618,8 +618,8 @@ img {
 }
 
 .pill {
-  background: rgba(31, 138, 138, 0.12);
-  color: #0f5658;
+  background: rgba(31, 111, 178, 0.12);
+  color: #0b3a66;
   padding: 0.4rem 0.9rem;
   border-radius: 999px;
   font-size: 0.9rem;
@@ -634,7 +634,7 @@ img {
 }
 
 .cta-banner {
-  margin-top: 2.5rem;
+  margin-top: 1.6rem;
   padding: 2rem;
   border-radius: var(--radius);
   background: #0e2236;
@@ -702,7 +702,7 @@ img {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.6rem;
 }
 
 .comparison-card {
@@ -732,7 +732,7 @@ img {
 }
 
 .comparison-card.accent {
-  background: linear-gradient(140deg, #1f6fb2 0%, #1682a0 100%);
+  background: linear-gradient(140deg, #1f6fb2 0%, #2a7ccf 100%);
   color: var(--white);
 }
 
@@ -883,7 +883,7 @@ img {
 }
 
 .footer a {
-  color: #8fe3c2;
+  color: #7ec1ff;
 }
 
 .footer-grid {
@@ -903,7 +903,7 @@ img {
 }
 
 .signup-hero {
-  padding: 3.2rem 0 1.6rem;
+  padding: 2.8rem 0 1.2rem;
 }
 
 .signup-hero h1 {
@@ -915,7 +915,7 @@ img {
 .signup-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: start;
 }
 
@@ -923,11 +923,11 @@ img {
   position: relative;
   background: linear-gradient(180deg, #ffffff 0%, #f3f9ff 100%);
   border-radius: 24px;
-  padding: 2.4rem;
+  padding: 2.1rem;
   border: 1px solid rgba(31, 111, 178, 0.16);
   box-shadow: 0 20px 50px rgba(13, 27, 42, 0.12);
   display: grid;
-  gap: 1.4rem;
+  gap: 1.2rem;
 }
 
 .plan-options {
@@ -1024,8 +1024,8 @@ img {
   gap: 0.4rem;
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
-  background: rgba(31, 138, 138, 0.12);
-  color: #0f5658;
+  background: rgba(31, 111, 178, 0.12);
+  color: #0b3a66;
   font-size: 0.8rem;
   font-weight: 600;
 }
