@@ -31,7 +31,7 @@
         </nav>
         <div class="nav-actions">
           <a class="text-link nav-question" href="mailto:hello@onevia.health">Ask a question</a>
-          <a class="btn btn-primary nav-cta" href="membership.html">Start Membership</a>
+          <a class="btn btn-primary nav-cta" href="membership.html" data-membership-link>Start Membership</a>
         </div>
       </div>
     </header>
@@ -49,12 +49,12 @@
         <div class="container signup-grid">
           <form class="signup-card">
             <div>
-              <h3>Dental membership - $40/month</h3>
+              <h3>Dental - <span class="addon-price" data-addon-price="dental" data-base-price="40">$40</span>/month</h3>
               <p class="muted">Routine care now helps avoid bigger procedures later.</p>
             </div>
             <div class="upsell-item">
               <label>
-                <input type="checkbox" name="addon" data-addon-key="dental" data-price="40" data-label="Dental membership" />
+                <input type="checkbox" name="addon" data-addon-key="dental" data-price="40" data-label="Dental" />
                 Add Dental to my membership
               </label>
               <span class="muted">Routine exams, cleanings, and at-cost restorative care.</span>
@@ -95,6 +95,7 @@
           <h4>Contact</h4>
           <p>Missoula, MT</p>
           <p>Email: hello@onevia.health</p>
+          <p>Employer plans: hello@onevia.health</p>
         </div>
       </div>
       <div class="container footer-bottom">

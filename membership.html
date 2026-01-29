@@ -31,7 +31,7 @@
         </nav>
         <div class="nav-actions">
           <a class="text-link nav-question" href="mailto:hello@onevia.health">Ask a question</a>
-          <a class="btn btn-primary nav-cta" href="#build">Start Membership</a>
+          <a class="btn btn-primary nav-cta" href="membership.html" data-membership-link>Start Membership</a>
         </div>
       </div>
     </header>
@@ -54,7 +54,7 @@
           <form class="signup-card" id="plan-step">
             <div>
               <h3>Membership plan</h3>
-              <p class="muted">Family plans are ideal for households with 2 or more adults.</p>
+              <p class="muted">Family plans are ideal for 2 adults + 2 kids. Call us for other arrangements.</p>
             </div>
             <fieldset class="form-row">
               <label>
@@ -62,14 +62,20 @@
                 Individual - $100/month
               </label>
               <label>
-                <input type="radio" name="plan" data-plan-key="family" data-price="260" data-label="Family membership" />
-                Family bundle - $260/month
+                <input
+                  type="radio"
+                  name="plan"
+                  data-plan-key="family"
+                  data-price="300"
+                  data-label="Family membership (2 adults + 2 kids)"
+                />
+                Family (2 adults + 2 kids) - $300/month
               </label>
             </fieldset>
-            <p class="muted">Employer plans are available at the end of the flow.</p>
+            <p class="muted">Family pricing reflects 25% savings vs. individual memberships.</p>
             <div class="stepper-actions">
               <span></span>
-              <a class="btn btn-primary" href="membership-rx.html">Next: Onevia Rx</a>
+              <a class="btn btn-primary" href="membership-rx.html">Next: Pharmacy</a>
             </div>
           </form>
 
@@ -97,6 +103,7 @@
           <h4>Contact</h4>
           <p>Missoula, MT</p>
           <p>Email: hello@onevia.health</p>
+          <p>Employer plans: hello@onevia.health</p>
         </div>
       </div>
       <div class="container footer-bottom">
