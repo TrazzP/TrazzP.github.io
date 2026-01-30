@@ -436,6 +436,46 @@ img {
   margin: 0;
 }
 
+.name-nowrap {
+  white-space: nowrap;
+}
+
+.about-page .service-title {
+  font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+}
+
+.about-page .signup-hero {
+  padding-bottom: 0.5rem;
+}
+
+.about-page .signup-hero + .section {
+  padding-top: 2rem;
+}
+
+.about-page .experience-grid {
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.specialist-intro {
+  margin: 0.4rem 0 0.8rem;
+}
+
+.specialist-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.specialist-media .service-image {
+  height: 260px;
+}
+
+.specialist-quote {
+  margin-top: 0.8rem;
+}
+
 .service-price {
   display: inline-flex;
   align-items: center;
@@ -1092,11 +1132,15 @@ img {
 }
 
 .membership-flow .signup-hero {
-  padding: 2.2rem 0 0.8rem;
+  padding: 2.2rem 0 0.5rem;
 }
 
 .membership-flow .signup-hero h1 {
   margin-bottom: 0.6rem;
+}
+
+.membership-flow .signup-hero + .section {
+  padding-top: 1.6rem;
 }
 
 .membership-flow .signup-card {
@@ -1119,6 +1163,21 @@ img {
 
 .membership-flow .upsell-item {
   padding: 0.85rem;
+}
+
+.membership-flow .note-box {
+  padding: 0.7rem 0.9rem;
+  margin-top: 0.6rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.membership-flow .note-box p {
+  margin: 0;
+}
+
+.membership-flow .note-box a {
+  margin-top: 0.1rem;
 }
 
 .order-summary .btn-primary {
@@ -1275,6 +1334,10 @@ img {
     align-items: stretch;
   }
 
+  .membership-flow .stepper-actions {
+    flex-direction: column-reverse;
+  }
+
   .stepper-actions .btn {
     width: 100%;
     justify-content: center;
@@ -1304,6 +1367,19 @@ img {
 
   .service-image {
     height: 260px;
+  }
+
+  .specialist-stack {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .specialist-media .service-image {
+    height: 200px;
+  }
+
+  .about-page .service-title {
+    font-size: 1.6rem;
   }
 
   .membership-flow .signup-hero {
