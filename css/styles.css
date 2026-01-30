@@ -25,7 +25,7 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--ink);
-  background: linear-gradient(180deg, #f5f9ff 0%, #e8f2fb 45%, #f6fbff 100%);
+  background: linear-gradient(180deg, #f8f4ee 0%, #eef4fb 45%, #f6fbff 100%);
   line-height: 1.6;
 }
 
@@ -95,12 +95,12 @@ img {
 }
 
 .section {
-  padding: 3.5rem 0;
+  padding: 3.2rem 0;
 }
 
 .section-title {
   max-width: 640px;
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.6rem;
 }
 
 .section-title h2 {
@@ -165,6 +165,13 @@ img {
 .nav-links a {
   color: #2b3a42;
   font-weight: 500;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  transform: scale(1.08);
+  color: var(--accent);
 }
 
 .nav-cta {
@@ -240,7 +247,7 @@ img {
 .hero-copy .lead {
   font-size: 1.1rem;
   color: #39464d;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.3rem;
 }
 
 .hero-actions {
@@ -633,9 +640,14 @@ img {
   border: 1px solid rgba(15, 25, 30, 0.1);
 }
 
+.link-disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 .cta-banner {
-  margin-top: 1.6rem;
-  padding: 2rem;
+  margin-top: 1.4rem;
+  padding: 1.8rem;
   border-radius: var(--radius);
   background: #0e2236;
   color: var(--white);
@@ -734,6 +746,45 @@ img {
 .comparison-card.accent {
   background: linear-gradient(140deg, #1f6fb2 0%, #2a7ccf 100%);
   color: var(--white);
+}
+
+.savings-table {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.savings-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 18px;
+  background: var(--white);
+  border: 1px solid rgba(20, 42, 58, 0.08);
+  box-shadow: 0 10px 24px rgba(13, 27, 42, 0.08);
+}
+
+.savings-head {
+  background: #0e2236;
+  color: var(--white);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+}
+
+.savings-cell {
+  display: grid;
+  gap: 0.2rem;
+  font-weight: 600;
+}
+
+.savings-cell span {
+  font-size: 0.82rem;
+  color: #4f6074;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
 }
 
 .comparison-card.accent li {
@@ -1181,6 +1232,25 @@ img {
 
   .service-image {
     height: 260px;
+  }
+
+  .savings-head {
+    display: none;
+  }
+
+  .savings-row {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .savings-cell::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #5f7388;
+    margin-bottom: 0.2rem;
   }
 }
 
