@@ -293,6 +293,7 @@ img {
   font-family: var(--font-heading);
   font-size: 2rem;
   margin: 0 0 0.4rem;
+  white-space: nowrap;
 }
 
 .hero-metrics p {
@@ -586,6 +587,7 @@ img {
 }
 
 .feature-card {
+  display: block;
   padding: 1.4rem;
   border-radius: 18px;
   background: var(--white);
@@ -594,6 +596,19 @@ img {
 
 #how-it-works .feature-card h4 {
   font-size: 1.2rem;
+  color: var(--accent);
+}
+
+#how-it-works .feature-link {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#how-it-works .feature-link:hover,
+#how-it-works .feature-link:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
 }
 
 #how-it-works .step-number {
@@ -603,7 +618,7 @@ img {
 }
 
 #why .feature-card h4 {
-  font-size: 1.22rem;
+  font-size: 1.3rem;
 }
 
 .service-hero-block {
@@ -770,8 +785,8 @@ img {
 .tag {
   display: inline-block;
   margin-top: 1rem;
-  font-size: 0.85rem;
-  padding: 0.2rem 0.6rem;
+  font-size: 0.95rem;
+  padding: 0.3rem 0.8rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
@@ -1449,11 +1464,47 @@ img {
     margin-top: -2rem;
   }
 
+  .hero-copy,
+  .hero-media {
+    min-width: 0;
+  }
+
+  .hero-media,
+  .hero-image {
+    width: 100%;
+  }
+
+  .hero-copy .eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    white-space: normal;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.3rem;
+  }
+
+  .hero-copy .lead {
+    font-size: 1rem;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .hero-actions .btn {
     width: 100%;
     justify-content: center;
     padding: 0.75rem 1.3rem;
     box-sizing: border-box;
+  }
+
+  .hero-metrics h3 {
+    font-size: 1.5rem;
   }
 
   .cta-strip {
@@ -1519,14 +1570,14 @@ img {
     background-image: url("../assets/images/vision.jpg");
     background-size: cover;
     background-position: center;
-    opacity: 0.45;
+    opacity: 0.32;
   }
 
   .services-page .service-hero-block::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.65);
   }
 
   .services-page .service-hero-block > * {
