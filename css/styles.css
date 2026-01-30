@@ -163,6 +163,7 @@ img {
 }
 
 .nav-links a {
+  display: inline-block;
   color: #2b3a42;
   font-weight: 500;
   transition: transform 0.2s ease, color 0.2s ease;
@@ -528,7 +529,7 @@ img {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1.1rem;
   flex-wrap: wrap;
 }
 
@@ -1196,7 +1197,26 @@ img {
   }
 
   .nav-cta {
-    display: none;
+    display: inline-flex;
+    padding: 0.65rem 1.1rem;
+    margin-left: auto;
+  }
+
+  .brand {
+    order: 1;
+  }
+
+  .nav-cta {
+    order: 2;
+  }
+
+  .menu-toggle {
+    order: 3;
+    margin-left: 0.6rem;
+  }
+
+  .nav-links {
+    order: 4;
   }
 
   .nav-actions {
@@ -1206,6 +1226,28 @@ img {
   .cta-banner {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .signup-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-summary {
+    order: -1;
+  }
+
+  .signup-card {
+    order: 1;
+  }
+
+  .stepper-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .stepper-actions .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -1245,12 +1287,23 @@ img {
 
   .savings-cell::before {
     content: attr(data-label);
-    display: block;
+    display: inline;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: #5f7388;
     margin-bottom: 0.2rem;
+  }
+
+  .savings-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .savings-cell::before {
+    margin: 0;
   }
 }
 
