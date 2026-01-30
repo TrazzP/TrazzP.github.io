@@ -614,7 +614,7 @@ img {
 #how-it-works .step-number {
   color: var(--accent);
   font-weight: 700;
-  font-size: 1.15em;
+  font-size: 1em;
 }
 
 #why .feature-card h4 {
@@ -625,6 +625,14 @@ img {
   display: grid;
   gap: 0.75rem;
   margin-bottom: 1rem;
+}
+
+.service-hero-card {
+  padding: 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(15, 25, 30, 0.12);
+  box-shadow: 0 18px 40px rgba(13, 27, 42, 0.12);
 }
 
 .membership {
@@ -870,6 +878,7 @@ img {
 .savings-head div:last-child {
   color: var(--accent);
   font-weight: 700;
+  font-size: 0.85rem;
 }
 
 .savings-cell {
@@ -881,11 +890,13 @@ img {
 .savings-cell[data-label="W/ ONEVIA"] {
   color: var(--accent);
   font-weight: 700;
+  font-size: 1.05rem;
 }
 
 .savings-cell[data-label="W/ ONEVIA"]::before {
   color: var(--accent);
   font-weight: 700;
+  font-size: 0.8rem;
 }
 
 .savings-cell span {
@@ -1570,19 +1581,24 @@ img {
     background-image: url("../assets/images/vision.jpg");
     background-size: cover;
     background-position: center;
-    opacity: 0.32;
+    opacity: 0.28;
   }
 
   .services-page .service-hero-block::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.58);
   }
 
   .services-page .service-hero-block > * {
     position: relative;
     z-index: 1;
+  }
+
+  .services-page .service-hero-card {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(8px);
   }
 
   .services-page .experience-copy {
