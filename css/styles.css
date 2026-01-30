@@ -1091,6 +1091,36 @@ img {
   gap: 1rem;
 }
 
+.membership-flow .signup-hero {
+  padding: 2.2rem 0 0.8rem;
+}
+
+.membership-flow .signup-hero h1 {
+  margin-bottom: 0.6rem;
+}
+
+.membership-flow .signup-card {
+  padding: 1.7rem;
+  gap: 1rem;
+}
+
+.membership-flow .signup-grid {
+  gap: 1.6rem;
+}
+
+.membership-flow .service-list {
+  margin: 0.9rem 0;
+}
+
+.membership-flow .service-list li {
+  font-size: 0.95rem;
+  padding: 0.55rem 0.8rem;
+}
+
+.membership-flow .upsell-item {
+  padding: 0.85rem;
+}
+
 .order-summary .btn-primary {
   background: var(--accent-2);
   color: #0b1e33;
@@ -1233,7 +1263,7 @@ img {
   }
 
   .order-summary {
-    order: -1;
+    order: 2;
   }
 
   .signup-card {
@@ -1274,6 +1304,20 @@ img {
 
   .service-image {
     height: 260px;
+  }
+
+  .membership-flow .signup-hero {
+    padding: 1.8rem 0 0.6rem;
+  }
+
+  .membership-flow .signup-card {
+    padding: 1.4rem;
+    gap: 0.9rem;
+  }
+
+  .membership-flow .service-list li {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.7rem;
   }
 
   .savings-head {
