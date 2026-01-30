@@ -464,17 +464,6 @@ img {
   margin: 0.4rem 0 0.8rem;
 }
 
-.specialist-stack {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1.2rem;
-  align-items: center;
-}
-
-.specialist-media .service-image {
-  height: 260px;
-}
-
 .specialist-quote {
   margin-top: 0.8rem;
 }
@@ -487,6 +476,41 @@ img {
   font-size: 0.92rem;
   padding: 0.45rem 0.65rem;
   line-height: 1.35;
+}
+
+.specialist-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.specialist-panel {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.glass-panel {
+  padding: 0.9rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 20px 50px rgba(13, 27, 42, 0.16);
+  backdrop-filter: blur(10px) saturate(130%);
+}
+
+.specialist-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.specialist-photo .service-image {
+  height: 360px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 22px;
 }
 
 .service-price {
@@ -630,7 +654,7 @@ img {
 .service-hero-card {
   padding: 1rem;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 24px 60px rgba(13, 27, 42, 0.18);
   backdrop-filter: blur(12px) saturate(130%);
@@ -825,14 +849,14 @@ img {
   background-image: url("../assets/images/vision.jpg");
   background-size: cover;
   background-position: center;
-  opacity: 0.22;
+  opacity: 0.35;
 }
 
 .services-page .experience-grid::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .services-page .experience-copy,
@@ -919,7 +943,7 @@ img {
 .savings-head div:last-child {
   color: var(--accent);
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .savings-cell {
@@ -931,13 +955,13 @@ img {
 .savings-cell[data-label="W/ ONEVIA"] {
   color: var(--accent);
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
 }
 
 .savings-cell[data-label="W/ ONEVIA"]::before {
   color: var(--accent);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .savings-cell span {
@@ -997,6 +1021,60 @@ img {
   background: var(--white);
   border-radius: 20px;
   box-shadow: var(--shadow);
+}
+
+.testimonial-glass-grid .testimonial {
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.testimonial-card {
+  position: relative;
+  min-height: 280px;
+  border-radius: 22px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: 0 24px 60px rgba(13, 27, 42, 0.2);
+}
+
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--testimonial-image);
+  background-size: cover;
+  background-position: center;
+}
+
+.testimonial-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 30, 51, 0.05) 0%, rgba(11, 30, 51, 0.35) 100%);
+}
+
+.testimonial-glass {
+  position: relative;
+  z-index: 1;
+  margin: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 18px 40px rgba(13, 27, 42, 0.18);
+  backdrop-filter: blur(10px) saturate(130%);
+}
+
+.testimonial-glass p {
+  margin: 0 0 0.6rem;
+}
+
+.testimonial-glass span {
+  font-weight: 600;
+  color: #2b3d4f;
 }
 
 .testimonial p {
@@ -1603,26 +1681,35 @@ img {
   }
 
   .services-page .experience-grid::before {
-    opacity: 0.28;
+    opacity: 0.4;
   }
 
   .services-page .experience-grid::after {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.25);
   }
 
   .services-page .service-hero-card {
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.74);
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
   }
 
-  .specialist-stack {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  .specialist-grid {
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  .specialist-media .service-image {
-    height: 200px;
+  .specialist-photo {
+    order: -1;
+  }
+
+  .specialist-photo .service-image {
+    width: 100%;
+    height: 260px;
+  }
+
+  .glass-panel {
+    padding: 0.8rem;
   }
 
   .about-page .service-title {
