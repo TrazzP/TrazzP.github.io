@@ -630,9 +630,10 @@ img {
 .service-hero-card {
   padding: 1rem;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(15, 25, 30, 0.12);
-  box-shadow: 0 18px 40px rgba(13, 27, 42, 0.12);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 24px 60px rgba(13, 27, 42, 0.18);
+  backdrop-filter: blur(12px) saturate(130%);
 }
 
 .membership {
@@ -808,6 +809,46 @@ img {
   align-items: center;
 }
 
+.services-page .experience-grid {
+  position: relative;
+  grid-template-columns: 1fr;
+  padding: 2.4rem;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #eef5fb;
+}
+
+.services-page .experience-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/images/vision.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.22;
+}
+
+.services-page .experience-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.services-page .experience-copy,
+.services-page .experience-media {
+  position: relative;
+  z-index: 1;
+}
+
+.services-page .experience-media {
+  display: none;
+}
+
+.services-page .service-hero-card {
+  max-width: 760px;
+}
+
 .comparison {
   background: #eef5fb;
 }
@@ -877,8 +918,8 @@ img {
 
 .savings-head div:last-child {
   color: var(--accent);
-  font-weight: 700;
-  font-size: 0.85rem;
+  font-weight: 800;
+  font-size: 1rem;
 }
 
 .savings-cell {
@@ -890,13 +931,13 @@ img {
 .savings-cell[data-label="W/ ONEVIA"] {
   color: var(--accent);
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
 }
 
 .savings-cell[data-label="W/ ONEVIA"]::before {
   color: var(--accent);
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .savings-cell span {
@@ -1558,56 +1599,21 @@ img {
   }
 
   .services-page .experience-grid {
-    padding: 0;
-    background: transparent;
+    padding: 1.4rem;
   }
 
   .services-page .experience-grid::before {
-    content: none;
-  }
-
-  .services-page .service-hero-block {
-    position: relative;
-    padding: 1rem;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #f2f7ff;
-  }
-
-  .services-page .service-hero-block::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("../assets/images/vision.jpg");
-    background-size: cover;
-    background-position: center;
     opacity: 0.28;
   }
 
-  .services-page .service-hero-block::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.58);
-  }
-
-  .services-page .service-hero-block > * {
-    position: relative;
-    z-index: 1;
+  .services-page .experience-grid::after {
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .services-page .service-hero-card {
-    background: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(8px);
-  }
-
-  .services-page .experience-copy {
-    background: transparent;
-    padding: 0;
-  }
-
-  .services-page .experience-media {
-    display: none;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.74);
+    backdrop-filter: blur(10px);
   }
 
   .specialist-stack {
