@@ -79,7 +79,7 @@ img {
 }
 
 .btn-primary {
-  background: var(--ink);
+  background: #0c2a4a;
   color: var(--white);
 }
 
@@ -405,8 +405,8 @@ img {
   align-items: flex-start;
   background: var(--white);
   border: 1px solid rgba(20, 42, 58, 0.08);
-  padding: 0.7rem 0.9rem;
-  border-radius: 14px;
+  padding: 0.55rem 0.75rem;
+  border-radius: 12px;
   box-shadow: 0 12px 24px rgba(13, 27, 42, 0.08);
   font-weight: 600;
 }
