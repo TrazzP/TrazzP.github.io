@@ -1636,7 +1636,7 @@ img {
 
   .about-page .glass-overlay {
     left: 1rem;
-    width: 50%;
+    width: 55%;
   }
 
   .about-page .glass-overlay-bubbles {
@@ -1644,11 +1644,12 @@ img {
   }
 
   .about-page .glass-hero {
-    height: 560px;
+    height: auto;
   }
 
   .about-page .glass-image {
-    object-position: 75% center;
+    height: 520px;
+    object-position: 78% center;
   }
 
   .nav-links {
@@ -1808,8 +1809,8 @@ img {
   }
 
   .about-page .glass-overlay {
-    left: 0.6rem;
-    width: 50%;
+    left: auto;
+    width: 100%;
   }
 
   .about-page .glass-overlay-bubbles {
@@ -1817,11 +1818,35 @@ img {
   }
 
   .about-page .glass-hero {
-    height: 600px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    height: auto;
   }
 
   .about-page .glass-image {
-    object-position: 78% center;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    height: 100%;
+    min-height: 600px;
+    object-position: 82% center;
+  }
+
+  .about-page .glass-overlay {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    grid-column: 1 / 2;
+    grid-row: 1;
+    align-self: start;
+    margin: 1rem 0 1rem 0.6rem;
+    width: calc(100% - 0.6rem);
+  }
+
+  .about-page .glass-overlay-bubbles {
+    width: 100%;
   }
 
   .cta-strip {
