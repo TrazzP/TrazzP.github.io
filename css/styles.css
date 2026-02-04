@@ -706,11 +706,15 @@ img {
   z-index: 1;
 }
 
+.about-page .glass-overlay {
+  top: 1.8rem;
+  left: 2rem;
+  transform: none;
+}
+
 .glass-eyebrow {
-  position: absolute;
-  top: 1.2rem;
-  left: 1.6rem;
-  z-index: 2;
+  display: inline-block;
+  margin: 0 0 0.8rem;
   background: rgba(255, 255, 255, 0.7);
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
@@ -725,7 +729,7 @@ img {
   border: none;
   box-shadow: none;
   padding: 0;
-  width: min(420px, 50%);
+  width: clamp(240px, 42%, 420px);
 }
 
 .glass-bubble-list {
@@ -734,12 +738,13 @@ img {
 }
 
 .glass-bubble {
-  padding: 0.6rem 0.8rem;
+  padding: clamp(0.45rem, 1vw, 0.7rem) clamp(0.6rem, 1.4vw, 0.9rem);
   border-radius: 16px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(31, 111, 178, 0.2));
   border: 1px solid rgba(255, 255, 255, 0.65);
   box-shadow: 0 14px 30px rgba(13, 27, 42, 0.14);
   backdrop-filter: blur(14px) saturate(140%);
+  font-size: clamp(0.82rem, 1.1vw, 0.95rem);
   transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -1602,11 +1607,21 @@ img {
   }
 
   .glass-overlay-bubbles {
-    width: min(92%, 360px);
+    width: min(90%, 360px);
   }
 
   .glass-eyebrow {
-    left: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .about-page .glass-overlay {
+    left: auto;
+    right: 1rem;
+    width: min(70%, 320px);
+  }
+
+  .about-page .glass-overlay-bubbles {
+    width: min(70%, 320px);
   }
 
   .nav-links {
@@ -1745,6 +1760,34 @@ img {
 
   .hero-metrics h3 {
     font-size: 1.5rem;
+  }
+
+  .glass-overlay {
+    left: 1rem;
+    width: min(90%, 320px);
+  }
+
+  .glass-overlay-bubbles {
+    width: min(90%, 320px);
+  }
+
+  .glass-bubble {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.55rem;
+  }
+
+  .name-bubble .service-title {
+    font-size: 1.35rem;
+  }
+
+  .about-page .glass-overlay {
+    left: auto;
+    right: 0.6rem;
+    width: min(64%, 260px);
+  }
+
+  .about-page .glass-overlay-bubbles {
+    width: min(64%, 260px);
   }
 
   .cta-strip {
