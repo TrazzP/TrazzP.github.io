@@ -692,12 +692,13 @@ img {
 }
 
 .about-page .glass-hero {
-  height: 520px;
+  min-height: 520px;
 }
 
 .about-page .glass-image {
   height: 100%;
-  object-position: 70% center;
+  min-height: 520px;
+  object-position: 78% center;
 }
 
 .glass-overlay {
@@ -1636,7 +1637,7 @@ img {
 
   .about-page .glass-overlay {
     left: 1rem;
-    width: 55%;
+    width: 50%;
   }
 
   .about-page .glass-overlay-bubbles {
@@ -1644,12 +1645,12 @@ img {
   }
 
   .about-page .glass-hero {
-    height: auto;
+    min-height: 560px;
   }
 
   .about-page .glass-image {
-    height: 520px;
-    object-position: 78% center;
+    min-height: 560px;
+    object-position: 80% center;
   }
 
   .nav-links {
@@ -1809,8 +1810,8 @@ img {
   }
 
   .about-page .glass-overlay {
-    left: auto;
-    width: 100%;
+    left: 0.6rem;
+    width: 50%;
   }
 
   .about-page .glass-overlay-bubbles {
@@ -1818,35 +1819,12 @@ img {
   }
 
   .about-page .glass-hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-    height: auto;
+    min-height: 640px;
   }
 
   .about-page .glass-image {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    height: 100%;
-    min-height: 600px;
+    min-height: 640px;
     object-position: 82% center;
-  }
-
-  .about-page .glass-overlay {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    transform: none;
-    grid-column: 1 / 2;
-    grid-row: 1;
-    align-self: start;
-    margin: 1rem 0 1rem 0.6rem;
-    width: calc(100% - 0.6rem);
-  }
-
-  .about-page .glass-overlay-bubbles {
-    width: 100%;
   }
 
   .cta-strip {
