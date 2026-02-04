@@ -712,6 +712,12 @@ img {
   transform: none;
 }
 
+.services-page .glass-overlay {
+  top: 1.8rem;
+  left: 2rem;
+  transform: none;
+}
+
 .glass-eyebrow {
   display: inline-block;
   margin: 0 0 0.8rem;
@@ -756,6 +762,11 @@ img {
 
 .name-bubble {
   padding: 0.7rem 1rem;
+}
+
+.price-bubble .service-price {
+  background: transparent;
+  padding: 0;
 }
 
 .name-bubble .service-title {
@@ -1615,13 +1626,12 @@ img {
   }
 
   .about-page .glass-overlay {
-    left: auto;
-    right: 1rem;
-    width: min(70%, 320px);
+    left: 1rem;
+    width: min(62%, 320px);
   }
 
   .about-page .glass-overlay-bubbles {
-    width: min(70%, 320px);
+    width: min(62%, 320px);
   }
 
   .nav-links {
@@ -1781,13 +1791,12 @@ img {
   }
 
   .about-page .glass-overlay {
-    left: auto;
-    right: 0.6rem;
-    width: min(64%, 260px);
+    left: 0.8rem;
+    width: min(58%, 260px);
   }
 
   .about-page .glass-overlay-bubbles {
-    width: min(64%, 260px);
+    width: min(58%, 260px);
   }
 
   .cta-strip {
