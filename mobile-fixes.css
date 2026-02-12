@@ -1,0 +1,617 @@
+/**
+ * MOBILE OPTIMIZATION FIXES FOR ONEVIA
+ * Add these styles to css/styles.css or include as separate stylesheet
+ *
+ * Quick implementation:
+ * <link rel="stylesheet" href="mobile-fixes.css">
+ */
+
+/* ============================================
+   1. SAFE AREA SUPPORT FOR NOTCHED DEVICES
+   ============================================ */
+
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .container {
+    padding-left: max(4%, env(safe-area-inset-left));
+    padding-right: max(4%, env(safe-area-inset-right));
+  }
+
+  .topbar {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .footer {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+
+  @media (max-width: 700px) {
+    .nav-links.is-open {
+      padding: 1rem max(1rem, env(safe-area-inset-right)) 1rem 1rem;
+    }
+  }
+}
+
+/* ============================================
+   2. IMPROVED TOUCH TARGETS (44x44px minimum)
+   ============================================ */
+
+@media (max-width: 960px) {
+  /* Menu toggle button */
+  .menu-toggle {
+    padding: 12px;
+    min-width: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Navigation links */
+  .nav-links a {
+    padding: 14px 16px;
+    display: block;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Buttons */
+  .btn {
+    min-height: 48px;
+    padding: 0.85rem 1.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 700px) {
+  /* FAQ tap targets */
+  .faq-grid summary {
+    padding: 16px 40px 16px 0;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Form inputs - larger tap areas */
+  .signup-card input[type="radio"],
+  .signup-card input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    margin: 8px;
+  }
+
+  /* Plan option labels */
+  .plan-option label,
+  .upsell-item label {
+    padding: 16px;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Stepper tabs */
+  .stepper-tab {
+    padding: 12px 20px;
+    min-height: 48px;
+  }
+
+  /* Care cards */
+  .care-card {
+    padding: 20px;
+    min-height: 120px;
+  }
+}
+
+/* ============================================
+   3. OPTIMIZED GLASS EFFECTS FOR MOBILE
+   ============================================ */
+
+/* Only apply glass effects if supported */
+@supports (backdrop-filter: blur(10px)) {
+  .glass-panel {
+    backdrop-filter: blur(10px) saturate(130%);
+  }
+
+  .glass-overlay {
+    backdrop-filter: blur(12px) saturate(140%);
+  }
+
+  .glass-bubble {
+    backdrop-filter: blur(14px) saturate(140%);
+  }
+
+  .testimonial-glass {
+    backdrop-filter: blur(10px) saturate(130%);
+  }
+
+  .topbar {
+    backdrop-filter: blur(20px);
+  }
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass-panel,
+  .glass-overlay,
+  .glass-bubble,
+  .testimonial-glass,
+  .topbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: none;
+  }
+}
+
+/* Reduce glass effects on mobile for better performance */
+@media (max-width: 700px) {
+  .topbar {
+    backdrop-filter: blur(10px); /* Reduced from 20px */
+  }
+
+  .glass-overlay {
+    backdrop-filter: blur(8px) saturate(120%); /* Reduced complexity */
+  }
+
+  .glass-bubble {
+    backdrop-filter: blur(10px) saturate(120%); /* Reduced complexity */
+  }
+}
+
+/* Disable glass effects on low-end devices */
+.low-bandwidth .topbar,
+.low-bandwidth .glass-panel,
+.low-bandwidth .glass-overlay,
+.low-bandwidth .glass-bubble,
+.low-bandwidth .testimonial-glass,
+.save-data .topbar,
+.save-data .glass-panel,
+.save-data .glass-overlay,
+.save-data .glass-bubble,
+.save-data .testimonial-glass {
+  backdrop-filter: none !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .topbar,
+  .glass-panel,
+  .glass-overlay,
+  .glass-bubble,
+  .testimonial-glass {
+    backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+}
+
+/* ============================================
+   4. TOUCH DEVICE ACTIVE STATES
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Button press feedback */
+  .btn:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
+  }
+
+  /* Navigation link press */
+  .nav-links a:active {
+    background: rgba(31, 111, 178, 0.1);
+    transition: background 0.1s ease;
+  }
+
+  /* Card press feedback */
+  .care-card:active,
+  .feature-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 24px 60px rgba(13, 27, 42, 0.18);
+  }
+
+  /* FAQ press feedback */
+  .faq-grid summary:active {
+    background: rgba(31, 111, 178, 0.05);
+  }
+
+  /* Plan option press feedback */
+  .plan-option:active {
+    background: rgba(31, 111, 178, 0.05);
+  }
+
+  /* Disable hover effects on touch devices */
+  .btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Glass bubble hover disabled on touch */
+  .glass-bubble:hover {
+    transform: none;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(31, 111, 178, 0.2));
+    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.14);
+  }
+}
+
+/* ============================================
+   5. IMPROVED TYPOGRAPHY FOR SMALL SCREENS
+   ============================================ */
+
+@media (max-width: 700px) {
+  /* Ensure minimum font sizes for readability */
+  body {
+    font-size: 16px; /* Prevent zoom on input focus in iOS */
+  }
+
+  /* Hero heading improvements */
+  .hero-copy h1 {
+    font-size: clamp(1.9rem, 7vw, 2.8rem);
+    line-height: 1.2;
+    margin: 0.8rem 0 1rem;
+  }
+
+  /* Lead text */
+  .hero-copy .lead {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* Section titles */
+  .section-title h2 {
+    font-size: clamp(1.7rem, 5vw, 2.6rem);
+    line-height: 1.25;
+  }
+
+  /* Glass overlay titles */
+  .glass-overlay .service-title {
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    line-height: 1.2;
+  }
+
+  /* Button text */
+  .btn {
+    font-size: 0.95rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 375px) {
+  .hero-copy h1 {
+    font-size: clamp(1.8rem, 8vw, 2.3rem);
+  }
+
+  .hero-copy .eyebrow {
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .section-title h2 {
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+  }
+
+  .glass-overlay .service-title {
+    font-size: clamp(1.3rem, 5vw, 2rem);
+  }
+}
+
+/* ============================================
+   6. CLICK-TO-CALL AND EMAIL STYLING
+   ============================================ */
+
+@media (max-width: 700px) {
+  .footer a[href^="tel"],
+  .footer a[href^="mailto"] {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 16px;
+    margin: 4px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-weight: 600;
+    min-height: 44px;
+    color: #7ec1ff;
+    transition: background 0.2s ease;
+  }
+
+  .footer a[href^="tel"]:active,
+  .footer a[href^="mailto"]:active {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Add icons for better UX */
+  .footer a[href^="tel"]::before {
+    content: "📞 ";
+    margin-right: 8px;
+    font-size: 1.1em;
+  }
+
+  .footer a[href^="mailto"]::before {
+    content: "✉️ ";
+    margin-right: 8px;
+    font-size: 1.1em;
+  }
+}
+
+/* ============================================
+   7. FORM INPUT OPTIMIZATION
+   ============================================ */
+
+/* Prevent iOS zoom on input focus */
+.contact-form input,
+.contact-form textarea,
+.contact-form select,
+.signup-card input[type="text"],
+.signup-card input[type="email"],
+.signup-card input[type="tel"] {
+  font-size: 16px !important;
+}
+
+/* Better mobile form spacing */
+@media (max-width: 700px) {
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form select {
+    padding: 1rem 1.1rem;
+    min-height: 48px;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .contact-form textarea {
+    min-height: 120px;
+  }
+
+  /* Form labels */
+  .contact-form label {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+}
+
+/* ============================================
+   8. NAVIGATION IMPROVEMENTS
+   ============================================ */
+
+@media (max-width: 960px) {
+  .nav-links.is-open {
+    /* Smooth animation */
+    animation: slideDown 0.3s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Backdrop for mobile menu */
+  .nav-links.is-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 30, 51, 0.4);
+    z-index: -1;
+  }
+}
+
+/* ============================================
+   9. LANDSCAPE ORIENTATION OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 960px) and (orientation: landscape) {
+  /* Reduce hero padding in landscape */
+  .hero {
+    padding: 2rem 0 1.5rem;
+  }
+
+  /* Smaller hero heading in landscape */
+  .hero-copy h1 {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    margin: 0.5rem 0;
+  }
+
+  /* Compact navigation in landscape */
+  .nav-wrap {
+    padding: 0.6rem 0;
+  }
+
+  /* Stack hero metrics horizontally */
+  .hero-metrics {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .hero-metrics h3 {
+    font-size: 1.3rem;
+  }
+
+  .hero-metrics p {
+    font-size: 0.8rem;
+  }
+}
+
+/* ============================================
+   10. IMPROVED FOCUS INDICATORS
+   ============================================ */
+
+/* Visible focus for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #1f6fb2;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Remove default focus outline */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Enhanced focus for navigation */
+.nav-links a:focus-visible {
+  background: rgba(31, 111, 178, 0.1);
+  outline: 3px solid #1f6fb2;
+  outline-offset: -3px;
+}
+
+/* ============================================
+   11. LOADING STATES AND SKELETON SCREENS
+   ============================================ */
+
+/* Lazy loading fade-in */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Image placeholder for better CLS */
+img {
+  background: linear-gradient(90deg, #eef4fb 0%, #f2f7fb 50%, #eef4fb 100%);
+  background-size: 200% 100%;
+}
+
+/* Skeleton loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* ============================================
+   12. PERFORMANCE UTILITIES
+   ============================================ */
+
+/* Disable animations for low-performance devices */
+.low-battery *,
+.low-bandwidth * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* GPU acceleration for animations */
+.btn,
+.card,
+.feature-card,
+.care-card {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ============================================
+   13. PRINT STYLES
+   ============================================ */
+
+@media print {
+  /* Hide navigation and non-essential elements */
+  .topbar,
+  .footer,
+  .hero-actions,
+  .btn,
+  .cta-banner {
+    display: none !important;
+  }
+
+  /* Remove glass effects for print */
+  .glass-panel,
+  .glass-overlay,
+  .glass-bubble {
+    background: white !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Ensure good contrast */
+  body {
+    background: white;
+    color: black;
+  }
+
+  /* Page breaks */
+  section {
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+}
+
+/* ============================================
+   14. DARK MODE SUPPORT (FUTURE)
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  /* Placeholder for future dark mode implementation */
+  /* Currently not implemented in Onevia design */
+  /* Would need design approval before implementation */
+}
+
+/* ============================================
+   15. HIGH CONTRAST MODE
+   ============================================ */
+
+@media (prefers-contrast: high) {
+  /* Increase contrast for better visibility */
+  .btn-primary {
+    border: 2px solid currentColor;
+  }
+
+  .btn-secondary {
+    border-width: 2px;
+  }
+
+  /* Ensure glass overlays have sufficient contrast */
+  .glass-overlay,
+  .glass-bubble,
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid rgba(11, 30, 51, 0.3);
+  }
+
+  /* Increase text contrast */
+  .muted {
+    color: #3a4a5a;
+  }
+}
+
+/* ============================================
+   END OF MOBILE OPTIMIZATION FIXES
+   ============================================ */

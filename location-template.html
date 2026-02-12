@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Onevia Missoula | Direct Primary Care Clinic</title>
+    <meta
+      name="description"
+      content="Onevia Missoula offers membership-based direct primary care, pharmacy, dental, and vision services in downtown Missoula, MT."
+    />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body class="location-page">
+    <header class="topbar" id="top">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="Onevia">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text brand-text-lg">Onevia</span>
+        </a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav-links" id="nav-links">
+          <a href="index.html#why">Why Onevia</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="locations.html">Locations</a>
+          <a href="index.html#testimonials">Patient Stories</a>
+          <a href="index.html#faq">FAQ</a>
+        </nav>
+        <a class="btn btn-primary nav-cta" href="membership.html" data-membership-link>Start Membership</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Location Hero with Local Imagery -->
+      <section class="location-hero">
+        <!--
+          LOCATION VIDEO/IMAGE: Replace with location-specific content
+          For Missoula: Downtown, mountains, local landmarks
+          Video specs: 1920x1080, H.264, 30fps, 10-15 seconds looping
+        -->
+        <div class="location-hero-media">
+          <img src="assets/images/hero-consult.jpg" alt="Missoula, Montana" class="location-hero-image" />
+          <!-- Optional video background:
+          <video class="location-hero-video" autoplay muted loop playsinline poster="assets/images/hero-consult.jpg">
+            <source src="assets/videos/location-missoula.mp4" type="video/mp4">
+          </video>
+          -->
+          <div class="location-hero-overlay"></div>
+        </div>
+
+        <div class="container">
+          <div class="location-hero-content">
+            <div class="glass-location-card" data-reveal>
+              <span class="location-breadcrumb">
+                <a href="locations.html">All Locations</a> / Missoula
+              </span>
+              <h1 class="location-title">Onevia Missoula</h1>
+              <p class="location-subtitle">Direct care in the heart of downtown</p>
+
+              <div class="location-quick-info">
+                <div class="quick-info-item">
+                  <strong>123 Healthcare Way</strong>
+                  <span>Missoula, MT 59801</span>
+                </div>
+                <div class="quick-info-item">
+                  <strong>(406) 555-0100</strong>
+                  <span>Mon-Fri 8am-6pm</span>
+                </div>
+              </div>
+
+              <div class="location-hero-actions">
+                <a href="membership.html" class="btn btn-primary btn-glass" data-membership-link>Join this clinic</a>
+                <a href="#directions" class="btn btn-secondary btn-glass-outline">Get directions</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Location Services -->
+      <section class="section">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Services at this location</span>
+            <h2>Complete care, one convenient location.</h2>
+            <p>Our Missoula clinic offers all Onevia services under one roof.</p>
+          </div>
+
+          <div class="location-services-grid" data-reveal>
+            <div class="location-service-card">
+              <h3>Primary Care</h3>
+              <p>Comprehensive primary care with extended visit times and same-day availability.</p>
+              <ul class="service-features">
+                <li>Annual wellness exams</li>
+                <li>Chronic disease management</li>
+                <li>Acute care visits</li>
+                <li>Preventive screenings</li>
+              </ul>
+              <a href="services.html#primary-care" class="text-link">Learn more about Primary Care →</a>
+            </div>
+
+            <div class="location-service-card">
+              <h3>Pharmacy</h3>
+              <p>At-cost medications with pharmacist consultation and medication management.</p>
+              <ul class="service-features">
+                <li>Generic medications at cost</li>
+                <li>Medication therapy management</li>
+                <li>Prescription refills</li>
+                <li>Drug interaction reviews</li>
+              </ul>
+              <a href="services.html#rx" class="text-link">Learn more about Pharmacy →</a>
+            </div>
+
+            <div class="location-service-card">
+              <h3>Dental</h3>
+              <p>Preventive-first dental care without insurance hassles.</p>
+              <ul class="service-features">
+                <li>Cleanings and exams</li>
+                <li>X-rays and diagnostics</li>
+                <li>Fillings and restorations</li>
+                <li>Periodontal care</li>
+              </ul>
+              <a href="services.html#dental" class="text-link">Learn more about Dental →</a>
+            </div>
+
+            <div class="location-service-card">
+              <h3>Vision</h3>
+              <p>Comprehensive eye exams and long-term vision care.</p>
+              <ul class="service-features">
+                <li>Annual eye exams</li>
+                <li>Contact lens fittings</li>
+                <li>Glaucoma screening</li>
+                <li>Vision prescriptions</li>
+              </ul>
+              <a href="services.html#vision" class="text-link">Learn more about Vision →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Care Team -->
+      <section class="section section-glass-bg" id="team">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Meet your team</span>
+            <h2>Physicians and specialists at this location.</h2>
+            <p>Small patient panels mean your care team truly knows you.</p>
+          </div>
+
+          <div class="physician-grid" data-reveal>
+            <!-- Physician 1 -->
+            <article class="physician-card-glass">
+              <div class="physician-photo">
+                <img src="assets/images/hero-consult.jpg" alt="Dr. Sarah Mitchell" />
+              </div>
+              <div class="physician-info">
+                <h3>Dr. Sarah Mitchell, MD</h3>
+                <span class="physician-title">Primary Care Physician</span>
+                <p class="physician-bio">
+                  Board-certified family medicine physician with 12 years of experience. Specializes in preventive care,
+                  chronic disease management, and women's health.
+                </p>
+                <div class="physician-credentials">
+                  <span class="credential-badge">MD, University of Washington</span>
+                  <span class="credential-badge">Residency, Providence Portland</span>
+                </div>
+                <p class="physician-quote">
+                  "Direct care lets me focus on what matters: building relationships and keeping my patients healthy
+                  long-term."
+                </p>
+              </div>
+            </article>
+
+            <!-- Physician 2 -->
+            <article class="physician-card-glass">
+              <div class="physician-photo">
+                <img src="assets/images/hero-consult.jpg" alt="Dr. James Chen" />
+              </div>
+              <div class="physician-info">
+                <h3>Dr. James Chen, DO</h3>
+                <span class="physician-title">Primary Care Physician</span>
+                <p class="physician-bio">
+                  Osteopathic physician focused on integrative medicine and sports medicine. Passionate about lifestyle
+                  interventions and chronic pain management.
+                </p>
+                <div class="physician-credentials">
+                  <span class="credential-badge">DO, Rocky Vista University</span>
+                  <span class="credential-badge">Sports Medicine Fellowship</span>
+                </div>
+                <p class="physician-quote">
+                  "I spend time understanding the whole person, not just treating symptoms. That's the power of this
+                  model."
+                </p>
+              </div>
+            </article>
+
+            <!-- Pharmacist -->
+            <article class="physician-card-glass">
+              <div class="physician-photo">
+                <img src="assets/images/hero-consult.jpg" alt="Dr. Emily Rodriguez" />
+              </div>
+              <div class="physician-info">
+                <h3>Dr. Emily Rodriguez, PharmD</h3>
+                <span class="physician-title">Clinical Pharmacist</span>
+                <p class="physician-bio">
+                  Clinical pharmacist specializing in medication therapy management and chronic disease optimization.
+                  Works closely with physicians to optimize drug regimens.
+                </p>
+                <div class="physician-credentials">
+                  <span class="credential-badge">PharmD, University of Montana</span>
+                  <span class="credential-badge">Ambulatory Care Certification</span>
+                </div>
+                <p class="physician-quote">
+                  "At-cost medications plus expert guidance means better adherence and better outcomes."
+                </p>
+              </div>
+            </article>
+
+            <!-- Dentist -->
+            <article class="physician-card-glass">
+              <div class="physician-photo">
+                <img src="assets/images/hero-consult.jpg" alt="Dr. Michael Thompson" />
+              </div>
+              <div class="physician-info">
+                <h3>Dr. Michael Thompson, DDS</h3>
+                <span class="physician-title">Dentist</span>
+                <p class="physician-bio">
+                  General dentist with emphasis on preventive care and patient education. Believes in conservative,
+                  evidence-based dentistry without insurance-driven treatment.
+                </p>
+                <div class="physician-credentials">
+                  <span class="credential-badge">DDS, University of Washington</span>
+                  <span class="credential-badge">Academy of General Dentistry</span>
+                </div>
+                <p class="physician-quote">
+                  "Without insurance constraints, I can recommend what's truly best for each patient."
+                </p>
+              </div>
+            </article>
+
+            <!-- Optometrist -->
+            <article class="physician-card-glass">
+              <div class="physician-photo">
+                <img src="assets/images/hero-consult.jpg" alt="Dr. Lisa Park" />
+              </div>
+              <div class="physician-info">
+                <h3>Dr. Lisa Park, OD</h3>
+                <span class="physician-title">Optometrist</span>
+                <p class="physician-bio">
+                  Therapeutic optometrist focused on early detection of eye disease and comprehensive vision care.
+                  Manages glaucoma, diabetic eye disease, and dry eye.
+                </p>
+                <div class="physician-credentials">
+                  <span class="credential-badge">OD, Pacific University</span>
+                  <span class="credential-badge">Glaucoma Specialist</span>
+                </div>
+                <p class="physician-quote">
+                  "Regular eye exams catch problems early. Membership makes prevention accessible."
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Clinic Photos -->
+      <section class="section" id="gallery">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Our space</span>
+            <h2>A welcoming environment for care.</h2>
+          </div>
+
+          <div class="clinic-gallery" data-reveal>
+            <div class="gallery-item">
+              <img src="assets/images/hero-consult.jpg" alt="Clinic waiting room" />
+              <span class="gallery-caption">Comfortable waiting area</span>
+            </div>
+            <div class="gallery-item">
+              <img src="assets/images/hero-consult.jpg" alt="Consultation room" />
+              <span class="gallery-caption">Private consultation rooms</span>
+            </div>
+            <div class="gallery-item">
+              <img src="assets/images/hero-consult.jpg" alt="Pharmacy area" />
+              <span class="gallery-caption">On-site pharmacy</span>
+            </div>
+            <div class="gallery-item">
+              <img src="assets/images/hero-consult.jpg" alt="Reception desk" />
+              <span class="gallery-caption">Friendly reception team</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hours and Directions -->
+      <section class="section section-glass-bg" id="directions">
+        <div class="container">
+          <div class="location-details-grid" data-reveal>
+            <div class="location-details-card">
+              <h3>Hours of Operation</h3>
+              <div class="hours-list">
+                <div class="hours-item">
+                  <span>Monday</span>
+                  <span>8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                  <span>Tuesday</span>
+                  <span>8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                  <span>Wednesday</span>
+                  <span>8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                  <span>Thursday</span>
+                  <span>8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                  <span>Friday</span>
+                  <span>8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                  <span>Saturday</span>
+                  <span>9:00 AM - 2:00 PM</span>
+                </div>
+                <div class="hours-item">
+                  <span>Sunday</span>
+                  <span>Closed</span>
+                </div>
+              </div>
+              <p class="hours-note">Extended hours available for members</p>
+            </div>
+
+            <div class="location-details-card">
+              <h3>Getting Here</h3>
+              <div class="directions-info">
+                <p><strong>Address:</strong><br />
+                123 Healthcare Way<br />
+                Missoula, MT 59801</p>
+
+                <p><strong>Phone:</strong><br />
+                (406) 555-0100</p>
+
+                <p><strong>Email:</strong><br />
+                missoula@onevia.health</p>
+
+                <p><strong>Parking:</strong><br />
+                Free parking available in adjacent lot. Street parking also available.</p>
+
+                <p><strong>Public Transit:</strong><br />
+                Mountain Line Route 2 stops one block away.</p>
+              </div>
+              <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-primary">Open in Maps</a>
+            </div>
+          </div>
+
+          <!-- Map Placeholder -->
+          <div class="location-map-embed" data-reveal>
+            <!--
+              EMBED MAP: Replace with Google Maps embed or Mapbox
+              Example: <iframe src="https://maps.google.com/..." />
+            -->
+            <div class="map-placeholder-inline">
+              <p>Interactive map with directions</p>
+              <small>Embedded map coming soon</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQs specific to this location -->
+      <section class="section faq">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Location FAQ</span>
+            <h2>Questions about this clinic.</h2>
+          </div>
+          <div class="faq-grid" data-reveal>
+            <details>
+              <summary>Do I need to live in Missoula to join?</summary>
+              <p>No, but you'll get the most value if this is your primary clinic for in-person visits. We also offer telemedicine for members who travel.</p>
+            </details>
+            <details>
+              <summary>Are all services available at this location?</summary>
+              <p>Yes. Our Missoula clinic is our flagship location and offers primary care, pharmacy, dental, and vision services.</p>
+            </details>
+            <details>
+              <summary>Can I switch to a different Onevia location later?</summary>
+              <p>Yes. Your membership is portable across all Onevia locations. Just update your primary clinic in your member portal.</p>
+            </details>
+            <details>
+              <summary>Is there wheelchair access?</summary>
+              <p>Yes. Our clinic is fully ADA accessible with wheelchair-friendly entrances and exam rooms.</p>
+            </details>
+            <details>
+              <summary>Do you accept walk-ins?</summary>
+              <p>Members are welcome to walk in during open hours, though we recommend scheduling for shorter wait times.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- Join CTA -->
+      <section class="section">
+        <div class="container">
+          <div class="cta-banner" data-reveal>
+            <div>
+              <h3>Ready to join Onevia Missoula?</h3>
+              <p>Start your membership and schedule your first visit today.</p>
+            </div>
+            <a class="btn btn-primary" href="membership.html" data-membership-link>Join this clinic</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <span class="brand-text">Onevia</span>
+          <p>One Membership. Complete Care.</p>
+          <p class="muted">Wellness-focused care across Montana.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <a href="index.html#why">Why Onevia</a>
+          <a href="index.html#savings">Savings</a>
+          <a href="index.html#testimonials">Patient Stories</a>
+          <a href="index.html#faq">FAQ</a>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <a href="services.html#primary-care">Primary Care</a>
+          <a href="services.html#rx">Pharmacy</a>
+          <a href="services.html#dental">Dental</a>
+          <a href="services.html#vision">Vision</a>
+          <a href="membership.html">Build Membership</a>
+        </div>
+        <div>
+          <h4>Locations</h4>
+          <a href="locations.html">All Locations</a>
+          <a href="location-template.html">Missoula</a>
+          <a href="location-template.html">Bozeman</a>
+          <a href="location-template.html">Billings</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>Email: hello@onevia.health</p>
+          <p>Employer plans: hello@onevia.health</p>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>(c) 2026 Onevia. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

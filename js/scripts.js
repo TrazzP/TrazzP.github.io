@@ -278,3 +278,378 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSummary(membershipData);
   updateAddonPrices(membershipData);
 });
+
+/* ============================================
+   ENHANCED FEATURES FOR LIQUID GLASS DESIGN
+   ============================================ */
+
+// Video Background Lazy Loading and Optimization
+document.addEventListener('DOMContentLoaded', () => {
+  // Lazy load video backgrounds for performance
+  const videoBackgrounds = document.querySelectorAll('.video-hero-bg, .location-hero-video');
+  
+  if (videoBackgrounds.length > 0) {
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    videoBackgrounds.forEach((video) => {
+      if (!prefersReducedMotion) {
+        // Ensure video plays on mobile devices
+        video.setAttribute('playsinline', '');
+        video.setAttribute('muted', '');
+        
+        // Handle video loading and playback
+        const playVideo = () => {
+          video.play().catch((error) => {
+            console.log('Video autoplay prevented:', error);
+            // Fallback: show poster image if video can't play
+          });
+        };
+        
+        // Play video when it's loaded enough
+        if (video.readyState >= 3) {
+          playVideo();
+        } else {
+          video.addEventListener('loadeddata', playVideo);
+        }
+        
+        // Pause video when out of viewport to save resources
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                video.play().catch(() => {});
+              } else {
+                video.pause();
+              }
+            });
+          },
+          { threshold: 0.25 }
+        );
+        
+        observer.observe(video);
+      } else {
+        // If user prefers reduced motion, don't autoplay
+        video.pause();
+      }
+    });
+  }
+});
+
+/* ============================================
+   LOCATION SEARCH AND FILTER FUNCTIONALITY
+   ============================================ */
+
+// Location Search and Filter
+if (document.getElementById('location-search')) {
+  const searchInput = document.getElementById('location-search');
+  const filterChips = document.querySelectorAll('.filter-chip');
+  const locationCards = document.querySelectorAll('[data-location]');
+  const locationCount = document.getElementById('location-count');
+  const noResults = document.getElementById('no-results');
+  
+  let activeFilter = 'all';
+  
+  // Search functionality
+  searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase().trim();
+    filterLocations(searchTerm, activeFilter);
+  });
+  
+  // Filter chip functionality
+  filterChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      // Update active chip
+      filterChips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      
+      // Update active filter
+      activeFilter = chip.dataset.filter;
+      
+      // Filter locations
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      filterLocations(searchTerm, activeFilter);
+    });
+  });
+  
+  function filterLocations(searchTerm, filter) {
+    let visibleCount = 0;
+    
+    locationCards.forEach((card) => {
+      let showCard = true;
+      
+      // Search filter
+      if (searchTerm) {
+        const cardText = card.textContent.toLowerCase();
+        if (!cardText.includes(searchTerm)) {
+          showCard = false;
+        }
+      }
+      
+      // Status and service filters
+      if (filter !== 'all') {
+        if (filter === 'open') {
+          if (card.dataset.status !== 'open') {
+            showCard = false;
+          }
+        } else {
+          // Service filters
+          const services = card.dataset.services || '';
+          if (!services.includes(filter)) {
+            showCard = false;
+          }
+        }
+      }
+      
+      // Show/hide card with animation
+      if (showCard) {
+        card.style.display = 'grid';
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 10);
+        visibleCount++;
+      } else {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          card.style.display = 'none';
+        }, 300);
+      }
+    });
+    
+    // Update count
+    if (locationCount) {
+      locationCount.textContent = visibleCount;
+    }
+    
+    // Show/hide no results message
+    if (noResults) {
+      if (visibleCount === 0) {
+        noResults.style.display = 'block';
+      } else {
+        noResults.style.display = 'none';
+      }
+    }
+  }
+  
+  // Reset filters function (global for button onclick)
+  window.resetFilters = function() {
+    searchInput.value = '';
+    filterChips.forEach((chip) => chip.classList.remove('active'));
+    filterChips[0].classList.add('active');
+    activeFilter = 'all';
+    filterLocations('', 'all');
+  };
+  
+  // Initialize card transitions
+  locationCards.forEach((card) => {
+    card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  });
+}
+
+/* ============================================
+   SMOOTH SCROLL ENHANCEMENTS
+   ============================================ */
+
+// Enhanced smooth scroll behavior for anchor links
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    
+    // Skip if href is just "#"
+    if (href === '#') return;
+    
+    e.preventDefault();
+    
+    const target = document.querySelector(href);
+    if (target) {
+      const headerOffset = 80;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+
+/* ============================================
+   GLASS CARD PARALLAX EFFECT
+   ============================================ */
+
+// Subtle parallax effect for glass cards on scroll
+if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  const glassCards = document.querySelectorAll('.glass-hero-card, .glass-metric-card, .feature-card-glass');
+  
+  if (glassCards.length > 0) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      
+      glassCards.forEach((card, index) => {
+        const speed = 0.05 + (index * 0.01);
+        const yPos = -(scrolled * speed);
+        
+        // Only apply if card is in viewport
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          card.style.transform = `translateY(${yPos}px)`;
+        }
+      });
+    });
+  }
+}
+
+/* ============================================
+   MOBILE MENU ENHANCEMENTS
+   ============================================ */
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  const navLinks = document.querySelector('.nav-links');
+  const menuToggle = document.querySelector('.menu-toggle');
+  
+  if (navLinks && menuToggle) {
+    if (navLinks.classList.contains('is-open')) {
+      if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+        navLinks.classList.remove('is-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+  }
+});
+
+// Close mobile menu on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const navLinks = document.querySelector('.nav-links');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (navLinks && menuToggle && navLinks.classList.contains('is-open')) {
+      navLinks.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+});
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+// Lazy load images with intersection observer
+if ('IntersectionObserver' in window) {
+  const imageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          
+          // If image has data-src, load it
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
+          
+          observer.unobserve(img);
+        }
+      });
+    },
+    { rootMargin: '50px' }
+  );
+  
+  // Observe all images with data-src attribute
+  document.querySelectorAll('img[data-src]').forEach((img) => {
+    imageObserver.observe(img);
+  });
+}
+
+// Debounce function for performance
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Throttle function for scroll events
+function throttle(func, limit) {
+  let inThrottle;
+  return function(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+
+/* ============================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================ */
+
+// Announce page changes to screen readers
+function announceToScreenReader(message) {
+  const announcement = document.createElement('div');
+  announcement.setAttribute('role', 'status');
+  announcement.setAttribute('aria-live', 'polite');
+  announcement.setAttribute('aria-atomic', 'true');
+  announcement.className = 'sr-only';
+  announcement.style.position = 'absolute';
+  announcement.style.left = '-10000px';
+  announcement.style.width = '1px';
+  announcement.style.height = '1px';
+  announcement.style.overflow = 'hidden';
+  announcement.textContent = message;
+  
+  document.body.appendChild(announcement);
+  
+  setTimeout(() => {
+    document.body.removeChild(announcement);
+  }, 1000);
+}
+
+// Announce filter changes
+if (document.getElementById('location-search')) {
+  const originalFilterLocations = filterLocations;
+  filterLocations = function(searchTerm, filter) {
+    originalFilterLocations(searchTerm, filter);
+    
+    const count = document.getElementById('location-count').textContent;
+    announceToScreenReader(`${count} locations found`);
+  };
+}
+
+/* ============================================
+   GLASS EFFECT FALLBACKS
+   ============================================ */
+
+// Check if backdrop-filter is supported
+if (!CSS.supports('backdrop-filter', 'blur(10px)') && !CSS.supports('-webkit-backdrop-filter', 'blur(10px)')) {
+  // Add fallback class for browsers that don't support backdrop-filter
+  document.documentElement.classList.add('no-backdrop-filter');
+  
+  // Adjust opacity for glass elements to maintain readability
+  const glassElements = document.querySelectorAll(
+    '.glass-hero-card, .glass-metric-card, .feature-card-glass, ' +
+    '.care-card-glass, .testimonial-glass-card, .location-service-card, ' +
+    '.physician-card-glass, .location-details-card'
+  );
+  
+  glassElements.forEach((element) => {
+    // Increase opacity for better readability without backdrop-filter
+    const currentBg = window.getComputedStyle(element).backgroundColor;
+    if (currentBg.includes('rgba')) {
+      // Increase alpha channel
+      element.style.backgroundColor = currentBg.replace(/[\d.]+\)$/g, '0.95)');
+    }
+  });
+}
+
+console.log('✨ Onevia 2.0 Liquid Glass - Enhanced features loaded');
