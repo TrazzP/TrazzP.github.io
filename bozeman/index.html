@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Onevia - Bozeman | Direct Primary Care Clinic</title>
+    <meta
+      name="description"
+      content="Onevia Bozeman offers membership-based direct primary care, pharmacy, and dental services in Bozeman, MT. Serving the Gallatin Valley."
+    />
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+  </head>
+  <body class="location-page" data-location="bozeman">
+    <header class="topbar" id="top">
+      <div class="container nav-wrap">
+        <a class="brand" href="../bozeman/index.html" aria-label="Onevia - Bozeman">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text brand-text-lg">Onevia - Bozeman</span>
+        </a>
+        <a class="brand-home-link" href="../index.html">← Onevia Home</a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav-links" id="nav-links">
+          <a href="#services">Services</a>
+          <a href="#team">About</a>
+          <a href="#testimonials">Patient Stories</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a class="btn btn-primary nav-cta" href="#" onclick="selectLocation('bozeman', 'Onevia - Bozeman'); return false;">Join This Clinic</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Location Hero -->
+      <section class="location-hero">
+        <div class="location-hero-media">
+          <img src="../assets/images/hero-consult.jpg" alt="Bozeman, Montana" class="location-hero-image" />
+          <div class="location-hero-overlay"></div>
+        </div>
+
+        <div class="container">
+          <div class="location-hero-content">
+            <div class="glass-location-card glass-location-card-compact" data-reveal>
+              <span class="location-breadcrumb">
+                <a href="../locations.html">All Locations</a> / Bozeman
+              </span>
+              <h1 class="location-title">Onevia Bozeman</h1>
+              <p class="location-subtitle">Direct care in the Gallatin Valley</p>
+
+              <div class="location-quick-info">
+                <div class="quick-info-item">
+                  <strong>456 Gallatin Way</strong>
+                  <span>Bozeman, MT 59715</span>
+                </div>
+                <div class="quick-info-item">
+                  <strong>(406) 555-0200</strong>
+                  <span>Mon-Fri 8am-5pm</span>
+                </div>
+              </div>
+
+              <div class="location-hero-actions">
+                <a href="#" class="btn btn-primary btn-glass" onclick="selectLocation('bozeman', 'Onevia - Bozeman'); return false;">Join This Clinic</a>
+                <a href="#getting-there" class="btn btn-secondary btn-glass-outline">Get directions</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Location Services -->
+      <section class="section" id="services">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Services at this location</span>
+            <h2>Complete care in one convenient location.</h2>
+            <p>Our Bozeman clinic offers primary care, pharmacy, and dental services under one roof.</p>
+          </div>
+
+          <div class="location-services-grid" data-reveal>
+            <div class="location-service-card">
+              <h3>Primary Care</h3>
+              <p>Comprehensive primary care with extended visit times and same-day availability.</p>
+              <ul class="service-features">
+                <li>Annual wellness exams</li>
+                <li>Chronic disease management</li>
+                <li>Acute care visits</li>
+                <li>Preventive screenings</li>
+                <li>Direct physician messaging</li>
+              </ul>
+              <a href="../services.html#primary-care" class="text-link">Learn more about Primary Care →</a>
+            </div>
+
+            <div class="location-service-card">
+              <h3>Pharmacy</h3>
+              <p>At-cost medications with pharmacist consultation and medication management.</p>
+              <ul class="service-features">
+                <li>Generic medications at cost</li>
+                <li>Medication therapy management</li>
+                <li>Prescription refills</li>
+                <li>Drug interaction reviews</li>
+                <li>90-day supplies available</li>
+              </ul>
+              <a href="../services.html#rx" class="text-link">Learn more about Pharmacy →</a>
+            </div>
+
+            <div class="location-service-card">
+              <h3>Dental</h3>
+              <p>Preventive-first dental care without insurance hassles.</p>
+              <ul class="service-features">
+                <li>Cleanings and exams</li>
+                <li>X-rays and diagnostics</li>
+                <li>Fillings and restorations</li>
+                <li>Periodontal care</li>
+                <li>Emergency dental visits</li>
+              </ul>
+              <a href="../services.html#dental" class="text-link">Learn more about Dental →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Care Team / Physicians Section -->
+      <section class="section section-glass-bg" id="team">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Meet your team</span>
+            <h2>Physicians and specialists at this location.</h2>
+            <p>Small patient panels mean your care team truly knows you.</p>
+          </div>
+
+          <div class="physician-grid" data-reveal>
+            <!-- Physician 1 - Dr. James Cooper, MD -->
+            <article class="physician-card-glass">
+              <div class="physician-photo">
+                <img src="../assets/images/hero-consult.jpg" alt="Dr. James Cooper" />
+              </div>
+              <div class="physician-info">
+                <h3>Dr. James Cooper, MD</h3>
+                <span class="physician-title">Primary Care Physician</span>
+                <p class="physician-bio">
+                  Board-certified family medicine physician with a focus on preventive care and chronic disease management.
+                  Passionate about building lasting relationships with patients and delivering personalized care in the
+                  Gallatin Valley.
+                </p>
+                <div class="physician-credentials">
+                  <span class="credential-badge">MD, Family Medicine</span>
+                  <span class="credential-badge">Board Certified</span>
+                </div>
+                <p class="physician-quote">
+                  "Direct care means I can spend the time each patient deserves. No rushing, no insurance hoops -- just
+                  medicine the way it should be practiced."
+                </p>
+              </div>
+            </article>
+
+            <!-- Pharmacist - Dr. Rachel Kim, PharmD -->
+            <article class="physician-card-glass">
+              <div class="physician-photo">
+                <img src="../assets/images/hero-consult.jpg" alt="Dr. Rachel Kim" />
+              </div>
+              <div class="physician-info">
+                <h3>Dr. Rachel Kim, PharmD</h3>
+                <span class="physician-title">Clinical Pharmacist</span>
+                <p class="physician-bio">
+                  Clinical pharmacist specializing in medication therapy management and patient education. Works closely
+                  with physicians to optimize drug regimens, reduce costs, and ensure medication safety for every member.
+                </p>
+                <div class="physician-credentials">
+                  <span class="credential-badge">PharmD, University of Montana</span>
+                  <span class="credential-badge">Ambulatory Care Certification</span>
+                </div>
+                <p class="physician-quote">
+                  "When patients pay at-cost for medications, adherence goes up and health outcomes improve. That's the
+                  power of removing financial barriers."
+                </p>
+              </div>
+            </article>
+
+            <!-- Dentist - Dr. Alex Nguyen, DDS -->
+            <article class="physician-card-glass">
+              <div class="physician-photo">
+                <img src="../assets/images/hero-consult.jpg" alt="Dr. Alex Nguyen" />
+              </div>
+              <div class="physician-info">
+                <h3>Dr. Alex Nguyen, DDS</h3>
+                <span class="physician-title">Dentist</span>
+                <p class="physician-bio">
+                  General dentist with a preventive-first approach and a commitment to patient education. Believes in
+                  conservative, evidence-based dentistry free from insurance-driven treatment decisions.
+                </p>
+                <div class="physician-credentials">
+                  <span class="credential-badge">DDS, Oregon Health & Science University</span>
+                  <span class="credential-badge">Academy of General Dentistry</span>
+                </div>
+                <p class="physician-quote">
+                  "Without insurance dictating care, I can recommend what's truly best for each patient's long-term oral
+                  health. That's a better way to practice."
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Patient Stories -->
+      <section class="section" id="testimonials">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Patient Stories</span>
+            <h2>What Bozeman members say.</h2>
+            <p>Real experiences from our Bozeman clinic members.</p>
+          </div>
+          <div class="testimonial-photo-grid" data-reveal>
+            <article class="testimonial-photo-card">
+              <div class="testimonial-photo-bg" style="background-image: url('../assets/images/testimonial-1.jpg');"></div>
+              <div class="testimonial-photo-overlay"></div>
+              <div class="testimonial-glass-content">
+                <p>"Moving to Bozeman, I wasn't sure I'd find good primary care. Onevia exceeded every expectation - the team knows my name and my health history."</p>
+                <span>- Patient story (composite)</span>
+              </div>
+            </article>
+            <article class="testimonial-photo-card">
+              <div class="testimonial-photo-bg" style="background-image: url('../assets/images/testimonial-2.jpg');"></div>
+              <div class="testimonial-photo-overlay"></div>
+              <div class="testimonial-glass-content">
+                <p>"The pharmacy savings alone cover my membership. Getting dental care in the same clinic makes life so much easier."</p>
+                <span>- Member story (composite)</span>
+              </div>
+            </article>
+            <article class="testimonial-photo-card">
+              <div class="testimonial-photo-bg" style="background-image: url('../assets/images/testimonial-3.jpg');"></div>
+              <div class="testimonial-photo-overlay"></div>
+              <div class="testimonial-glass-content">
+                <p>"Same-day appointments and a doctor who actually listens. This is what healthcare should be everywhere."</p>
+                <span>- Patient story (composite)</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Bozeman -->
+      <section class="section section-glass-bg">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Why Bozeman</span>
+            <h2>A natural fit for our care model.</h2>
+          </div>
+
+          <div class="feature-grid-glass" data-reveal>
+            <div class="feature-card-glass">
+              <h4>Growing community</h4>
+              <p>Bozeman's vibrant, health-conscious community aligns perfectly with our preventive care philosophy.</p>
+            </div>
+            <div class="feature-card-glass">
+              <h4>Convenient location</h4>
+              <p>Centrally located on Gallatin Way for easy access from across the Bozeman area and Gallatin Valley communities.</p>
+            </div>
+            <div class="feature-card-glass">
+              <h4>Network connected</h4>
+              <p>Part of our Montana network, making care portable if you travel between Onevia locations.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hours and Getting There -->
+      <section class="section section-glass-bg" id="getting-there">
+        <div class="container">
+          <div class="location-details-grid" data-reveal>
+            <div class="location-details-card">
+              <h3>Hours of Operation</h3>
+              <div class="hours-grid" id="hours-grid"></div>
+              <p class="hours-note">Extended hours available for members by appointment</p>
+            </div>
+            <div class="location-details-card">
+              <h3>Getting There</h3>
+              <div class="getting-there-info">
+                <div class="contact-item address">
+                  <strong>Address</strong>
+                  <p>456 Gallatin Way<br />Bozeman, MT 59715</p>
+                </div>
+                <div class="contact-item phone">
+                  <strong>Phone</strong>
+                  <p><a href="tel:+14065550200">(406) 555-0200</a></p>
+                </div>
+                <div class="contact-item email">
+                  <strong>Email</strong>
+                  <p><a href="mailto:bozeman@onevia.health">bozeman@onevia.health</a></p>
+                </div>
+              </div>
+              <div class="maps-buttons">
+                <button class="btn btn-primary" onclick="openGoogleMaps('456 Gallatin Way, Bozeman, MT 59715')">Open in Google Maps</button>
+                <button class="btn btn-secondary btn-apple-maps" onclick="openAppleMaps('456 Gallatin Way, Bozeman, MT 59715')">Open in Apple Maps</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Location-specific FAQ -->
+      <section class="section faq" id="faq">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">FAQ</span>
+            <h2>Questions about this clinic.</h2>
+          </div>
+          <div class="faq-grid" data-reveal>
+            <details>
+              <summary>Do I need to live in Bozeman to join?</summary>
+              <p>No, but you'll get the most value if this is your primary clinic for in-person visits. We also offer telemedicine for members who travel.</p>
+            </details>
+            <details>
+              <summary>What services are available at this location?</summary>
+              <p>Our Bozeman clinic offers primary care, pharmacy, and dental services. All three are available to members today.</p>
+            </details>
+            <details>
+              <summary>Can I switch to a different Onevia location later?</summary>
+              <p>Yes. Your membership is portable across all Onevia locations. Just update your primary clinic in your member portal.</p>
+            </details>
+            <details>
+              <summary>Is there wheelchair access?</summary>
+              <p>Yes. Our clinic is fully ADA accessible with wheelchair-friendly entrances and exam rooms.</p>
+            </details>
+            <details>
+              <summary>Do you accept walk-ins?</summary>
+              <p>Members are welcome to walk in during open hours, though we recommend scheduling for shorter wait times.</p>
+            </details>
+            <details>
+              <summary>What if I need care after hours?</summary>
+              <p>Members have 24/7 access to our on-call physician via text or phone for urgent questions and guidance.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- Join CTA -->
+      <section class="section">
+        <div class="container">
+          <div class="cta-banner" data-reveal>
+            <div>
+              <h3>Ready to join Onevia Bozeman?</h3>
+              <p>Start your membership and schedule your first visit today.</p>
+            </div>
+            <a class="btn btn-primary" href="#" onclick="selectLocation('bozeman', 'Onevia - Bozeman'); return false;">Join This Clinic</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>Explore</h4>
+          <a href="../index.html#savings">Savings</a>
+          <a href="../index.html#why">Why Onevia</a>
+          <a href="../index.html#testimonials">Patient Stories</a>
+          <a href="../index.html#faq">FAQ</a>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <a href="../services.html#primary-care">Primary Care</a>
+          <a href="../services.html#rx">Pharmacy</a>
+          <a href="../services.html#dental">Dental</a>
+          <a href="../services.html#vision">Vision</a>
+        </div>
+        <div>
+          <h4>Locations</h4>
+          <a href="../locations.html">Find a Clinic</a>
+          <a href="../missoula/index.html">Missoula</a>
+          <a href="../bozeman/index.html">Bozeman</a>
+          <a href="../billings/index.html">Billings</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>Email: <a href="mailto:bozeman@onevia.health">bozeman@onevia.health</a></p>
+          <p>Phone: <a href="tel:+14065550200">(406) 555-0200</a></p>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>(c) 2026 Onevia. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="../js/scripts.js"></script>
+  </body>
+</html>

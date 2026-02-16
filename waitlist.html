@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Onevia | Join Waitlist</title>
+    <meta name="description" content="Join the Onevia waitlist and be the first to know when we open in your area." />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body class="membership-flow">
+    <header class="topbar" id="top">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="Onevia">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text brand-text-lg">Onevia</span>
+        </a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav-links" id="nav-links">
+          <a href="services.html">Services</a>
+          <a href="locations.html">Locations</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="text-link nav-question link-disabled" href="#">Ask a question</a>
+          <a class="btn btn-primary nav-cta" href="locations.html">Find a Clinic</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="signup-hero" id="waitlist">
+        <div class="container">
+          <span class="badge" id="waitlist-badge">Waitlist</span>
+          <h1 id="waitlist-heading">Join the waitlist.</h1>
+          <p class="muted" id="waitlist-description">Be the first to know when we open in your area.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container signup-grid">
+          <form class="signup-card" id="waitlist-form">
+            <div>
+              <h3>Contact information</h3>
+              <p class="muted">We will notify you as soon as this location opens.</p>
+            </div>
+            <div class="form-row">
+              <label>
+                Full name
+                <input type="text" name="name" placeholder="Your name" required />
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                Email address
+                <input type="email" name="email" placeholder="you@email.com" required />
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                Phone number (optional)
+                <input type="tel" name="phone" placeholder="(555) 555-5555" />
+              </label>
+            </div>
+            <div>
+              <h4 style="font-size: 1.1rem; margin-bottom: 0.75rem;">Services of interest</h4>
+              <p class="muted" style="margin-bottom: 1rem; font-size: 0.9rem;">
+                Select the services you are interested in (available services depend on location).
+              </p>
+              <div class="form-row">
+                <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--sand); border-radius: 12px;">
+                  <input type="checkbox" name="services" value="primary" checked disabled />
+                  <div>
+                    <strong>Primary Care</strong>
+                    <p style="margin: 0; font-size: 0.85rem; color: #4f6074;">Included with all memberships</p>
+                  </div>
+                </label>
+              </div>
+              <div class="form-row" id="pharmacy-option">
+                <label style="display: flex; align-items: center; gap: 0.75rem;">
+                  <input type="checkbox" name="services" value="pharmacy" />
+                  Pharmacy
+                </label>
+              </div>
+              <div class="form-row" id="dental-option" style="display: none;">
+                <label style="display: flex; align-items: center; gap: 0.75rem;">
+                  <input type="checkbox" name="services" value="dental" />
+                  Dental
+                </label>
+              </div>
+              <div class="form-row" id="vision-option" style="display: none;">
+                <label style="display: flex; align-items: center; gap: 0.75rem;">
+                  <input type="checkbox" name="services" value="vision" />
+                  Vision
+                </label>
+              </div>
+            </div>
+            <div class="form-row">
+              <label>
+                Additional notes (optional)
+                <textarea name="message" rows="3" placeholder="Tell us what matters most to you"></textarea>
+              </label>
+            </div>
+            <div class="stepper-actions">
+              <a class="btn btn-secondary" href="locations.html">Back to locations</a>
+              <button type="submit" class="btn btn-primary">Join waitlist</button>
+            </div>
+          </form>
+
+          <aside class="order-summary" data-order-summary>
+            <h3 id="waitlist-location-name">Onevia - Bozeman</h3>
+            <div style="margin-top: 1rem;">
+              <span class="location-badge location-planned" style="position: static; display: inline-block;">Planned 2026</span>
+            </div>
+            <div style="margin-top: 1.5rem;">
+              <h4 style="font-size: 1rem; margin-bottom: 0.75rem;">Planned services</h4>
+              <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;" id="waitlist-services">
+                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="font-size: 1.2rem;">&#10003;</span> Primary Care
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="font-size: 1.2rem;">&#10003;</span> Pharmacy
+                </li>
+              </ul>
+            </div>
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+              <p style="font-size: 0.9rem; line-height: 1.6;">
+                We will notify you when <span id="location-short-name">Bozeman</span> opens.
+                You will be able to build your membership at that time.
+              </p>
+            </div>
+            <p class="order-note">Questions? Email hello@onevia.health</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>Explore</h4>
+          <a href="index.html#savings">Savings</a>
+          <a href="index.html#why">Why Onevia</a>
+          <a href="index.html#testimonials">Patient Stories</a>
+          <a href="index.html#faq">FAQ</a>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <a href="services.html#primary-care">Primary Care</a>
+          <a href="services.html#rx">Pharmacy</a>
+          <a href="services.html#dental">Dental</a>
+          <a href="services.html#vision">Vision</a>
+        </div>
+        <div>
+          <h4>Locations</h4>
+          <a href="locations.html">Find a Clinic</a>
+          <a href="missoula/index.html">Missoula</a>
+          <a href="bozeman/index.html">Bozeman</a>
+          <a href="billings/index.html">Billings</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>Email: <a href="mailto:hello@onevia.health">hello@onevia.health</a></p>
+          <p>Phone: <a href="tel:+14065550100">(406) 555-0100</a></p>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>(c) 2026 Onevia. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

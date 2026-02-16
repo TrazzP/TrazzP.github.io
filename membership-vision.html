@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Onevia | Membership Step 4</title>
+    <title>Onevia | Membership Step 5</title>
     <meta name="description" content="Add Vision to your Onevia membership for proactive eye care." />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,11 +27,11 @@
         </button>
         <nav class="nav-links" id="nav-links">
           <a href="services.html">Services</a>
-          <a href="about.html">About</a>
+          <a href="locations.html">Locations</a>
         </nav>
         <div class="nav-actions">
           <a class="text-link nav-question link-disabled" href="#">Ask a question</a>
-          <a class="btn btn-primary nav-cta" href="membership.html" data-membership-link>Enroll Here</a>
+          <a class="btn btn-primary nav-cta" href="locations.html">Find a Clinic</a>
         </div>
       </div>
     </header>
@@ -48,6 +48,11 @@
       <section class="section">
         <div class="container signup-grid">
           <form class="signup-card">
+            <div class="selected-location-indicator" id="location-indicator">
+              <span class="eyebrow">Your selected clinic</span>
+              <h4 id="location-name">Onevia - Missoula</h4>
+              <a href="locations.html" class="text-link">Change location</a>
+            </div>
             <div>
               <h3>Vision - <span class="addon-price" data-addon-price="vision" data-base-price="10">$10</span>/month</h3>
               <p class="compact-copy">Early detection and continuity for long-term eye health.</p>
@@ -91,9 +96,8 @@
       <div class="container footer-grid">
         <div>
           <h4>Explore</h4>
-          <a href="index.html#why">Why Onevia</a>
-          <a href="index.html#how-it-works">How it works</a>
           <a href="index.html#savings">Savings</a>
+          <a href="index.html#why">Why Onevia</a>
           <a href="index.html#testimonials">Patient Stories</a>
           <a href="index.html#faq">FAQ</a>
         </div>
@@ -103,21 +107,18 @@
           <a href="services.html#rx">Pharmacy</a>
           <a href="services.html#dental">Dental</a>
           <a href="services.html#vision">Vision</a>
-          <a href="membership.html">Build Membership</a>
         </div>
         <div>
-          <h4>About</h4>
-          <a href="about.html#physicians">Physicians</a>
-          <a href="about.html#pharmacists">Pharmacists</a>
-          <a href="about.html#dentist">Dentist</a>
-          <a href="about.html#optometrists">Optometrists</a>
+          <h4>Locations</h4>
+          <a href="locations.html">Find a Clinic</a>
+          <a href="missoula/index.html">Missoula</a>
+          <a href="bozeman/index.html">Bozeman</a>
+          <a href="billings/index.html">Billings</a>
         </div>
         <div>
           <h4>Contact</h4>
-          <a class="link-disabled" href="#">123 Main Street, Missoula, MT</a>
-          <a class="link-disabled" href="#">hello@onevia.health</a>
-          <a class="link-disabled" href="#">406-123-1234</a>
-          <a class="link-disabled" href="#">employer.plans@onevia.health</a>
+          <p>Email: <a href="mailto:hello@onevia.health">hello@onevia.health</a></p>
+          <p>Phone: <a href="tel:+14065550100">(406) 555-0100</a></p>
         </div>
       </div>
       <div class="container footer-bottom">

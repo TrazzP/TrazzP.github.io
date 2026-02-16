@@ -3,11 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Onevia Locations | Find Your Clinic</title>
-    <meta
-      name="description"
-      content="Find an Onevia direct care clinic near you. Membership-based healthcare in Montana and expanding."
-    />
+    <title>Onevia | Find Your Clinic</title>
+    <meta name="description" content="Browse and search Onevia clinic locations across Montana. Find the clinic closest to you." />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,7 +14,7 @@
     />
     <link href="css/styles.css" rel="stylesheet" />
   </head>
-  <body>
+  <body class="locations-page">
     <header class="topbar" id="top">
       <div class="container nav-wrap">
         <a class="brand" href="index.html" aria-label="Onevia">
@@ -29,328 +26,165 @@
           <span></span>
         </button>
         <nav class="nav-links" id="nav-links">
+          <a href="index.html#savings">Savings</a>
           <a href="index.html#why">Why Onevia</a>
-          <a href="about.html">About</a>
           <a href="services.html">Services</a>
-          <a href="locations.html">Locations</a>
           <a href="index.html#testimonials">Patient Stories</a>
           <a href="index.html#faq">FAQ</a>
         </nav>
-        <a class="btn btn-primary nav-cta" href="membership.html" data-membership-link>Start Membership</a>
+        <a class="btn btn-primary nav-cta" href="#locations-grid">Search Clinics</a>
       </div>
     </header>
 
     <main>
-      <!-- Locations Hero -->
-      <section class="locations-hero">
+      <section class="signup-hero" id="locations">
         <div class="container">
-          <div class="locations-hero-content" data-reveal>
-            <span class="eyebrow">Onevia Locations</span>
-            <h1>Find your clinic.</h1>
-            <p class="lead">
-              We're building a network of direct care clinics across Montana. Choose the location that works best for you.
-            </p>
-          </div>
+          <span class="badge">Our Clinics</span>
+          <h1>Find your Onevia clinic.</h1>
+          <p class="muted">Browse all locations, search by city or service, and find the clinic closest to you.</p>
+        </div>
+      </section>
 
+      <section class="section">
+        <div class="container">
           <!-- Search and Filter Bar -->
-          <div class="locations-search-bar" data-reveal>
-            <div class="search-input-wrapper">
-              <input
-                type="text"
-                id="location-search"
-                class="location-search-input"
-                placeholder="Search by city or service..."
-                aria-label="Search locations"
-              />
-              <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM18 18l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-
+          <div class="locations-search-bar">
+            <input
+              type="text"
+              id="location-search"
+              placeholder="Search by city or service..."
+              aria-label="Search locations"
+            />
             <div class="filter-chips">
               <button class="filter-chip active" data-filter="all">All Locations</button>
               <button class="filter-chip" data-filter="open">Open Now</button>
+              <button class="filter-chip" data-filter="planned">Coming Soon</button>
               <button class="filter-chip" data-filter="primary-care">Primary Care</button>
               <button class="filter-chip" data-filter="pharmacy">Pharmacy</button>
               <button class="filter-chip" data-filter="dental">Dental</button>
               <button class="filter-chip" data-filter="vision">Vision</button>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- Map Placeholder -->
-      <section class="locations-map-section">
-        <div class="locations-map-container">
-          <!--
-            MAP INTEGRATION PLACEHOLDER
-            Replace with Google Maps, Mapbox, or preferred mapping solution
-            Should show clinic locations with interactive markers
-          -->
-          <div class="map-placeholder" id="locations-map">
-            <div class="map-overlay">
-              <p>Interactive map coming soon</p>
-              <small>Browse all locations below</small>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Locations Grid -->
-      <section class="section locations-grid-section">
-        <div class="container">
-          <div class="locations-count" data-reveal>
-            <p><span id="location-count">8</span> locations found</p>
-          </div>
-
-          <div class="locations-grid" id="locations-grid">
-            <!-- Missoula - Open -->
-            <article class="location-card-full" data-location data-status="open" data-services="primary-care,pharmacy,dental,vision">
-              <div class="location-card-full-image">
-                <img src="assets/images/hero-consult.jpg" alt="Onevia Missoula Clinic" />
-                <span class="location-status-badge status-open">Open Now</span>
-              </div>
-              <div class="location-card-full-content">
-                <div class="location-header">
-                  <h2>Missoula</h2>
-                  <span class="location-type">Flagship Clinic</span>
+          <!-- Location Cards Grid -->
+          <div class="location-cards-grid" id="locations-grid">
+            <!-- Missoula - Open (4 services) -->
+            <a
+              href="missoula/index.html"
+              class="location-card"
+              data-location-id="missoula"
+              data-status="open"
+              data-services="primary-care,pharmacy,dental,vision"
+              data-city="missoula"
+              data-lat="46.8721"
+              data-lon="-113.9940"
+            >
+              <div class="location-card-image">
+                <img src="assets/images/building.jpg" alt="Onevia Missoula clinic" loading="lazy" />
+                <div class="location-card-glass-overlay">
+                  <h3>Onevia - Missoula</h3>
                 </div>
-                <p class="location-description">
-                  Our founding clinic in the heart of downtown Missoula. Full-service care including primary care,
-                  pharmacy, dental, and vision.
-                </p>
-                <div class="location-services">
+              </div>
+              <div class="location-card-content">
+                <div class="services-available">
                   <span class="service-badge">Primary Care</span>
                   <span class="service-badge">Pharmacy</span>
                   <span class="service-badge">Dental</span>
                   <span class="service-badge">Vision</span>
                 </div>
-                <div class="location-info">
-                  <div class="info-item">
-                    <strong>Address:</strong> 123 Healthcare Way, Missoula, MT 59801
-                  </div>
-                  <div class="info-item">
-                    <strong>Phone:</strong> (406) 555-0100
-                  </div>
-                  <div class="info-item">
-                    <strong>Hours:</strong> Mon-Fri 8am-6pm, Sat 9am-2pm
-                  </div>
-                </div>
-                <div class="location-actions">
-                  <a href="location-template.html" class="btn btn-primary">View clinic details</a>
-                  <a href="membership.html" class="btn btn-secondary" data-membership-link>Join this location</a>
-                </div>
+                <span class="distance-badge" data-location-distance="missoula"></span>
               </div>
-            </article>
+            </a>
 
-            <!-- Bozeman - Opening Soon -->
-            <article class="location-card-full" data-location data-status="coming-soon" data-services="primary-care,pharmacy">
-              <div class="location-card-full-image">
-                <img src="assets/images/hero-consult.jpg" alt="Onevia Bozeman Clinic" />
-                <span class="location-status-badge status-coming">Opening Q2 2026</span>
-              </div>
-              <div class="location-card-full-content">
-                <div class="location-header">
-                  <h2>Bozeman</h2>
-                  <span class="location-type">Coming Soon</span>
+            <!-- Bozeman - Open (3 services) -->
+            <a
+              href="bozeman/index.html"
+              class="location-card"
+              data-location-id="bozeman"
+              data-status="open"
+              data-services="primary-care,pharmacy,dental"
+              data-city="bozeman"
+              data-lat="45.6770"
+              data-lon="-111.0429"
+            >
+              <div class="location-card-image">
+                <img src="assets/images/building.jpg" alt="Onevia Bozeman clinic" loading="lazy" />
+                <div class="location-card-glass-overlay">
+                  <h3>Onevia - Bozeman</h3>
                 </div>
-                <p class="location-description">
-                  Opening in the Gallatin Valley this spring. Primary care and pharmacy services with plans to expand
-                  to full-service care.
-                </p>
-                <div class="location-services">
+              </div>
+              <div class="location-card-content">
+                <div class="services-available">
                   <span class="service-badge">Primary Care</span>
                   <span class="service-badge">Pharmacy</span>
-                  <span class="service-badge service-badge-future">Dental (2027)</span>
+                  <span class="service-badge">Dental</span>
                 </div>
-                <div class="location-info">
-                  <div class="info-item">
-                    <strong>Address:</strong> Location being finalized
-                  </div>
-                  <div class="info-item">
-                    <strong>Opening:</strong> April 2026
-                  </div>
-                </div>
-                <div class="location-actions">
-                  <a href="location-template.html" class="btn btn-primary">View clinic details</a>
-                  <button class="btn btn-secondary" onclick="alert('Join waitlist feature coming soon!')">Join waitlist</button>
-                </div>
+                <span class="distance-badge" data-location-distance="bozeman"></span>
               </div>
-            </article>
+            </a>
 
-            <!-- Billings - Coming Soon -->
-            <article class="location-card-full" data-location data-status="coming-soon" data-services="primary-care">
-              <div class="location-card-full-image">
-                <img src="assets/images/hero-consult.jpg" alt="Onevia Billings Clinic" />
-                <span class="location-status-badge status-coming">Coming Q4 2026</span>
-              </div>
-              <div class="location-card-full-content">
-                <div class="location-header">
-                  <h2>Billings</h2>
-                  <span class="location-type">Coming Soon</span>
+            <!-- Billings - Open (2 services) -->
+            <a
+              href="billings/index.html"
+              class="location-card"
+              data-location-id="billings"
+              data-status="open"
+              data-services="primary-care,pharmacy"
+              data-city="billings"
+              data-lat="45.7833"
+              data-lon="-108.5007"
+            >
+              <div class="location-card-image">
+                <img src="assets/images/building.jpg" alt="Onevia Billings clinic" loading="lazy" />
+                <div class="location-card-glass-overlay">
+                  <h3>Onevia - Billings</h3>
                 </div>
-                <p class="location-description">
-                  Bringing direct primary care to Montana's largest city. Starting with comprehensive primary care
-                  services.
-                </p>
-                <div class="location-services">
+              </div>
+              <div class="location-card-content">
+                <div class="services-available">
+                  <span class="service-badge">Primary Care</span>
+                  <span class="service-badge">Pharmacy</span>
+                </div>
+                <span class="distance-badge" data-location-distance="billings"></span>
+              </div>
+            </a>
+
+            <!-- Great Falls - Planned (1 service) -->
+            <a
+              href="greatfalls/index.html"
+              class="location-card"
+              data-location-id="greatfalls"
+              data-status="planned"
+              data-services="primary-care"
+              data-city="great falls"
+              data-lat="47.5002"
+              data-lon="-111.3008"
+            >
+              <div class="location-card-image">
+                <img src="assets/images/building.jpg" alt="Onevia Great Falls coming soon" loading="lazy" />
+                <div class="location-card-glass-overlay">
+                  <h3>Onevia - Great Falls</h3>
+                  <span class="location-badge-coming-soon">Coming Soon</span>
+                </div>
+              </div>
+              <div class="location-card-content">
+                <div class="services-available">
                   <span class="service-badge">Primary Care</span>
                 </div>
-                <div class="location-info">
-                  <div class="info-item">
-                    <strong>Opening:</strong> Fall 2026
-                  </div>
-                </div>
-                <div class="location-actions">
-                  <a href="location-template.html" class="btn btn-primary">View clinic details</a>
-                  <button class="btn btn-secondary" onclick="alert('Join waitlist feature coming soon!')">Join waitlist</button>
-                </div>
+                <span class="distance-badge" data-location-distance="greatfalls"></span>
               </div>
-            </article>
-
-            <!-- Helena - Future -->
-            <article class="location-card-full" data-location data-status="coming-soon" data-services="">
-              <div class="location-card-full-image">
-                <img src="assets/images/hero-consult.jpg" alt="Onevia Helena Clinic" />
-                <span class="location-status-badge status-future">2027</span>
-              </div>
-              <div class="location-card-full-content">
-                <div class="location-header">
-                  <h2>Helena</h2>
-                  <span class="location-type">Planned</span>
-                </div>
-                <p class="location-description">
-                  Expanding to Montana's capital in 2027.
-                </p>
-                <div class="location-info">
-                  <div class="info-item">
-                    <strong>Target Opening:</strong> 2027
-                  </div>
-                </div>
-                <div class="location-actions">
-                  <button class="btn btn-secondary" onclick="alert('Join waitlist feature coming soon!')">Join waitlist</button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Great Falls - Future -->
-            <article class="location-card-full" data-location data-status="coming-soon" data-services="">
-              <div class="location-card-full-image">
-                <img src="assets/images/hero-consult.jpg" alt="Onevia Great Falls Clinic" />
-                <span class="location-status-badge status-future">2027</span>
-              </div>
-              <div class="location-card-full-content">
-                <div class="location-header">
-                  <h2>Great Falls</h2>
-                  <span class="location-type">Planned</span>
-                </div>
-                <p class="location-description">
-                  Serving North Central Montana in 2027.
-                </p>
-                <div class="location-info">
-                  <div class="info-item">
-                    <strong>Target Opening:</strong> 2027
-                  </div>
-                </div>
-                <div class="location-actions">
-                  <button class="btn btn-secondary" onclick="alert('Join waitlist feature coming soon!')">Join waitlist</button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Kalispell - Future -->
-            <article class="location-card-full" data-location data-status="coming-soon" data-services="">
-              <div class="location-card-full-image">
-                <img src="assets/images/hero-consult.jpg" alt="Onevia Kalispell Clinic" />
-                <span class="location-status-badge status-future">2027</span>
-              </div>
-              <div class="location-card-full-content">
-                <div class="location-header">
-                  <h2>Kalispell</h2>
-                  <span class="location-type">Planned</span>
-                </div>
-                <p class="location-description">
-                  Bringing direct care to the Flathead Valley.
-                </p>
-                <div class="location-info">
-                  <div class="info-item">
-                    <strong>Target Opening:</strong> 2027
-                  </div>
-                </div>
-                <div class="location-actions">
-                  <button class="btn btn-secondary" onclick="alert('Join waitlist feature coming soon!')">Join waitlist</button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Butte - Future -->
-            <article class="location-card-full" data-location data-status="coming-soon" data-services="">
-              <div class="location-card-full-image">
-                <img src="assets/images/hero-consult.jpg" alt="Onevia Butte Clinic" />
-                <span class="location-status-badge status-future">2027</span>
-              </div>
-              <div class="location-card-full-content">
-                <div class="location-header">
-                  <h2>Butte</h2>
-                  <span class="location-type">Planned</span>
-                </div>
-                <p class="location-description">
-                  Serving Southwest Montana.
-                </p>
-                <div class="location-info">
-                  <div class="info-item">
-                    <strong>Target Opening:</strong> 2027
-                  </div>
-                </div>
-                <div class="location-actions">
-                  <button class="btn btn-secondary" onclick="alert('Join waitlist feature coming soon!')">Join waitlist</button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Whitefish - Future -->
-            <article class="location-card-full" data-location data-status="coming-soon" data-services="">
-              <div class="location-card-full-image">
-                <img src="assets/images/hero-consult.jpg" alt="Onevia Whitefish Clinic" />
-                <span class="location-status-badge status-future">2028</span>
-              </div>
-              <div class="location-card-full-content">
-                <div class="location-header">
-                  <h2>Whitefish</h2>
-                  <span class="location-type">Planned</span>
-                </div>
-                <p class="location-description">
-                  Expanding to Northwest Montana.
-                </p>
-                <div class="location-info">
-                  <div class="info-item">
-                    <strong>Target Opening:</strong> 2028
-                  </div>
-                </div>
-                <div class="location-actions">
-                  <button class="btn btn-secondary" onclick="alert('Join waitlist feature coming soon!')">Join waitlist</button>
-                </div>
-              </div>
-            </article>
+            </a>
           </div>
 
           <!-- No Results Message -->
-          <div class="no-results" id="no-results" style="display: none;">
-            <p>No locations found matching your criteria.</p>
-            <button class="btn btn-secondary" onclick="resetFilters()">Clear filters</button>
+          <div class="no-results-message" id="no-results" style="display: none;">
+            <p>No locations match your search.</p>
+            <button class="btn btn-secondary" onclick="resetFilters()">Reset filters</button>
           </div>
-        </div>
-      </section>
 
-      <!-- CTA Section -->
-      <section class="section section-glass-bg">
-        <div class="container">
-          <div class="cta-banner" data-reveal>
-            <div>
-              <h3>Don't see your city?</h3>
-              <p>We're always expanding. Let us know where you'd like to see Onevia next.</p>
-            </div>
-            <a class="btn btn-primary link-disabled" href="#">Request a location</a>
+          <!-- Location Count Display -->
+          <div class="location-count" id="location-count" style="display: none;">
+            <p id="location-count-text"></p>
           </div>
         </div>
       </section>
@@ -359,14 +193,9 @@
     <footer class="footer">
       <div class="container footer-grid">
         <div>
-          <span class="brand-text">Onevia</span>
-          <p>One Membership. Complete Care.</p>
-          <p class="muted">Wellness-focused care across Montana.</p>
-        </div>
-        <div>
           <h4>Explore</h4>
-          <a href="index.html#why">Why Onevia</a>
           <a href="index.html#savings">Savings</a>
+          <a href="index.html#why">Why Onevia</a>
           <a href="index.html#testimonials">Patient Stories</a>
           <a href="index.html#faq">FAQ</a>
         </div>
@@ -376,19 +205,18 @@
           <a href="services.html#rx">Pharmacy</a>
           <a href="services.html#dental">Dental</a>
           <a href="services.html#vision">Vision</a>
-          <a href="membership.html">Build Membership</a>
         </div>
         <div>
           <h4>Locations</h4>
-          <a href="locations.html">All Locations</a>
-          <a href="location-template.html">Missoula</a>
-          <a href="location-template.html">Bozeman</a>
-          <a href="location-template.html">Billings</a>
+          <a href="locations.html">Find a Clinic</a>
+          <a href="missoula/index.html">Missoula</a>
+          <a href="bozeman/index.html">Bozeman</a>
+          <a href="billings/index.html">Billings</a>
         </div>
         <div>
           <h4>Contact</h4>
-          <p>Email: hello@onevia.health</p>
-          <p>Employer plans: hello@onevia.health</p>
+          <p>Email: <a href="mailto:hello@onevia.health">hello@onevia.health</a></p>
+          <p>Phone: <a href="tel:+14065550100">(406) 555-0100</a></p>
         </div>
       </div>
       <div class="container footer-bottom">

@@ -30,17 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return match ? decodeURIComponent(match.split('=')[1]) : null;
   };
 
-  const membershipLinks = document.querySelectorAll('[data-membership-link]');
+  // Track membership step progress
   const currentPath = window.location.pathname.split('/').pop();
   if (currentPath && currentPath.startsWith('membership')) {
     localStorage.setItem(STEP_KEY, currentPath);
     setCookie(STEP_KEY, currentPath);
-  }
-  const lastStep = localStorage.getItem(STEP_KEY) || getCookie(STEP_KEY);
-  if (lastStep && membershipLinks.length) {
-    membershipLinks.forEach((link) => {
-      link.setAttribute('href', lastStep);
-    });
   }
 
   const revealElements = document.querySelectorAll('[data-reveal]');
@@ -340,70 +334,110 @@ document.addEventListener('DOMContentLoaded', () => {
    LOCATION SEARCH AND FILTER FUNCTIONALITY
    ============================================ */
 
-// Location Search and Filter
+// Location Search and Filter (multi-select)
 if (document.getElementById('location-search')) {
   const searchInput = document.getElementById('location-search');
   const filterChips = document.querySelectorAll('.filter-chip');
-  const locationCards = document.querySelectorAll('[data-location]');
-  const locationCount = document.getElementById('location-count');
+  const locationCards = document.querySelectorAll('.location-card[data-location-id]');
+  const locationCountContainer = document.getElementById('location-count');
+  const locationCountText = document.getElementById('location-count-text');
   const noResults = document.getElementById('no-results');
-  
-  let activeFilter = 'all';
-  
-  // Search functionality
-  searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase().trim();
-    filterLocations(searchTerm, activeFilter);
+  const totalLocations = locationCards.length;
+
+  const STATUS_FILTERS = new Set(['open', 'planned']);
+  const SERVICE_FILTERS = new Set(['primary-care', 'pharmacy', 'dental', 'vision']);
+  let activeFilters = new Set();
+
+  function updateChipVisuals() {
+    const allChip = document.querySelector('.filter-chip[data-filter="all"]');
+    filterChips.forEach((chip) => {
+      const f = chip.dataset.filter;
+      if (f === 'all') {
+        chip.classList.toggle('active', activeFilters.size === 0);
+      } else {
+        chip.classList.toggle('active', activeFilters.has(f));
+      }
+    });
+  }
+
+  function updateLocationCount(count) {
+    if (locationCountContainer && locationCountText) {
+      if (count < totalLocations && (activeFilters.size > 0 || searchInput.value.trim())) {
+        locationCountText.textContent = `${count} location${count !== 1 ? 's' : ''} found`;
+        locationCountContainer.style.display = 'block';
+      } else {
+        locationCountContainer.style.display = 'none';
+      }
+    }
+  }
+
+  searchInput.addEventListener('input', () => {
+    runFilter();
   });
-  
-  // Filter chip functionality
+
   filterChips.forEach((chip) => {
     chip.addEventListener('click', () => {
-      // Update active chip
-      filterChips.forEach((c) => c.classList.remove('active'));
-      chip.classList.add('active');
-      
-      // Update active filter
-      activeFilter = chip.dataset.filter;
-      
-      // Filter locations
-      const searchTerm = searchInput.value.toLowerCase().trim();
-      filterLocations(searchTerm, activeFilter);
+      const filter = chip.dataset.filter;
+
+      if (filter === 'all') {
+        activeFilters.clear();
+      } else {
+        if (activeFilters.has(filter)) {
+          activeFilters.delete(filter);
+        } else {
+          activeFilters.add(filter);
+        }
+      }
+
+      updateChipVisuals();
+      runFilter();
     });
   });
-  
-  function filterLocations(searchTerm, filter) {
+
+  function runFilter() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
     let visibleCount = 0;
-    
+
+    // Separate active filters into status and service groups
+    const activeStatusFilters = [];
+    const activeServiceFilters = [];
+    activeFilters.forEach((f) => {
+      if (STATUS_FILTERS.has(f)) activeStatusFilters.push(f);
+      if (SERVICE_FILTERS.has(f)) activeServiceFilters.push(f);
+    });
+
     locationCards.forEach((card) => {
       let showCard = true;
-      
-      // Search filter
+
+      // Text search
       if (searchTerm) {
         const cardText = card.textContent.toLowerCase();
-        if (!cardText.includes(searchTerm)) {
+        const cardCity = (card.dataset.city || '').toLowerCase();
+        if (!cardText.includes(searchTerm) && !cardCity.includes(searchTerm)) {
           showCard = false;
         }
       }
-      
-      // Status and service filters
-      if (filter !== 'all') {
-        if (filter === 'open') {
-          if (card.dataset.status !== 'open') {
-            showCard = false;
-          }
-        } else {
-          // Service filters
-          const services = card.dataset.services || '';
-          if (!services.includes(filter)) {
-            showCard = false;
-          }
+
+      // Status filter: card must match at least ONE active status filter
+      if (showCard && activeStatusFilters.length > 0) {
+        const cardStatus = card.dataset.status || '';
+        if (!activeStatusFilters.includes(cardStatus)) {
+          showCard = false;
         }
       }
-      
+
+      // Service filter: card must have ALL active service filters (intersection)
+      if (showCard && activeServiceFilters.length > 0) {
+        const cardServices = (card.dataset.services || '').split(',');
+        const hasAllServices = activeServiceFilters.every((f) => cardServices.includes(f));
+        if (!hasAllServices) {
+          showCard = false;
+        }
+      }
+
       // Show/hide card with animation
       if (showCard) {
-        card.style.display = 'grid';
+        card.style.display = '';
         setTimeout(() => {
           card.style.opacity = '1';
           card.style.transform = 'translateY(0)';
@@ -417,35 +451,35 @@ if (document.getElementById('location-search')) {
         }, 300);
       }
     });
-    
-    // Update count
-    if (locationCount) {
-      locationCount.textContent = visibleCount;
-    }
-    
-    // Show/hide no results message
+
+    updateLocationCount(visibleCount);
+
     if (noResults) {
-      if (visibleCount === 0) {
-        noResults.style.display = 'block';
-      } else {
-        noResults.style.display = 'none';
-      }
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
     }
   }
-  
-  // Reset filters function (global for button onclick)
+
+  // Reset filters (global for button onclick)
   window.resetFilters = function() {
     searchInput.value = '';
-    filterChips.forEach((chip) => chip.classList.remove('active'));
-    filterChips[0].classList.add('active');
-    activeFilter = 'all';
-    filterLocations('', 'all');
+    activeFilters.clear();
+    updateChipVisuals();
+    runFilter();
   };
-  
+
   // Initialize card transitions
   locationCards.forEach((card) => {
     card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
   });
+
+  // URL parameter support (e.g., ?filter=primary-care from services page)
+  const urlParams = new URLSearchParams(window.location.search);
+  const preFilter = urlParams.get('filter');
+  if (preFilter && (STATUS_FILTERS.has(preFilter) || SERVICE_FILTERS.has(preFilter))) {
+    activeFilters.add(preFilter);
+    updateChipVisuals();
+    runFilter();
+  }
 }
 
 /* ============================================
@@ -476,31 +510,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-/* ============================================
-   GLASS CARD PARALLAX EFFECT
-   ============================================ */
-
-// Subtle parallax effect for glass cards on scroll
-if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-  const glassCards = document.querySelectorAll('.glass-hero-card, .glass-metric-card, .feature-card-glass');
-  
-  if (glassCards.length > 0) {
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      
-      glassCards.forEach((card, index) => {
-        const speed = 0.05 + (index * 0.01);
-        const yPos = -(scrolled * speed);
-        
-        // Only apply if card is in viewport
-        const rect = card.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          card.style.transform = `translateY(${yPos}px)`;
-        }
-      });
-    });
-  }
-}
+/* Glass cards use CSS transitions only - no JS parallax to avoid layout inconsistency */
 
 /* ============================================
    MOBILE MENU ENHANCEMENTS
@@ -615,16 +625,7 @@ function announceToScreenReader(message) {
   }, 1000);
 }
 
-// Announce filter changes
-if (document.getElementById('location-search')) {
-  const originalFilterLocations = filterLocations;
-  filterLocations = function(searchTerm, filter) {
-    originalFilterLocations(searchTerm, filter);
-    
-    const count = document.getElementById('location-count').textContent;
-    announceToScreenReader(`${count} locations found`);
-  };
-}
+/* Filter change announcements handled inline in filterLocations */
 
 /* ============================================
    GLASS EFFECT FALLBACKS
@@ -652,4 +653,827 @@ if (!CSS.supports('backdrop-filter', 'blur(10px)') && !CSS.supports('-webkit-bac
   });
 }
 
-console.log('✨ Onevia 2.0 Liquid Glass - Enhanced features loaded');
+/* Onevia 2.0 loaded */
+
+/* ============================================
+   IP-BASED LOCATION DETECTION
+   ============================================ */
+
+// Clinic locations with coordinates
+const CLINICS = [
+  { id: 'missoula', name: 'Missoula', lat: 46.8721, lon: -113.9940, status: 'open' },
+  { id: 'bozeman', name: 'Bozeman', lat: 45.6770, lon: -111.0429, status: 'open' },
+  { id: 'billings', name: 'Billings', lat: 45.7833, lon: -108.5007, status: 'open' },
+  { id: 'greatfalls', name: 'Great Falls', lat: 47.5002, lon: -111.3008, status: 'planned' }
+];
+
+// Convert degrees to radians
+function toRad(degrees) {
+  return degrees * (Math.PI / 180);
+}
+
+// Calculate distance between two coordinates using Haversine formula
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 3959; // Earth radius in miles
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c; // Distance in miles
+}
+
+// Display location cards with distance badges
+function displayLocationCards(clinicsWithDistance) {
+  clinicsWithDistance.forEach((clinic) => {
+    const distanceBadge = document.querySelector(`[data-location-distance="${clinic.id}"]`);
+    if (distanceBadge && clinic.distance !== undefined) {
+      const miles = Math.round(clinic.distance);
+      distanceBadge.textContent = `${miles} miles away`;
+      distanceBadge.style.display = 'inline-block';
+    }
+  });
+
+  // Reorder cards by distance
+  const container = document.getElementById('location-cards-container');
+  if (container) {
+    const cards = Array.from(container.querySelectorAll('.location-card'));
+
+    // Sort cards based on clinic order
+    cards.sort((a, b) => {
+      const aId = a.dataset.locationId;
+      const bId = b.dataset.locationId;
+      const aIndex = clinicsWithDistance.findIndex(c => c.id === aId);
+      const bIndex = clinicsWithDistance.findIndex(c => c.id === bId);
+      return aIndex - bIndex;
+    });
+
+    // Reappend in sorted order
+    cards.forEach(card => container.appendChild(card));
+  }
+}
+
+// Load nearest locations based on IP geolocation
+async function loadNearestLocations() {
+  try {
+    const response = await fetch('https://ipapi.co/json/');
+
+    if (!response.ok) {
+      throw new Error('Geolocation API failed');
+    }
+
+    const data = await response.json();
+    const userLat = data.latitude;
+    const userLon = data.longitude;
+    const userRegion = data.region || '';
+
+    // Calculate distances
+    const clinicsWithDistance = CLINICS.map(clinic => ({
+      ...clinic,
+      distance: calculateDistance(userLat, userLon, clinic.lat, clinic.lon)
+    }));
+
+    // Sort by distance (nearest first)
+    clinicsWithDistance.sort((a, b) => a.distance - b.distance);
+
+    // Display all 3 locations with distance badges
+    displayLocationCards(clinicsWithDistance.slice(0, 3));
+
+  } catch (error) {
+    // Fallback: show all locations without distance badges (default order)
+    displayLocationCards(CLINICS);
+  }
+}
+
+// Initialize location detection on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const locationContainer = document.getElementById('location-cards-container');
+
+  if (locationContainer) {
+    // Load nearest locations based on IP
+    loadNearestLocations();
+  }
+});
+
+/* ============================================
+   LOCATION-AWARE MEMBERSHIP FLOW
+   ============================================ */
+
+// Location data structure
+const LOCATION_DATA = {
+  missoula: {
+    name: 'Onevia - Missoula',
+    shortName: 'Missoula',
+    status: 'open',
+    services: ['primary', 'pharmacy', 'dental', 'vision'],
+    description: 'Full-service clinic with all available services'
+  },
+  bozeman: {
+    name: 'Onevia - Bozeman',
+    shortName: 'Bozeman',
+    status: 'open',
+    services: ['primary', 'pharmacy', 'dental'],
+    description: 'Primary Care, Pharmacy, and Dental services'
+  },
+  billings: {
+    name: 'Onevia - Billings',
+    shortName: 'Billings',
+    status: 'open',
+    services: ['primary', 'pharmacy'],
+    description: 'Primary Care and Pharmacy services'
+  },
+  greatfalls: {
+    name: 'Onevia - Great Falls',
+    shortName: 'Great Falls',
+    status: 'planned',
+    services: ['primary'],
+    description: 'Coming soon with Primary Care'
+  }
+};
+
+// Resolve path from any page depth back to site root
+function siteRoot() {
+  const path = window.location.pathname;
+  // City subdirectories are one level deep (e.g., /missoula/index.html)
+  const segments = path.split('/').filter(Boolean);
+  if (segments.length >= 2 && segments[segments.length - 1] === 'index.html') {
+    return '../';
+  }
+  return '';
+}
+
+// Store selected location and start membership flow
+function selectLocation(locationKey, locationName) {
+  localStorage.setItem('selectedLocation', locationKey);
+  localStorage.setItem('selectedLocationName', locationName);
+  window.location.href = siteRoot() + 'membership-plan.html';
+}
+
+// Join waitlist function
+function joinWaitlist(locationKey, locationName) {
+  localStorage.setItem('waitlistLocation', locationKey);
+  localStorage.setItem('waitlistLocationName', locationName);
+  window.location.href = siteRoot() + 'waitlist.html';
+}
+
+// Get available services for a location
+function getAvailableServices(locationKey) {
+  const location = LOCATION_DATA[locationKey];
+  return location ? location.services : ['primary'];
+}
+
+// Check if service is available at selected location
+function isServiceAvailable(serviceKey) {
+  const locationKey = localStorage.getItem('selectedLocation') || 'missoula';
+  const services = getAvailableServices(locationKey);
+  return services.includes(serviceKey);
+}
+
+// Update location indicator on membership pages
+function updateLocationIndicator() {
+  const locationIndicator = document.getElementById('location-indicator');
+  const locationNameEl = document.getElementById('location-name');
+
+  if (locationIndicator && locationNameEl) {
+    const locationKey = localStorage.getItem('selectedLocation') || 'missoula';
+    const locationName = localStorage.getItem('selectedLocationName') || 'Onevia - Missoula';
+
+    locationNameEl.textContent = locationName;
+
+    // Show/hide based on available services
+    const currentPage = window.location.pathname.split('/').pop();
+
+    // Check if current service page should be skipped
+    if (currentPage === 'membership-rx.html' && !isServiceAvailable('pharmacy')) {
+      window.location.href = 'membership-dental.html';
+      return;
+    }
+
+    if (currentPage === 'membership-dental.html' && !isServiceAvailable('dental')) {
+      window.location.href = 'membership-vision.html';
+      return;
+    }
+
+    if (currentPage === 'membership-vision.html' && !isServiceAvailable('vision')) {
+      window.location.href = 'membership-details.html';
+      return;
+    }
+  }
+}
+
+// Update waitlist page with location information
+function updateWaitlistPage() {
+  const waitlistLocationKey = localStorage.getItem('waitlistLocation');
+  const waitlistLocationName = localStorage.getItem('waitlistLocationName');
+
+  if (!waitlistLocationKey || !waitlistLocationName) {
+    // Redirect back to membership if no waitlist location selected
+    window.location.href = siteRoot() + 'locations.html';
+    return;
+  }
+
+  const locationData = LOCATION_DATA[waitlistLocationKey];
+  if (!locationData) {
+    window.location.href = siteRoot() + 'locations.html';
+    return;
+  }
+
+  // Update heading
+  const heading = document.getElementById('waitlist-heading');
+  if (heading) {
+    heading.textContent = `Join the ${locationData.name} waitlist.`;
+  }
+
+  // Update description
+  const description = document.getElementById('waitlist-description');
+  if (description) {
+    description.textContent = `Be the first to know when we open in ${locationData.shortName}.`;
+  }
+
+  // Update sidebar location name
+  const sidebarName = document.getElementById('waitlist-location-name');
+  if (sidebarName) {
+    sidebarName.textContent = locationData.name;
+  }
+
+  // Update short name in description
+  const shortNameEl = document.getElementById('location-short-name');
+  if (shortNameEl) {
+    shortNameEl.textContent = locationData.shortName;
+  }
+
+  // Update available services in sidebar
+  const servicesList = document.getElementById('waitlist-services');
+  if (servicesList) {
+    servicesList.innerHTML = '';
+    locationData.services.forEach((service) => {
+      const serviceName = {
+        primary: 'Primary Care',
+        pharmacy: 'Pharmacy',
+        dental: 'Dental',
+        vision: 'Vision'
+      }[service];
+
+      const li = document.createElement('li');
+      li.style.display = 'flex';
+      li.style.alignItems = 'center';
+      li.style.gap = '0.5rem';
+      li.innerHTML = `<span style="font-size: 1.2rem;">&#10003;</span> ${serviceName}`;
+      servicesList.appendChild(li);
+    });
+  }
+
+  // Show/hide service checkboxes based on location
+  const pharmacyOption = document.getElementById('pharmacy-option');
+  const dentalOption = document.getElementById('dental-option');
+  const visionOption = document.getElementById('vision-option');
+
+  if (pharmacyOption) {
+    pharmacyOption.style.display = locationData.services.includes('pharmacy') ? 'block' : 'none';
+  }
+  if (dentalOption) {
+    dentalOption.style.display = locationData.services.includes('dental') ? 'block' : 'none';
+  }
+  if (visionOption) {
+    visionOption.style.display = locationData.services.includes('vision') ? 'block' : 'none';
+  }
+}
+
+// Handle waitlist form submission
+function handleWaitlistSubmit(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const formData = new FormData(form);
+  const data = {
+    location: localStorage.getItem('waitlistLocation'),
+    locationName: localStorage.getItem('waitlistLocationName'),
+    name: formData.get('name'),
+    email: formData.get('email'),
+    phone: formData.get('phone'),
+    services: formData.getAll('services'),
+    message: formData.get('message')
+  };
+
+  console.log('Waitlist submission:', data);
+
+  // In a real implementation, you would send this to your backend
+  // For now, show a success message
+  alert(`Thank you for joining the waitlist for ${data.locationName}! We will notify you when this location opens.`);
+
+  // Clear waitlist data
+  localStorage.removeItem('waitlistLocation');
+  localStorage.removeItem('waitlistLocationName');
+
+  // Redirect to home or confirmation page
+  window.location.href = 'index.html';
+}
+
+// Initialize location-aware features
+document.addEventListener('DOMContentLoaded', () => {
+  const currentPage = window.location.pathname.split('/').pop();
+
+  // Update location indicator on membership flow pages
+  if (currentPage.startsWith('membership-')) {
+    updateLocationIndicator();
+  }
+
+  // Initialize waitlist page
+  if (currentPage === 'waitlist.html') {
+    updateWaitlistPage();
+
+    const waitlistForm = document.getElementById('waitlist-form');
+    if (waitlistForm) {
+      waitlistForm.addEventListener('submit', handleWaitlistSubmit);
+    }
+  }
+
+  // Redirect to location selection if no location is selected
+  if (currentPage.startsWith('membership-')) {
+    const selectedLocation = localStorage.getItem('selectedLocation');
+    if (!selectedLocation) {
+      window.location.href = siteRoot() + 'locations.html';
+    }
+  }
+});
+
+// Make functions globally available
+window.selectLocation = selectLocation;
+window.joinWaitlist = joinWaitlist;
+window.getAvailableServices = getAvailableServices;
+window.isServiceAvailable = isServiceAvailable;
+
+/* ============================================
+   LOCATION PAGE HOURS AND MAPS FUNCTIONALITY
+   ============================================ */
+
+// Detect if user is on iOS device
+function isIOS() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+
+// Open Apple Maps with address
+function openAppleMaps(address) {
+  const encoded = encodeURIComponent(address);
+  window.open(`maps://maps.apple.com/?q=${encoded}`, '_blank');
+}
+
+// Open Google Maps with address
+function openGoogleMaps(address) {
+  const encoded = encodeURIComponent(address);
+  window.open(`https://www.google.com/maps/search/?api=1&query=${encoded}`, '_blank');
+}
+
+// Universal maps function that detects platform
+function openInMaps(address) {
+  if (isIOS()) {
+    openAppleMaps(address);
+  } else {
+    openGoogleMaps(address);
+  }
+}
+
+// Populate hours grid with today highlighted
+function populateHoursGrid(hoursData) {
+  const hoursGrid = document.getElementById('hours-grid');
+  if (!hoursGrid) return;
+
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const today = new Date().getDay();
+
+  hoursGrid.innerHTML = '';
+
+  days.forEach((day, index) => {
+    const hours = hoursData[day.toLowerCase()] || 'Closed';
+    const isToday = index === today;
+
+    const row = document.createElement('div');
+    row.className = `hours-row${isToday ? ' today' : ''}${hours === 'Closed' ? ' closed' : ''}`;
+
+    row.innerHTML = `
+      <div class="hours-day">${day}${isToday ? ' (Today)' : ''}</div>
+      <div class="hours-time">${hours}</div>
+    `;
+
+    hoursGrid.appendChild(row);
+  });
+}
+
+// Initialize location page features
+document.addEventListener('DOMContentLoaded', () => {
+  const locationPage = document.querySelector('.location-page');
+
+  if (locationPage) {
+    // Show Apple Maps button on iOS devices
+    if (isIOS()) {
+      const appleMapsButtons = document.querySelectorAll('.btn-apple-maps');
+      appleMapsButtons.forEach(btn => {
+        btn.style.display = 'inline-flex';
+      });
+    }
+
+    // Get location-specific hours data from data attribute
+    const locationKey = locationPage.dataset.location;
+
+    // Default hours structure - can be customized per location
+    const defaultHours = {
+      monday: '8:00 AM - 5:00 PM',
+      tuesday: '8:00 AM - 5:00 PM',
+      wednesday: '8:00 AM - 5:00 PM',
+      thursday: '8:00 AM - 5:00 PM',
+      friday: '8:00 AM - 5:00 PM',
+      saturday: 'Closed',
+      sunday: 'Closed'
+    };
+
+    // Location-specific hours (can be expanded)
+    const locationHours = {
+      missoula: {
+        monday: '8:00 AM - 6:00 PM',
+        tuesday: '8:00 AM - 6:00 PM',
+        wednesday: '8:00 AM - 6:00 PM',
+        thursday: '8:00 AM - 6:00 PM',
+        friday: '8:00 AM - 5:00 PM',
+        saturday: '9:00 AM - 1:00 PM',
+        sunday: 'Closed'
+      },
+      bozeman: {
+        monday: '8:00 AM - 5:00 PM',
+        tuesday: '8:00 AM - 5:00 PM',
+        wednesday: '8:00 AM - 5:00 PM',
+        thursday: '8:00 AM - 5:00 PM',
+        friday: '8:00 AM - 5:00 PM',
+        saturday: 'Closed',
+        sunday: 'Closed'
+      },
+      billings: {
+        monday: '8:00 AM - 5:00 PM',
+        tuesday: '8:00 AM - 5:00 PM',
+        wednesday: '8:00 AM - 5:00 PM',
+        thursday: '8:00 AM - 5:00 PM',
+        friday: '8:00 AM - 5:00 PM',
+        saturday: 'Closed',
+        sunday: 'Closed'
+      }
+    };
+
+    // Populate hours grid
+    const hours = locationHours[locationKey] || defaultHours;
+    populateHoursGrid(hours);
+  }
+});
+
+// Make maps functions globally available
+window.openInMaps = openInMaps;
+window.openAppleMaps = openAppleMaps;
+window.openGoogleMaps = openGoogleMaps;
+
+/* ============================================
+   MOBILE-SPECIFIC ENHANCEMENTS
+   ============================================ */
+
+// Enhanced Video Background for Mobile
+(function() {
+  const isMobile = window.innerWidth <= 768;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isAndroid = /Android/.test(navigator.userAgent);
+
+  // Detect network speed for video optimization
+  let connectionSpeed = 'unknown';
+  if ('connection' in navigator) {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (connection && connection.effectiveType) {
+      connectionSpeed = connection.effectiveType; // '4g', '3g', '2g', 'slow-2g'
+    }
+  }
+
+  // Enhanced video loading with mobile optimizations
+  const videoBackgrounds = document.querySelectorAll('.video-hero-bg, .location-hero-video');
+
+  videoBackgrounds.forEach((video) => {
+    // On slow connections or 3G, prefer poster image
+    if (isMobile && (connectionSpeed === '3g' || connectionSpeed === '2g' || connectionSpeed === 'slow-2g')) {
+      video.style.display = 'none';
+      if (video.poster) {
+        const posterImg = document.createElement('img');
+        posterImg.src = video.poster;
+        posterImg.style.width = '100%';
+        posterImg.style.height = '100%';
+        posterImg.style.objectFit = 'cover';
+        posterImg.style.position = 'absolute';
+        posterImg.style.inset = '0';
+        posterImg.style.zIndex = '0';
+        video.parentElement.insertBefore(posterImg, video);
+      }
+      return;
+    }
+
+    // iOS-specific video handling
+    if (isIOS) {
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      video.setAttribute('x-webkit-airplay', 'allow');
+      video.muted = true;
+
+      // iOS sometimes needs user interaction, prepare fallback
+      const iosVideoFallback = () => {
+        if (video.paused && video.poster) {
+          video.style.opacity = '0.01';
+        }
+      };
+
+      video.addEventListener('pause', iosVideoFallback);
+    }
+
+    // Android-specific optimizations
+    if (isAndroid) {
+      video.setAttribute('preload', 'metadata');
+      video.muted = true;
+    }
+  });
+})();
+
+/* Mobile menu close handled by earlier event listener */
+
+// Prevent body scroll when mobile menu is open
+if (window.innerWidth <= 768) {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.contains('is-open');
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    });
+  }
+}
+
+// Touch-friendly scroll improvements
+if ('ontouchstart' in window) {
+  // Add momentum scrolling for iOS
+  document.body.style.webkitOverflowScrolling = 'touch';
+
+  // Disable hover effects on touch devices
+  document.body.classList.add('touch-device');
+}
+
+// Optimize images for mobile
+if (window.innerWidth <= 768) {
+  const images = document.querySelectorAll('img:not([data-src])');
+
+  images.forEach((img) => {
+    // Add loading="lazy" to images below the fold
+    const rect = img.getBoundingClientRect();
+    const isInViewport = rect.top < window.innerHeight;
+
+    if (!isInViewport) {
+      img.setAttribute('loading', 'lazy');
+    }
+  });
+}
+
+/* Battery-aware: handled by OS power settings and prefers-reduced-motion */
+
+// Mobile-specific performance monitoring
+if (window.innerWidth <= 768) {
+  // Monitor layout shifts for debugging
+  let cls = 0;
+
+  if ('PerformanceObserver' in window) {
+    try {
+      const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (!entry.hadRecentInput) {
+            cls += entry.value;
+            if (cls > 0.1) {
+              console.warn('Cumulative Layout Shift exceeded threshold:', cls);
+            }
+          }
+        }
+      });
+
+      observer.observe({ type: 'layout-shift', buffered: true });
+    } catch (e) {
+      // PerformanceObserver not supported
+    }
+  }
+}
+
+// Viewport height fix for mobile browsers (addresses 100vh issues)
+function setVH() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVH();
+window.addEventListener('resize', throttle(setVH, 250));
+window.addEventListener('orientationchange', setVH);
+
+// Handle safe area insets for notched devices
+if (CSS.supports('padding-top: env(safe-area-inset-top)')) {
+  document.documentElement.classList.add('has-safe-areas');
+}
+
+// Improved scroll behavior for mobile
+let ticking = false;
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const currentScrollY = window.scrollY;
+      const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+
+      // Add scroll direction class to header for hiding/showing on scroll
+      const header = document.querySelector('.topbar');
+      if (header && window.innerWidth <= 768) {
+        if (scrollDirection === 'down' && currentScrollY > 100) {
+          header.style.transform = 'translateY(-100%)';
+        } else if (scrollDirection === 'up') {
+          header.style.transform = 'translateY(0)';
+        }
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    });
+
+    ticking = true;
+  }
+});
+
+// Handle form inputs on mobile (prevent zoom)
+if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+  const inputs = document.querySelectorAll('input, textarea, select');
+  inputs.forEach((input) => {
+    if (!input.style.fontSize || parseInt(input.style.fontSize) < 16) {
+      input.style.fontSize = '16px';
+    }
+  });
+}
+
+/* Backdrop-filter fallback handled by earlier glass effect detection */
+
+// Optimize touch events
+if ('ontouchstart' in window) {
+  document.addEventListener('touchstart', () => {}, { passive: true });
+  document.addEventListener('touchmove', () => {}, { passive: true });
+}
+
+// Mobile-specific accessibility improvements
+function improveAccessibilityOnMobile() {
+  if (window.innerWidth <= 768) {
+    // Ensure all interactive elements have adequate size
+    const interactiveElements = document.querySelectorAll('a, button, input, select, textarea');
+
+    interactiveElements.forEach((element) => {
+      const rect = element.getBoundingClientRect();
+
+      // If element is too small, add padding class
+      if (rect.width < 44 || rect.height < 44) {
+        element.classList.add('touch-target-enhanced');
+      }
+    });
+
+    // Add CSS for enhanced touch targets dynamically
+    const style = document.createElement('style');
+    style.textContent = `
+      .touch-target-enhanced {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', improveAccessibilityOnMobile);
+
+// Network-aware loading
+if ('connection' in navigator) {
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+  if (connection) {
+    connection.addEventListener('change', () => {
+      const effectiveType = connection.effectiveType;
+
+      if (effectiveType === '2g' || effectiveType === 'slow-2g') {
+        // Disable videos and heavy animations on slow connections
+        document.querySelectorAll('video').forEach((video) => {
+          video.pause();
+          video.style.display = 'none';
+        });
+
+        document.documentElement.classList.add('slow-connection');
+      }
+    });
+  }
+}
+
+/* ============================================
+   SERVICES PAGE HOTBAR SCROLL HIGHLIGHTING
+   ============================================ */
+
+if (document.getElementById('services-hotbar')) {
+  const hotbarItems = document.querySelectorAll('.services-hotbar-item');
+  const sectionIds = ['primary-care', 'rx', 'dental', 'vision'];
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            hotbarItems.forEach((item) => {
+              const href = item.getAttribute('href').replace('#', '');
+              item.classList.toggle('active', href === id);
+            });
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: '-100px 0px -40% 0px' }
+    );
+
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+  }
+}
+
+/* ============================================
+   MEMBERSHIP FLOW DYNAMIC NAVIGATION
+   ============================================ */
+
+// Update membership step navigation based on available services
+function updateMembershipNavigation() {
+  const locationKey = localStorage.getItem('selectedLocation');
+  if (!locationKey) return;
+
+  const services = getAvailableServices(locationKey);
+  const currentPage = window.location.pathname.split('/').pop();
+
+  // Map service pages to service keys
+  const pageServiceMap = {
+    'membership-rx.html': 'pharmacy',
+    'membership-dental.html': 'dental',
+    'membership-vision.html': 'vision'
+  };
+
+  // Build the step sequence based on available services
+  const allSteps = [
+    { page: 'membership-plan.html', service: 'primary' },
+    { page: 'membership-rx.html', service: 'pharmacy' },
+    { page: 'membership-dental.html', service: 'dental' },
+    { page: 'membership-vision.html', service: 'vision' },
+    { page: 'membership-details.html', service: null }
+  ];
+
+  const availableSteps = allSteps.filter(
+    (step) => step.service === null || step.service === 'primary' || services.includes(step.service)
+  );
+
+  // Find current step index
+  const currentIndex = availableSteps.findIndex((step) => step.page === currentPage);
+  if (currentIndex === -1) return;
+
+  // Update step counter
+  const stepBadge = document.querySelector('.badge');
+  if (stepBadge) {
+    stepBadge.textContent = `Step ${currentIndex + 1} of ${availableSteps.length}`;
+  }
+
+  // Update "Next" button to point to correct next step
+  const nextStep = availableSteps[currentIndex + 1];
+  const prevStep = availableSteps[currentIndex - 1];
+
+  const stepperActions = document.querySelector('.stepper-actions');
+  if (stepperActions && nextStep) {
+    const nextLink = stepperActions.querySelector('.btn-primary');
+    if (nextLink) {
+      nextLink.href = nextStep.page;
+      // Update button text based on next service
+      const serviceNames = { pharmacy: 'Pharmacy', dental: 'Dental', vision: 'Vision' };
+      if (nextStep.service && serviceNames[nextStep.service]) {
+        nextLink.textContent = `Next: ${serviceNames[nextStep.service]}`;
+      } else if (nextStep.page === 'membership-details.html') {
+        nextLink.textContent = 'Next: Your Details';
+      }
+    }
+  }
+}
+
+// Run on membership pages
+document.addEventListener('DOMContentLoaded', () => {
+  const currentPage = window.location.pathname.split('/').pop();
+  if (currentPage && currentPage.startsWith('membership-')) {
+    updateMembershipNavigation();
+  }
+});
+
+/* End of scripts */
+
