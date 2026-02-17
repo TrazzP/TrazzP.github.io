@@ -6,7 +6,7 @@
     <title>Onevia | One Membership. Complete Care.</title>
     <meta
       name="description"
-      content="Onevia is a membership-based direct care clinic with primary care, pharmacy, dental, and vision. Predictable pricing, longer visits, and at-cost medications, labs, and imaging."
+      content="Join Onevia starting at $100/mo - same-day appointments, at-cost labs & meds, and a doctor who actually knows you. Direct primary care clinics in Missoula, Bozeman & Billings, Montana."
     />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,11 +27,12 @@
         <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
           <span></span>
           <span></span>
+          <span></span>
         </button>
         <nav class="nav-links" id="nav-links">
           <a href="#savings">Savings</a>
           <a href="#why">Why Onevia</a>
-          <a href="services.html">Services</a>
+          <a href="#services-preview">Services</a>
           <a href="#testimonials">Patient Stories</a>
           <a href="#faq">FAQ</a>
         </nav>
@@ -54,33 +55,22 @@
         <div class="video-hero-overlay"></div>
 
         <div class="container">
-          <div class="video-hero-content">
-            <!-- Floating Glass Card -->
-            <div class="glass-hero-card glass-hero-card-compact" data-reveal>
-              <span class="glass-eyebrow">Direct Primary Care + Pharmacy + Dental + Vision</span>
+          <div class="video-hero-content hero-split-layout">
+            <div class="glass-hero-card glass-hero-title-card" data-reveal>
+              <p class="hero-services-label">Direct Primary Care + Pharmacy + Dental + Vision</p>
               <h1 class="hero-title-glass">One Membership. Complete Care.</h1>
-              <p class="hero-lead-glass">
-                Membership-based care built around time, access, and human connection.
-                Direct access to your care team, longer visits, and transparent costs.
-              </p>
-              <div class="hero-actions-glass">
-                <a class="btn btn-primary btn-glass" href="locations.html">Find a Clinic</a>
-              </div>
             </div>
 
-            <!-- Floating Metrics Cards -->
-            <div class="glass-metrics-grid" data-reveal>
-              <div class="glass-metric-card">
-                <h3>Same-day</h3>
-                <p>Really, see your doctor today!</p>
+            <div class="glass-hero-card glass-hero-tagline-card" data-reveal>
+              <div class="hero-slider" id="hero-slider">
+                <p class="hero-slide active"><strong>How often can I see my doctor?</strong><br />As often as you need — unlimited visits with no copays.</p>
+                <p class="hero-slide"><strong>What's included in my membership?</strong><br />Everything. No copays, no surprise bills, no waiting rooms.</p>
+                <p class="hero-slide"><strong>How quickly can I be seen?</strong><br />Same day. Plus 24/7 text and phone access to your doctor.</p>
               </div>
-              <div class="glass-metric-card">
-                <h3>One-hour</h3>
-                <p>Hour long appointments to listen and plan</p>
-              </div>
-              <div class="glass-metric-card">
-                <h3>Transparent pricing</h3>
-                <p>At-cost labs, imaging, meds</p>
+              <div class="hero-dots" id="hero-dots">
+                <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
+                <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
+                <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
               </div>
             </div>
           </div>
@@ -94,8 +84,7 @@
             <span class="eyebrow">Savings with Onevia</span>
             <h2>Transparent pricing that feels different.</h2>
             <p>
-              Onevia removes markups on common labs, imaging, and everyday medications. This is where members feel the
-              difference the fastest.
+              <strong>Membership starts at $100/month.</strong> Onevia removes markups on common labs, imaging, and everyday medications — this is where members feel the difference the fastest.
             </p>
           </div>
           <div class="savings-table" data-reveal>
@@ -105,38 +94,37 @@
               <div>W/ Onevia</div>
             </div>
             <div class="savings-row">
+              <div class="savings-cell" data-label="Service / Lab">Common generic Rx (30-day)</div>
+              <div class="savings-cell" data-label="Typical Cash Price">$25-60</div>
+              <div class="savings-cell savings-with-onevia" data-label="W/ Onevia">$3-10</div>
+            </div>
+            <div class="savings-row">
               <div class="savings-cell" data-label="Service / Lab">Comprehensive metabolic panel (CMP)</div>
               <div class="savings-cell" data-label="Typical Cash Price">$40-80</div>
-              <div class="savings-cell" data-label="W/ Onevia">$12-20</div>
+              <div class="savings-cell savings-with-onevia" data-label="W/ Onevia">$12-20</div>
             </div>
             <div class="savings-row">
               <div class="savings-cell" data-label="Service / Lab">Lipid panel</div>
               <div class="savings-cell" data-label="Typical Cash Price">$60-100</div>
-              <div class="savings-cell" data-label="W/ Onevia">$15-25</div>
+              <div class="savings-cell savings-with-onevia" data-label="W/ Onevia">$15-25</div>
             </div>
             <div class="savings-row">
               <div class="savings-cell" data-label="Service / Lab">HbA1c (A1C) test</div>
               <div class="savings-cell" data-label="Typical Cash Price">$60-100</div>
-              <div class="savings-cell" data-label="W/ Onevia">$10-20</div>
+              <div class="savings-cell savings-with-onevia" data-label="W/ Onevia">$10-20</div>
             </div>
             <div class="savings-row">
               <div class="savings-cell" data-label="Service / Lab">TSH panel</div>
               <div class="savings-cell" data-label="Typical Cash Price">$50-90</div>
-              <div class="savings-cell" data-label="W/ Onevia">$12-20</div>
+              <div class="savings-cell savings-with-onevia" data-label="W/ Onevia">$12-20</div>
             </div>
             <div class="savings-row">
               <div class="savings-cell" data-label="Service / Lab">Chest X-ray</div>
               <div class="savings-cell" data-label="Typical Cash Price">$150-300</div>
-              <div class="savings-cell" data-label="W/ Onevia">$30-60</div>
-            </div>
-            <div class="savings-row">
-              <div class="savings-cell" data-label="Service / Lab">Common generic Rx (30-day)</div>
-              <div class="savings-cell" data-label="Typical Cash Price">$25-60</div>
-              <div class="savings-cell" data-label="W/ Onevia">$3-10</div>
+              <div class="savings-cell savings-with-onevia" data-label="W/ Onevia">$30-60</div>
             </div>
           </div>
-          <p class="muted">Many members cover their membership cost through at-cost labs and pharmacy savings alone.</p>
-          <p class="muted">Example pricing only. Actual costs vary by market and supply.</p>
+          <p class="muted">Many members cover their membership cost through at-cost labs and pharmacy savings alone.<sup>1</sup></p>
           <div class="cta-banner" data-reveal>
             <div>
               <h3>Ready to see your savings?</h3>
@@ -155,28 +143,31 @@
         <div class="video-hero-overlay"></div>
 
         <div class="container">
-          <div class="video-hero-content">
-            <div class="glass-hero-card glass-hero-card-compact" data-reveal>
-              <span class="glass-eyebrow">Why Onevia</span>
-              <h2 class="hero-title-glass">Healthcare built around you, not billing codes.</h2>
-              <div class="glass-benefits-grid">
-                <div class="glass-benefit-card">
-                  <h4>Time to listen</h4>
-                  <p>30-60 minute visits so your doctor can truly hear you and plan ahead.</p>
-                </div>
-                <div class="glass-benefit-card">
-                  <h4>Aligned incentives</h4>
-                  <p>We win when you stay healthy, not when you visit more.</p>
-                </div>
-                <div class="glass-benefit-card">
-                  <h4>Transparent pricing</h4>
-                  <p>No surprise bills. Clear monthly costs with at-cost labs and meds.</p>
-                </div>
-                <div class="glass-benefit-card">
-                  <h4>Coordinated care</h4>
-                  <p>All services connected so nothing falls through the cracks.</p>
-                </div>
+          <div class="video-hero-content hero-split-layout hero-split-three">
+            <div class="glass-hero-card glass-hero-title-card" data-reveal>
+              <h2 class="hero-title-glass">Live Life Uninterrupted</h2>
+              <p class="hero-lead-glass">Happy • Healthy • Connected</p>
+            </div>
+
+            <div class="glass-hero-card glass-hero-tagline-card" data-reveal>
+              <div class="hero-slider" id="why-slider">
+                <p class="hero-slide active"><strong>Tired of healthcare getting in the way of your life?</strong><br />Get care that fits your schedule. Focus on what matters.</p>
+                <p class="hero-slide"><strong>Want to stop worrying and start living?</strong><br />Your doctor is a text away. Stop Googling symptoms at midnight.</p>
+                <p class="hero-slide"><strong>Ready to feel like yourself again?</strong><br />Feel energized and fully present for the moments that matter.</p>
+                <p class="hero-slide"><strong>Missing out because of health complications?</strong><br />Life doesn't happen 9-to-5, and neither should your healthcare.</p>
               </div>
+              <div class="hero-dots" id="why-dots">
+                <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
+                <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
+                <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+                <button class="hero-dot" data-slide="3" aria-label="Slide 4"></button>
+              </div>
+            </div>
+
+            <div class="glass-hero-card glass-hero-story-card" data-reveal>
+              <a class="story-cta-link" href="about.html">
+                Read Our Story <span>&rarr;</span>
+              </a>
             </div>
           </div>
         </div>
@@ -187,30 +178,50 @@
         <div class="container">
           <div class="section-title" data-reveal>
             <span class="eyebrow">Services</span>
-            <h2>Explore Onevia services.</h2>
-            <p>Primary care anchored by pharmacy, dental, and vision as you grow.</p>
+            <h2>Everything under one roof. One membership.</h2>
+            <p>Primary care is the foundation. Add pharmacy, dental, and vision as you need them.</p>
           </div>
-          <div class="care-grid-glass" data-reveal>
-            <a class="care-card-glass" href="services.html#primary-care">
+          <div class="services-grid-2x2" data-reveal>
+            <div class="service-preview-card">
               <h3>Primary Care</h3>
-              <p>Small patient panels, longer visits, and personalized care plans.</p>
-              <span class="tag">Learn more</span>
-            </a>
-            <a class="care-card-glass" href="services.html#rx">
+              <ul class="service-features">
+                <li>Unlimited visits, always included</li>
+                <li>Same-day & next-day appointments</li>
+                <li>30-60 min with your doctor, not a stranger</li>
+                <li>Text or call your doctor directly - even after hours</li>
+              </ul>
+              <a href="services.html#primary-care" class="text-link">Learn more &rarr;</a>
+            </div>
+            <div class="service-preview-card">
               <h3>Pharmacy</h3>
-              <p>Medication optimization and at-cost pricing with pharmacist support.</p>
-              <span class="tag">Learn more</span>
-            </a>
-            <a class="care-card-glass" href="services.html#dental">
+              <ul class="service-features">
+                <li>Medications at actual cost - no markup</li>
+                <li>Save $50-500/month vs. retail pharmacy</li>
+                <li>90-day supplies for maximum savings</li>
+                <li>Pharmacist reviews every prescription for safety</li>
+              </ul>
+              <a href="services.html#rx" class="text-link">Learn more &rarr;</a>
+            </div>
+            <div class="service-preview-card">
               <h3>Dental</h3>
-              <p>Preventive-first dentistry without insurance pressure.</p>
-              <span class="tag">Learn more</span>
-            </a>
-            <a class="care-card-glass" href="services.html#vision">
+              <ul class="service-features">
+                <li>Cleanings, exams & X-rays at transparent pricing</li>
+                <li>No insurance games - pay what it actually costs</li>
+                <li>Preventive-first approach saves money long-term</li>
+                <li>Emergency dental visits available same-day</li>
+              </ul>
+              <a href="services.html#dental" class="text-link">Learn more &rarr;</a>
+            </div>
+            <div class="service-preview-card">
               <h3>Vision</h3>
-              <p>Long-term eye care focused on early detection and continuity.</p>
-              <span class="tag">Learn more</span>
-            </a>
+              <ul class="service-features">
+                <li>Comprehensive eye exams at membership pricing</li>
+                <li>Preventive screenings & ongoing monitoring</li>
+                <li>Coordinated with your primary care team</li>
+                <li>No referral needed - just book and go</li>
+              </ul>
+              <a href="services.html#vision" class="text-link">Learn more &rarr;</a>
+            </div>
           </div>
         </div>
       </section>
@@ -271,6 +282,34 @@
         </div>
       </section>
 
+      <!-- For Employers -->
+      <section class="section section-glass-bg" id="employers">
+        <div class="container">
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">For Employers</span>
+            <h2>Better care for your team. Lower costs for your business.</h2>
+            <p>Onevia employer plans give your team direct access to primary care, pharmacy, dental, and vision - with predictable monthly costs and zero claims to manage.</p>
+          </div>
+          <div class="employer-benefits-grid" data-reveal>
+            <div class="employer-benefit">
+              <h4>Predictable costs</h4>
+              <p>Flat monthly rate per employee. No surprise claims, no deductible negotiations, no annual premium hikes.</p>
+            </div>
+            <div class="employer-benefit">
+              <h4>Healthier employees</h4>
+              <p>Same-day access and preventive focus mean fewer sick days, fewer ER visits, and faster return to work.</p>
+            </div>
+            <div class="employer-benefit">
+              <h4>Retention advantage</h4>
+              <p>Direct care is a benefit employees actually value. Teams that feel cared for stay longer.</p>
+            </div>
+          </div>
+          <div class="employer-cta" data-reveal>
+            <a class="btn btn-primary" href="mailto:employers@onevia.health">Contact Us About Employer Plans</a>
+          </div>
+        </div>
+      </section>
+
       <section class="section faq" id="faq">
         <div class="container">
           <div class="section-title" data-reveal>
@@ -306,6 +345,26 @@
         </div>
       </section>
 
+      <!-- Not in your city yet? -->
+      <section class="section" id="notify">
+        <div class="container">
+          <div class="notify-card" data-reveal>
+            <div class="section-title">
+              <span class="eyebrow">Not in your city yet?</span>
+              <h2>We're growing across Montana.</h2>
+              <p>Leave your email and we'll let you know when Onevia is coming to your area. Early supporters get priority access and founding member pricing.</p>
+            </div>
+            <form class="notify-form" onsubmit="handleNotifySubmit(event)">
+              <div class="notify-form-row">
+                <input type="email" id="notify-email" placeholder="you@email.com" required aria-label="Email address" />
+                <button type="submit" class="btn btn-primary">Notify Me</button>
+              </div>
+              <p class="form-note">No spam. Just updates when we expand to new cities.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="contact">
         <div class="container">
           <div class="cta-banner" data-reveal>
@@ -313,7 +372,7 @@
               <h3>Ready to join Onevia?</h3>
               <p>Find your clinic and get started today.</p>
             </div>
-            <a class="btn btn-primary" href="locations.html">Find Your Clinic</a>
+            <a class="btn btn-primary" href="locations.html">Get Started</a>
           </div>
         </div>
       </section>
@@ -324,6 +383,7 @@
           <h4>Explore</h4>
           <a href="index.html#savings">Savings</a>
           <a href="index.html#why">Why Onevia</a>
+          <a href="about.html">Our Story</a>
           <a href="index.html#testimonials">Patient Stories</a>
           <a href="index.html#faq">FAQ</a>
         </div>
@@ -348,6 +408,7 @@
         </div>
       </div>
       <div class="container footer-bottom">
+        <p class="footer-note"><sup>1</sup> Actual costs vary by market and supply.</p>
         <p>(c) 2026 Onevia. All rights reserved.</p>
       </div>
     </footer>

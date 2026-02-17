@@ -970,6 +970,17 @@ function handleWaitlistSubmit(event) {
   window.location.href = 'index.html';
 }
 
+// Handle notify/email capture form (homepage)
+function handleNotifySubmit(event) {
+  event.preventDefault();
+  const email = document.getElementById('notify-email').value;
+  console.log('Notify submission:', { email });
+
+  // In a real implementation, send to backend/email service
+  const form = event.target;
+  form.innerHTML = '<p style="font-size: 1.1rem; color: var(--accent); font-weight: 600; padding: 1rem 0;">Thanks! We\'ll let you know when Onevia expands to your area.</p>';
+}
+
 // Initialize location-aware features
 document.addEventListener('DOMContentLoaded', () => {
   const currentPage = window.location.pathname.split('/').pop();
@@ -1473,6 +1484,290 @@ document.addEventListener('DOMContentLoaded', () => {
   if (currentPage && currentPage.startsWith('membership-')) {
     updateMembershipNavigation();
   }
+});
+
+/* ============================================
+   HERO SLIDER - AUTO-ROTATING TAGLINES
+   ============================================ */
+
+function initHeroSlider(sliderId, dotsId, interval) {
+  const slider = document.getElementById(sliderId);
+  const dotsContainer = document.getElementById(dotsId);
+  if (!slider || !dotsContainer) return null;
+
+  const slides = slider.querySelectorAll('.hero-slide');
+  const dots = dotsContainer.querySelectorAll('.hero-dot');
+  if (slides.length === 0) return null;
+
+  let current = 0;
+  let timer = null;
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = index % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function next() {
+    goTo(current + 1);
+  }
+
+  function startAutoPlay() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(next, interval || 4000);
+  }
+
+  function stopAutoPlay() {
+    if (timer) clearInterval(timer);
+  }
+
+  // Dot click handlers
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      goTo(Number(dot.dataset.slide));
+      stopAutoPlay();
+      startAutoPlay(); // restart timer after manual click
+    });
+  });
+
+  // Pause on hover
+  slider.addEventListener('mouseenter', stopAutoPlay);
+  slider.addEventListener('mouseleave', startAutoPlay);
+
+  // Respect reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    startAutoPlay();
+  }
+
+  return { goTo, next, startAutoPlay, stopAutoPlay };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Hero slider (3 taglines, 4s interval)
+  initHeroSlider('hero-slider', 'hero-dots', 4000);
+
+  // Why Onevia slider (4 taglines, 5s interval)
+  initHeroSlider('why-slider', 'why-dots', 5000);
+});
+
+// Progress bar functionality for membership flow
+document.addEventListener('DOMContentLoaded', () => {
+  const progressContainer = document.querySelector('.progress-bar-container, .membership-progress-bar');
+  if (!progressContainer) return;
+
+  updateProgressBar();
+  updateMembershipBrand();
+});
+
+// Update the brand text and link to show selected location
+function updateMembershipBrand() {
+  const brandText = document.getElementById('membership-brand-text');
+  const brandLink = brandText ? brandText.closest('.brand') : null;
+  if (!brandText) return;
+
+  const locationKey = localStorage.getItem('selectedLocation') || 'missoula';
+  const locationName = localStorage.getItem('selectedLocationName') || 'Onevia - Missoula';
+
+  brandText.textContent = locationName;
+
+  // Update brand link to go to location homepage
+  if (brandLink) {
+    brandLink.href = `${locationKey}/index.html`;
+  }
+}
+
+function updateProgressBar() {
+  const locationKey = localStorage.getItem('selectedLocation') || 'missoula';
+  const services = getAvailableServices(locationKey);
+
+  // Get current page to determine step
+  const currentPath = window.location.pathname.split('/').pop();
+  const pageStepMap = {
+    'membership-plan.html': 'plan',
+    'membership-rx.html': 'pharmacy',
+    'membership-dental.html': 'dental',
+    'membership-vision.html': 'vision',
+    'membership-details.html': 'details'
+  };
+
+  const currentStep = pageStepMap[currentPath];
+  if (!currentStep) return;
+
+  // Build list of available steps
+  const allSteps = ['plan'];
+  if (services.includes('pharmacy')) allSteps.push('pharmacy');
+  if (services.includes('dental')) allSteps.push('dental');
+  if (services.includes('vision')) allSteps.push('vision');
+  allSteps.push('details');
+
+  // Update progress bar steps
+  const progressSteps = document.querySelector('.progress-bar-steps');
+  if (!progressSteps) return;
+
+  // Clear existing steps
+  const bg = progressSteps.querySelector('.progress-bar-bg');
+  const fill = bg ? bg.querySelector('.progress-bar-fill') : null;
+  progressSteps.innerHTML = '';
+
+  // Re-add background
+  const newBg = document.createElement('div');
+  newBg.className = 'progress-bar-bg';
+  const newFill = document.createElement('div');
+  newFill.className = 'progress-bar-fill';
+  newBg.appendChild(newFill);
+  progressSteps.appendChild(newBg);
+
+  // Calculate progress percentage
+  const currentIndex = allSteps.indexOf(currentStep);
+  const totalSteps = allSteps.length;
+  const progressPercent = ((currentIndex + 1) / totalSteps) * 100;
+  newFill.style.width = progressPercent + '%';
+
+  // Step labels
+  const stepLabels = {
+    'plan': 'Membership',
+    'pharmacy': 'Pharmacy',
+    'dental': 'Dental',
+    'vision': 'Vision',
+    'details': 'Review'
+  };
+
+  // Create step elements
+  allSteps.forEach((step, index) => {
+    const stepEl = document.createElement('div');
+    stepEl.className = 'progress-step';
+
+    if (index < currentIndex) {
+      stepEl.classList.add('completed');
+    } else if (index === currentIndex) {
+      stepEl.classList.add('active');
+    }
+
+    const circle = document.createElement('div');
+    circle.className = 'progress-step-circle';
+    if (index >= currentIndex) {
+      circle.textContent = index + 1;
+    }
+
+    const label = document.createElement('span');
+    label.className = 'progress-step-label';
+    label.textContent = stepLabels[step] || step;
+
+    stepEl.appendChild(circle);
+    stepEl.appendChild(label);
+    progressSteps.appendChild(stepEl);
+  });
+}
+
+// Track membership flow progress
+function trackMembershipProgress() {
+  const currentLocation = localStorage.getItem('selectedLocation');
+  const lastLocation = localStorage.getItem('membershipFlowLocation');
+
+  // If location changed, reset progress
+  if (currentLocation !== lastLocation) {
+    localStorage.removeItem('membershipProgress');
+    localStorage.setItem('membershipFlowLocation', currentLocation);
+  }
+
+  // Update current progress
+  const currentPath = window.location.pathname.split('/').pop();
+  if (currentPath && currentPath.startsWith('membership-')) {
+    localStorage.setItem('membershipProgress', currentPath);
+  }
+}
+
+// Location selection handler - reset progress when location changes
+document.addEventListener('DOMContentLoaded', () => {
+  const locationCards = document.querySelectorAll('[data-location-key]');
+  locationCards.forEach(card => {
+    card.addEventListener('click', function(e) {
+      const newLocation = this.dataset.locationKey;
+      const currentLocation = localStorage.getItem('selectedLocation');
+
+      // If selecting a different location, reset progress
+      if (newLocation !== currentLocation) {
+        localStorage.removeItem('membershipProgress');
+        localStorage.removeItem('membershipFlowLocation');
+      }
+    });
+  });
+
+  // Track progress on membership pages
+  if (window.location.pathname.includes('membership-')) {
+    trackMembershipProgress();
+  }
+
+  // Fix back button on membership-details page
+  if (window.location.pathname.includes('membership-details.html')) {
+    updateDetailsBackButton();
+  }
+});
+
+// Update the back button on membership-details to go to the correct previous page
+function updateDetailsBackButton() {
+  const backButton = document.querySelector('.stepper-actions .btn-secondary');
+  if (!backButton) return;
+
+  const locationKey = localStorage.getItem('selectedLocation') || 'missoula';
+  const services = getAvailableServices(locationKey);
+
+  // Determine the last available service page
+  let previousPage = 'membership-plan.html';
+
+  if (services.includes('vision')) {
+    previousPage = 'membership-vision.html';
+  } else if (services.includes('dental')) {
+    previousPage = 'membership-dental.html';
+  } else if (services.includes('pharmacy')) {
+    previousPage = 'membership-rx.html';
+  }
+
+  backButton.href = previousPage;
+}
+
+// Header hide/show on scroll
+let lastScrollTop = 0;
+let scrollTimer = null;
+
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('.topbar');
+  if (!header) return;
+
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  // If scrolling down, hide header
+  if (scrollTop > lastScrollTop && scrollTop > 100) {
+    header.classList.add('header-hidden');
+  }
+  // If scrolling up, show header
+  else if (scrollTop < lastScrollTop) {
+    header.classList.remove('header-hidden');
+  }
+
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+}, { passive: true });
+
+// Progress bar sticky state detection
+document.addEventListener('DOMContentLoaded', () => {
+  const progressBar = document.querySelector('.progress-bar-container');
+  if (!progressBar) return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.intersectionRatio < 1) {
+        progressBar.classList.add('is-stuck');
+      } else {
+        progressBar.classList.remove('is-stuck');
+      }
+    },
+    { threshold: [1], rootMargin: '-64px 0px 0px 0px' }
+  );
+
+  observer.observe(progressBar);
 });
 
 /* End of scripts */

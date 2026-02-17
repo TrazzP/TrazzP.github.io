@@ -15,23 +15,52 @@
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body class="membership-flow">
-    <header class="topbar" id="top">
+    <header class="topbar membership-topbar" id="top">
       <div class="container nav-wrap">
         <a class="brand" href="index.html" aria-label="Onevia">
           <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-text brand-text-lg">Onevia</span>
+          <span class="brand-text brand-text-lg" id="membership-brand-text">Onevia - Missoula</span>
         </a>
         <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+          <span></span>
           <span></span>
           <span></span>
         </button>
         <nav class="nav-links" id="nav-links">
           <a href="services.html">Services</a>
-          <a href="locations.html">Locations</a>
+          <a href="about.html">About</a>
+          <a href="index.html#testimonials">Patient Stories</a>
+          <a href="index.html#faq">FAQ</a>
         </nav>
-        <div class="nav-actions">
-          <a class="text-link nav-question link-disabled" href="#">Ask a question</a>
-          <a class="btn btn-primary nav-cta" href="locations.html">Find a Clinic</a>
+        <a class="btn btn-primary nav-cta" href="locations.html">Change Clinic</a>
+      </div>
+      <div class="membership-progress-bar">
+        <div class="container">
+          <div class="progress-bar-steps">
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" style="width: 40%"></div>
+            </div>
+            <div class="progress-step completed">
+              <div class="progress-step-circle"></div>
+              <span class="progress-step-label">Membership</span>
+            </div>
+            <div class="progress-step active">
+              <div class="progress-step-circle">2</div>
+              <span class="progress-step-label">Pharmacy</span>
+            </div>
+            <div class="progress-step">
+              <div class="progress-step-circle">3</div>
+              <span class="progress-step-label">Dental</span>
+            </div>
+            <div class="progress-step">
+              <div class="progress-step-circle">4</div>
+              <span class="progress-step-label">Vision</span>
+            </div>
+            <div class="progress-step">
+              <div class="progress-step-circle">5</div>
+              <span class="progress-step-label">Review</span>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -39,7 +68,6 @@
     <main>
       <section class="signup-hero">
         <div class="container">
-          <span class="badge">Step 2 of 5</span>
           <h1>Add Pharmacy</h1>
           <p class="muted">Most members add Onevia Rx to unlock medication optimization and at-cost pricing.</p>
         </div>
@@ -97,6 +125,7 @@
           <h4>Explore</h4>
           <a href="index.html#savings">Savings</a>
           <a href="index.html#why">Why Onevia</a>
+          <a href="about.html">Our Story</a>
           <a href="index.html#testimonials">Patient Stories</a>
           <a href="index.html#faq">FAQ</a>
         </div>
