@@ -540,41 +540,6 @@ img {
   line-height: 1.35;
 }
 
-.specialist-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.specialist-panel {
-  display: grid;
-  gap: 0.9rem;
-}
-
-.glass-panel {
-  padding: 0.9rem;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 20px 50px rgba(13, 27, 42, 0.16);
-  backdrop-filter: blur(10px) saturate(130%);
-}
-
-.specialist-photo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.specialist-photo .service-image {
-  height: 360px;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 22px;
-}
-
 .service-price {
   display: inline-flex;
   align-items: center;
@@ -707,21 +672,6 @@ img {
   font-size: 1.3rem;
 }
 
-.service-hero-block {
-  display: grid;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.service-hero-card {
-  padding: 1rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 24px 60px rgba(13, 27, 42, 0.18);
-  backdrop-filter: blur(12px) saturate(130%);
-}
-
 .glass-hero {
   position: relative;
   border-radius: 24px;
@@ -743,20 +693,6 @@ img {
   display: block;
 }
 
-.specialist-hero .glass-image {
-  object-position: right center;
-}
-
-.about-page .glass-hero {
-  min-height: 520px;
-}
-
-.about-page .glass-image {
-  height: 100%;
-  min-height: 520px;
-  object-position: 78% center;
-}
-
 .glass-overlay {
   position: absolute;
   top: 50%;
@@ -772,77 +708,10 @@ img {
   z-index: 1;
 }
 
-.about-page .glass-overlay {
-  top: 1.6rem;
-  left: 2rem;
-  transform: none;
-}
-
 .services-page .glass-overlay {
   top: 1.8rem;
   left: 2rem;
   transform: none;
-}
-
-.glass-eyebrow {
-  display: inline-block;
-  margin: 0 0 0.8rem;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(8px);
-}
-
-.glass-overlay-bubbles {
-  display: grid;
-  gap: 0.8rem;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  width: clamp(240px, 42%, 420px);
-}
-
-.glass-bubble-list {
-  display: grid;
-  gap: 0.6rem;
-}
-
-.glass-bubble {
-  padding: clamp(0.45rem, 1vw, 0.7rem) clamp(0.6rem, 1.4vw, 0.9rem);
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(31, 111, 178, 0.2));
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  box-shadow: 0 14px 30px rgba(13, 27, 42, 0.14);
-  backdrop-filter: blur(14px) saturate(140%);
-  font-size: clamp(0.82rem, 1.1vw, 0.95rem);
-  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.glass-bubble:hover {
-  transform: translateY(-2px) scale(1.02);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(31, 111, 178, 0.3));
-  box-shadow: 0 18px 36px rgba(13, 27, 42, 0.18);
-}
-
-.name-bubble {
-  padding: 0.7rem 1rem;
-}
-
-.price-bubble .service-price {
-  background: transparent;
-  padding: 0;
-}
-
-.name-bubble .service-title {
-  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
-  margin: 0;
-}
-
-.quote-bubble .specialist-quote {
-  margin: 0;
-  font-style: italic;
 }
 
 .glass-overlay .service-title {
@@ -1956,32 +1825,6 @@ img {
     width: min(90%, 360px);
   }
 
-  .glass-overlay-bubbles {
-    width: min(90%, 360px);
-  }
-
-  .glass-eyebrow {
-    margin-bottom: 0.6rem;
-  }
-
-  .about-page .glass-overlay {
-    left: 1rem;
-    width: 50%;
-  }
-
-  .about-page .glass-overlay-bubbles {
-    width: 100%;
-  }
-
-  .about-page .glass-hero {
-    min-height: 560px;
-  }
-
-  .about-page .glass-image {
-    min-height: 560px;
-    object-position: 80% center;
-  }
-
   .nav-links {
     position: absolute;
     top: 70px;
@@ -2027,21 +1870,6 @@ img {
 
   .nav-actions {
     display: none;
-  }
-
-  .membership-progress-bar .progress-step-circle {
-    width: 20px;
-    height: 20px;
-    font-size: 0.6rem;
-  }
-
-  .membership-progress-bar .progress-step-label {
-    font-size: 0.6rem;
-    max-width: 52px;
-  }
-
-  .membership-flow {
-    padding-top: 115px;
   }
 
   .cta-banner {
@@ -2155,37 +1983,6 @@ img {
     width: min(90%, 320px);
   }
 
-  .glass-overlay-bubbles {
-    width: min(90%, 320px);
-  }
-
-  .glass-bubble {
-    font-size: 0.78rem;
-    padding: 0.4rem 0.55rem;
-  }
-
-  .name-bubble .service-title {
-    font-size: 1.35rem;
-  }
-
-  .about-page .glass-overlay {
-    left: 0.6rem;
-    width: 50%;
-  }
-
-  .about-page .glass-overlay-bubbles {
-    width: 100%;
-  }
-
-  .about-page .glass-hero {
-    min-height: 640px;
-  }
-
-  .about-page .glass-image {
-    min-height: 640px;
-    object-position: 82% center;
-  }
-
   .cta-strip {
     flex-direction: column;
     text-align: center;
@@ -2235,30 +2032,6 @@ img {
 
   .services-page .experience-grid::after {
     background: rgba(255, 255, 255, 0.25);
-  }
-
-  .services-page .service-hero-card {
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-  }
-
-  .specialist-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .specialist-photo {
-    order: -1;
-  }
-
-  .specialist-photo .service-image {
-    width: 100%;
-    height: 260px;
-  }
-
-  .glass-panel {
-    padding: 0.8rem;
   }
 
   .about-page .service-title {
@@ -2337,7 +2110,7 @@ img {
   position: relative;
   min-height: 92vh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   overflow: hidden;
   background: linear-gradient(135deg, #0b1e33 0%, #1f6fb2 100%);
 }
@@ -2378,6 +2151,7 @@ img {
 .video-hero-content.hero-split-layout {
   display: flex;
   max-width: none;
+  width: 100%;
   justify-content: center;
   align-items: flex-end;
   min-height: 75vh;
@@ -2400,6 +2174,7 @@ img {
 .glass-hero-combined {
   max-width: 480px;
   padding: 1.3rem 1.6rem;
+  margin: 0 auto;
 }
 
 .glass-hero-combined .hero-title-glass {
@@ -2421,6 +2196,25 @@ img {
   margin-top: 0.8rem;
 }
 
+/* FORCE hero section to bottom - override everything */
+#hero.video-hero {
+  align-items: flex-end !important;
+}
+
+#hero .video-hero-content.hero-split-layout {
+  align-items: flex-end !important;
+  justify-content: center !important;
+}
+
+#hero .hero-dot {
+  width: 5px !important;
+  height: 5px !important;
+}
+
+#hero .hero-dot.active {
+  transform: none !important;
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
@@ -2428,21 +2222,6 @@ img {
   50% {
     transform: translateY(-10px);
   }
-}
-
-.glass-eyebrow {
-  display: inline-block;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  margin-bottom: 0.6rem;
 }
 
 .hero-title-glass {
@@ -4133,20 +3912,19 @@ img {
 }
 
 .hero-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   background: transparent;
   cursor: pointer;
   padding: 0;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .hero-dot.active {
   background: rgba(255, 255, 255, 0.95);
   border-color: rgba(255, 255, 255, 0.95);
-  transform: scale(1.2);
 }
 
 .hero-dot:hover {
@@ -4416,9 +4194,7 @@ img {
   .location-service-card,
   .physician-card-glass,
   .location-details-card,
-  .glass-panel,
-  .glass-overlay,
-  .glass-bubble {
+  .glass-overlay {
     backdrop-filter: blur(8px) saturate(130%);
     -webkit-backdrop-filter: blur(8px) saturate(130%);
   }
@@ -4489,11 +4265,6 @@ img {
     line-height: 1.6;
   }
 
-  .glass-eyebrow {
-    font-size: 0.7rem;
-    padding: 0.35rem 0.75rem;
-  }
-
   /* Why Onevia section - 2x2 grid becomes 1 column */
   .feature-grid-glass {
     grid-template-columns: 1fr;
@@ -4558,18 +4329,6 @@ img {
     padding: 1rem 1.2rem;
     backdrop-filter: blur(8px) saturate(130%);
     -webkit-backdrop-filter: blur(8px) saturate(130%);
-  }
-
-  .glass-overlay-bubbles {
-    width: auto;
-    left: 0.75rem;
-    right: 0.75rem;
-    max-width: calc(100% - 1.5rem);
-  }
-
-  .glass-bubble {
-    padding: 0.5rem 0.7rem;
-    font-size: 0.85rem;
   }
 
   /* Navigation drawer improvements */
@@ -4898,8 +4657,7 @@ img {
     border: 2px solid var(--ink);
   }
 
-  .glass-overlay,
-  .glass-bubble {
+  .glass-overlay {
     background: rgba(255, 255, 255, 0.95);
     border: 2px solid rgba(11, 30, 51, 0.5);
   }
@@ -5519,11 +5277,6 @@ img[data-src] {
     font-size: 1.5rem;
   }
 
-  .glass-eyebrow {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.6rem;
-  }
-
   .glass-benefits-grid {
     grid-template-columns: 1fr;
     gap: 0.5rem;
@@ -5547,6 +5300,26 @@ img[data-src] {
 
 /* Mobile Glass Cards - More Compact */
 @media (max-width: 768px) {
+  /* Fix video zoom on mobile */
+  .video-hero-bg {
+    object-fit: cover;
+    object-position: center top;
+    transform: scale(1.05);
+  }
+
+  /* Ensure video always shows, never just blue */
+  .video-hero {
+    background: #0b1e33;
+  }
+
+  .video-hero-overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(11, 30, 51, 0.4) 0%,
+      rgba(31, 111, 178, 0.25) 100%
+    );
+  }
+
   /* Further reduce glass card size on mobile so video shows through more */
   .glass-hero-card {
     padding: 0.85rem 1rem !important;
@@ -5555,38 +5328,47 @@ img[data-src] {
   }
 
   .glass-hero-combined {
-    max-width: 90% !important;
-    padding: 1rem 1.2rem !important;
+    max-width: 72% !important;
+    padding: 0.9rem 1.1rem !important;
     margin: 0 auto;
   }
 
   .glass-hero-combined .hero-title-glass {
-    margin-bottom: 0.8rem;
-    font-size: 1.15rem !important;
+    margin-bottom: 0.7rem;
+    font-size: 1.05rem !important;
     white-space: normal !important;
   }
 
   .glass-hero-combined .hero-services-label {
-    font-size: 0.65rem !important;
-    margin-bottom: 0.3rem;
+    font-size: 0.6rem !important;
+    margin-bottom: 0.25rem;
   }
 
   .glass-hero-combined .hero-slider {
-    margin-top: 0.8rem;
+    margin-top: 0.7rem;
   }
 
   .glass-hero-combined .hero-slide {
-    font-size: 0.8rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1.4;
   }
 
   .glass-hero-combined .hero-dots {
-    margin-top: 0.6rem;
+    margin-top: 0.55rem;
   }
 
   .video-hero-content.hero-split-layout {
     justify-content: center;
-    min-height: 65vh;
+    align-items: flex-end;
+    min-height: 70vh;
     padding-bottom: 2rem;
+  }
+
+  /* Make dots smaller on mobile */
+  .hero-dot {
+    width: 5px !important;
+    height: 5px !important;
+    border-width: 1px !important;
   }
 
   .hero-title-glass {
@@ -5797,13 +5579,9 @@ img[data-src] {
   }
 
   .hero-dot {
-    width: 8px;
-    height: 8px;
-    border-width: 1px;
-  }
-
-  .hero-dot.active {
-    transform: scale(1.15);
+    width: 5px !important;
+    height: 5px !important;
+    border-width: 1px !important;
   }
 
   .urgency-badge {
@@ -6217,41 +5995,56 @@ img[data-src] {
     max-width: 96%;
   }
 
+  /* Even more aggressive sizing for small mobile */
   .glass-hero-combined {
-    max-width: 92% !important;
-    padding: 0.85rem 1rem !important;
+    max-width: 85% !important;
+    padding: 0.75rem 0.9rem !important;
   }
 
   .glass-hero-combined .hero-title-glass {
-    font-size: 1rem !important;
-    margin-bottom: 0.6rem;
+    font-size: 0.95rem !important;
+    margin-bottom: 0.5rem;
   }
 
   .glass-hero-combined .hero-services-label {
-    font-size: 0.6rem !important;
+    font-size: 0.55rem !important;
+    margin-bottom: 0.2rem;
   }
 
   .glass-hero-combined .hero-slide {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
+    line-height: 1.35;
+  }
+
+  .glass-hero-combined .hero-slider {
+    margin-top: 0.6rem;
+  }
+
+  .glass-hero-combined .hero-dots {
+    margin-top: 0.5rem;
   }
 
   .video-hero-content.hero-split-layout {
-    min-height: 60vh;
+    min-height: 65vh;
     padding-bottom: 1.5rem;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  /* Fix video zoom for very small screens */
+  .video-hero-bg {
+    transform: scale(1.02);
   }
 
   .hero-split-layout {
     gap: 1rem;
   }
 
+  /* Dots same size as 768px - small and consistent */
   .hero-dot {
-    width: 8px !important;
-    height: 8px !important;
+    width: 5px !important;
+    height: 5px !important;
     border-width: 1px !important;
-  }
-
-  .hero-dot.active {
-    transform: scale(1.15) !important;
   }
 
   .membership-progress-bar {
@@ -6303,5 +6096,123 @@ img[data-src] {
 
   .glass-hero-story-card {
     max-width: 240px;
+  }
+}
+
+/* ============================================
+   HERO CANONICAL OVERRIDES
+   Keep homepage hero card bottom-centered and dots consistent on mobile
+   ============================================ */
+
+#hero.video-hero {
+  align-items: flex-end;
+}
+
+#hero.video-hero .video-hero-content.hero-split-layout {
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 74vh;
+  padding-bottom: 2rem;
+}
+
+#hero .glass-hero-combined {
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: clamp(300px, 86vw, 520px);
+}
+
+#hero .hero-dots,
+#why .hero-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+#hero .hero-dot,
+#why .hero-dot {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  aspect-ratio: 1 / 1;
+  width: 6px;
+  height: 6px;
+  min-width: 6px;
+  min-height: 6px;
+  max-width: 6px;
+  max-height: 6px;
+  flex: 0 0 6px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: transparent;
+  line-height: 0;
+  font-size: 0;
+  transform: none;
+}
+
+#hero .hero-dot.active,
+#why .hero-dot.active {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+#hero .hero-dot:hover,
+#why .hero-dot:hover,
+#hero .hero-dot:focus-visible,
+#why .hero-dot:focus-visible {
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  #hero.video-hero .video-hero-content.hero-split-layout {
+    min-height: 70vh;
+    padding-bottom: 1.6rem;
+  }
+
+  #hero .glass-hero-combined {
+    max-width: min(88vw, 420px);
+    padding: 0.95rem 1.1rem;
+  }
+
+  #hero .hero-dot,
+  #why .hero-dot {
+    width: 5px;
+    height: 5px;
+    min-width: 5px;
+    min-height: 5px;
+    max-width: 5px;
+    max-height: 5px;
+    flex-basis: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  #hero.video-hero .video-hero-content.hero-split-layout {
+    min-height: 66vh;
+    padding-bottom: 1.4rem;
+  }
+
+  #hero .glass-hero-combined {
+    max-width: 89vw;
+    padding: 0.82rem 0.95rem;
+  }
+
+  #hero .glass-hero-combined .hero-title-glass {
+    white-space: normal;
+    font-size: clamp(1rem, 4.6vw, 1.15rem);
+  }
+
+  #hero .glass-hero-combined .hero-services-label {
+    white-space: normal;
+    font-size: 0.58rem;
+    line-height: 1.35;
+  }
+
+  #hero .glass-hero-combined .hero-slide {
+    font-size: 0.74rem;
+    line-height: 1.34;
   }
 }
