@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Onevia | Patient Portal</title>
+    <meta
+      name="description"
+      content="Onevia patient portal access point for upcoming chart access, secure messaging, and care follow-ups."
+    />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body class="portal-login-page">
+    <header class="topbar" id="top">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="Onevia">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text brand-text-lg">Onevia</span>
+        </a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav-links" id="nav-links">
+          <a href="index.html#savings">Savings</a>
+          <div class="nav-dropdown">
+            <a class="nav-dropdown-link" href="index.html#why">Why Onevia</a>
+            <button class="nav-dropdown-toggle" type="button" aria-label="Open Why Onevia menu" aria-expanded="false">
+              <span aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="about.html">Our Story</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <a class="nav-dropdown-link" href="services.html">Services</a>
+            <button class="nav-dropdown-toggle" type="button" aria-label="Open Services menu" aria-expanded="false">
+              <span aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="services.html">All Services</a>
+              <a href="services.html#primary-care">Primary Care</a>
+              <a href="services.html#rx">Pharmacy</a>
+              <a href="services.html#dental">Dental</a>
+              <a href="services.html#vision">Vision</a>
+            </div>
+          </div>
+          <a href="index.html#testimonials">Patient Stories</a>
+          <a href="index.html#faq">FAQ</a>
+        </nav>
+        <a class="btn btn-primary nav-cta" href="locations.html">Find Your Clinic</a>
+        <a class="text-link nav-portal-inline" href="patient-portal.html">Patient Portal</a>
+      </div>
+    </header>
+
+    <main class="portal-login-main">
+      <section class="portal-login-shell">
+        <div class="container">
+          <div class="portal-login-card" data-reveal>
+            <span class="badge">Patient Portal</span>
+            <h1>Sign in to your portal.</h1>
+            <p class="muted">Use your Onevia account credentials to access your chart and secure messages.</p>
+
+            <form class="portal-login-form" action="#" method="post">
+              <label for="portal-email">Email</label>
+              <input id="portal-email" name="email" type="email" autocomplete="email" required />
+
+              <label for="portal-password">Password</label>
+              <input id="portal-password" name="password" type="password" autocomplete="current-password" required />
+
+              <div class="portal-login-row">
+                <label class="portal-remember">
+                  <input type="checkbox" name="remember" />
+                  <span>Remember me</span>
+                </label>
+                <a href="#" class="portal-link">Forgot password?</a>
+              </div>
+
+              <button class="btn btn-primary portal-login-submit" type="submit">Sign In</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-bottom">
+        <p>&copy; 2026 Onevia. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

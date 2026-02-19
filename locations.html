@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Onevia | Find Your Clinic</title>
-    <meta name="description" content="Find an Onevia direct primary care clinic near you. Locations in Missoula, Bozeman, and Billings, Montana. Membership starts at $100/month." />
+    <meta
+      name="description"
+      content="Find a Onevia clinic near you. Explore open and upcoming Montana locations, compare services, and choose the clinic that fits your care goals."
+    />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,48 +31,97 @@
         </button>
         <nav class="nav-links" id="nav-links">
           <a href="index.html#savings">Savings</a>
-          <a href="index.html#why">Why Onevia</a>
-          <a href="services.html">Services</a>
+          <div class="nav-dropdown">
+            <a class="nav-dropdown-link" href="index.html#why">Why Onevia</a>
+            <button class="nav-dropdown-toggle" type="button" aria-label="Open Why Onevia menu" aria-expanded="false">
+              <span aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="about.html">Our Story</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <a class="nav-dropdown-link" href="services.html">Services</a>
+            <button class="nav-dropdown-toggle" type="button" aria-label="Open Services menu" aria-expanded="false">
+              <span aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="services.html">All Services</a>
+              <a href="services.html#primary-care">Primary Care</a>
+              <a href="services.html#rx">Pharmacy</a>
+              <a href="services.html#dental">Dental</a>
+              <a href="services.html#vision">Vision</a>
+            </div>
+          </div>
           <a href="index.html#testimonials">Patient Stories</a>
           <a href="index.html#faq">FAQ</a>
         </nav>
-        <a class="btn btn-primary nav-cta" href="#locations-grid">Search Clinics</a>
+        <a class="btn btn-primary nav-cta" href="locations.html">Find Your Clinic</a>
+        <a class="text-link nav-portal-inline" href="patient-portal.html">Patient Portal</a>
       </div>
     </header>
 
-    <main>
-      <section class="signup-hero" id="locations">
-        <div class="container">
-          <span class="badge">Our Clinics</span>
-          <h1>Find your Onevia clinic.</h1>
-          <p class="muted">Browse all locations, search by city or service, and find the clinic closest to you.</p>
+    <main class="locations-hub">
+      <section class="locations-hero-v2" id="locations">
+        <div class="container locations-hero-grid">
+          <div class="locations-hero-copy" data-reveal>
+            <span class="badge">Find Your Clinic</span>
+            <h1>Choose the Onevia clinic that fits your life.</h1>
+            <p class="muted">
+              Every location follows the same Onevia model: faster access, longer visits, and transparent pricing.
+              Search by city or service and start where care is strongest for you.
+            </p>
+            <div class="locations-hero-points">
+              <span>Same model, city by city</span>
+              <span>Service availability by clinic</span>
+              <span>Fast path to enrollment</span>
+            </div>
+          </div>
+          <aside class="locations-hero-card" data-reveal>
+            <h3>What you can do here</h3>
+            <ul>
+              <li>See which services are live in each clinic</li>
+              <li>Filter by Primary Care, Pharmacy, Dental, or Vision</li>
+              <li>Open your clinic page and continue enrollment</li>
+            </ul>
+            <a class="btn btn-primary" href="#locations-grid">Start searching</a>
+          </aside>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section locations-results-section" id="locations-grid">
         <div class="container">
-          <!-- Search and Filter Bar -->
-          <div class="locations-search-bar">
-            <input
-              type="text"
-              id="location-search"
-              placeholder="Search by city or service..."
-              aria-label="Search locations"
-            />
-            <div class="filter-chips">
-              <button class="filter-chip active" data-filter="all">All Locations</button>
-              <button class="filter-chip" data-filter="open">Open Now</button>
-              <button class="filter-chip" data-filter="planned">Coming Soon</button>
-              <button class="filter-chip" data-filter="primary-care">Primary Care</button>
-              <button class="filter-chip" data-filter="pharmacy">Pharmacy</button>
-              <button class="filter-chip" data-filter="dental">Dental</button>
-              <button class="filter-chip" data-filter="vision">Vision</button>
+          <div class="locations-search-shell" data-reveal>
+            <div class="locations-search-head">
+              <h2>Search clinics by city or service.</h2>
+              <p>Use filters to match the clinic to the services you want in your membership.</p>
+            </div>
+
+            <div class="locations-search-bar">
+              <input
+                type="text"
+                id="location-search"
+                class="location-search-input"
+                placeholder="Search by city, service, or clinic..."
+                aria-label="Search locations"
+              />
+              <div class="filter-chips">
+                <button class="filter-chip active" data-filter="all">All Locations</button>
+                <button class="filter-chip" data-filter="open">Open Now</button>
+                <button class="filter-chip" data-filter="planned">Coming Soon</button>
+                <button class="filter-chip" data-filter="primary-care">Primary Care</button>
+                <button class="filter-chip" data-filter="pharmacy">Pharmacy</button>
+                <button class="filter-chip" data-filter="dental">Dental</button>
+                <button class="filter-chip" data-filter="vision">Vision</button>
+              </div>
+            </div>
+
+            <div class="location-count" id="location-count" style="display: none;">
+              <p id="location-count-text"></p>
             </div>
           </div>
 
-          <!-- Location Cards Grid -->
-          <div class="location-cards-grid" id="locations-grid">
-            <!-- Missoula - Open (4 services) -->
+          <div class="location-cards-grid" id="location-cards-container">
             <a
               href="missoula/index.html"
               class="location-card"
@@ -87,17 +139,21 @@
                 </div>
               </div>
               <div class="location-card-content">
+                <div class="location-card-meta">
+                  <span class="location-status-pill">Now Open</span>
+                  <span class="distance-badge" data-location-distance="missoula"></span>
+                </div>
+                <p class="location-card-copy">Full ecosystem access across Primary Care, Pharmacy, Dental, and Vision.</p>
                 <div class="services-available">
                   <span class="service-badge">Primary Care</span>
                   <span class="service-badge">Pharmacy</span>
                   <span class="service-badge">Dental</span>
                   <span class="service-badge">Vision</span>
                 </div>
-                <span class="distance-badge" data-location-distance="missoula"></span>
+                <span class="location-card-link">Open clinic page &#8594;</span>
               </div>
             </a>
 
-            <!-- Bozeman - Open (3 services) -->
             <a
               href="bozeman/index.html"
               class="location-card"
@@ -115,16 +171,20 @@
                 </div>
               </div>
               <div class="location-card-content">
+                <div class="location-card-meta">
+                  <span class="location-status-pill">Now Open</span>
+                  <span class="distance-badge" data-location-distance="bozeman"></span>
+                </div>
+                <p class="location-card-copy">Primary Care, Pharmacy, and Dental available today.</p>
                 <div class="services-available">
                   <span class="service-badge">Primary Care</span>
                   <span class="service-badge">Pharmacy</span>
                   <span class="service-badge">Dental</span>
                 </div>
-                <span class="distance-badge" data-location-distance="bozeman"></span>
+                <span class="location-card-link">Open clinic page &#8594;</span>
               </div>
             </a>
 
-            <!-- Billings - Open (2 services) -->
             <a
               href="billings/index.html"
               class="location-card"
@@ -142,15 +202,19 @@
                 </div>
               </div>
               <div class="location-card-content">
+                <div class="location-card-meta">
+                  <span class="location-status-pill">Now Open</span>
+                  <span class="distance-badge" data-location-distance="billings"></span>
+                </div>
+                <p class="location-card-copy">Primary Care and Pharmacy with transparent monthly membership.</p>
                 <div class="services-available">
                   <span class="service-badge">Primary Care</span>
                   <span class="service-badge">Pharmacy</span>
                 </div>
-                <span class="distance-badge" data-location-distance="billings"></span>
+                <span class="location-card-link">Open clinic page &#8594;</span>
               </div>
             </a>
 
-            <!-- Great Falls - Planned (1 service) -->
             <a
               href="greatfalls/index.html"
               class="location-card"
@@ -165,28 +229,41 @@
                 <img src="assets/images/building.jpg" alt="Onevia Great Falls coming soon" loading="lazy" />
                 <div class="location-card-glass-overlay">
                   <h3>Onevia - Great Falls</h3>
-                  <span class="location-badge-coming-soon">Coming Soon</span>
                 </div>
               </div>
               <div class="location-card-content">
+                <div class="location-card-meta">
+                  <span class="location-status-pill location-status-pill-planned">Coming Soon</span>
+                  <span class="distance-badge" data-location-distance="greatfalls"></span>
+                </div>
+                <p class="location-card-copy">Planned launch with Primary Care, then staged service expansion.</p>
                 <div class="services-available">
                   <span class="service-badge">Primary Care</span>
                 </div>
-                <span class="distance-badge" data-location-distance="greatfalls"></span>
+                <span class="location-card-link">Open clinic page &#8594;</span>
               </div>
             </a>
           </div>
 
-          <!-- No Results Message -->
           <div class="no-results-message" id="no-results" style="display: none;">
             <p>No locations match your search.</p>
             <button class="btn btn-secondary" onclick="resetFilters()">Reset filters</button>
           </div>
 
-          <!-- Location Count Display -->
-          <div class="location-count" id="location-count" style="display: none;">
-            <p id="location-count-text"></p>
-          </div>
+          <section class="nearby-results" id="nearby-results" style="display: none;">
+            <div class="nearby-results-head">
+              <h3>Closest clinics to <span id="nearby-title-query">your search</span></h3>
+              <p>
+                We may not be in that exact city yet. Here are the two nearest Onevia clinics available right now.
+              </p>
+            </div>
+            <div class="nearby-results-grid" id="nearby-results-grid"></div>
+            <article class="new-clinic-card">
+              <h4>Want Onevia in your city?</h4>
+              <p>Tell us where you want to see the next clinic and our expansion team will follow up.</p>
+              <a class="btn btn-primary" href="waitlist.html">Request a New Clinic</a>
+            </article>
+          </section>
         </div>
       </section>
     </main>
@@ -198,7 +275,6 @@
           <a href="index.html#savings">Savings</a>
           <a href="index.html#why">Why Onevia</a>
           <a href="about.html">Our Story</a>
-          <a href="index.html#testimonials">Patient Stories</a>
           <a href="index.html#faq">FAQ</a>
         </div>
         <div>
@@ -209,11 +285,9 @@
           <a href="services.html#vision">Vision</a>
         </div>
         <div>
-          <h4>Locations</h4>
-          <a href="locations.html">Find a Clinic</a>
-          <a href="missoula/index.html">Missoula</a>
-          <a href="bozeman/index.html">Bozeman</a>
-          <a href="billings/index.html">Billings</a>
+          <h4>Care Access</h4>
+          <a href="locations.html">Find Your Clinic</a>
+          <a href="patient-portal.html">Patient Portal</a>
         </div>
         <div>
           <h4>Contact</h4>
@@ -222,7 +296,7 @@
         </div>
       </div>
       <div class="container footer-bottom">
-        <p>(c) 2026 Onevia. All rights reserved.</p>
+        <p>&copy; 2026 Onevia. All rights reserved.</p>
       </div>
     </footer>
 

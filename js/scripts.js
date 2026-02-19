@@ -6,16 +6,51 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelector('.nav-links');
 
   if (menuToggle && navLinks) {
+    const closeDropdowns = () => {
+      navLinks.querySelectorAll('.nav-dropdown.is-open').forEach((dropdown) => {
+        dropdown.classList.remove('is-open');
+        const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+        if (toggle) {
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    };
+
+    navLinks.querySelectorAll('.nav-dropdown-toggle').forEach((toggle) => {
+      toggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const dropdown = toggle.closest('.nav-dropdown');
+        if (!dropdown) return;
+        const willOpen = !dropdown.classList.contains('is-open');
+        closeDropdowns();
+        if (willOpen) {
+          dropdown.classList.add('is-open');
+          toggle.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
     menuToggle.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('is-open');
       menuToggle.setAttribute('aria-expanded', String(isOpen));
+      if (!isOpen) {
+        closeDropdowns();
+      }
     });
 
     navLinks.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('is-open');
         menuToggle.setAttribute('aria-expanded', 'false');
+        closeDropdowns();
       });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
+        closeDropdowns();
+      }
     });
   }
 
@@ -121,32 +156,31 @@ document.addEventListener('DOMContentLoaded', () => {
     setPlan('individual');
   }
 
-  const FAMILY_DISCOUNT = 0.25;
-  const FAMILY_SIZE = 4;
-  const defaultMembership = {
+  const createDefaultMembership = () => ({
     plan: {
-      key: 'individual',
-      label: 'Individual membership',
-      price: 100,
+      key: 'standard',
+      label: 'Standard',
     },
     addons: {
+      primary_adult: { label: 'Adult Primary Care (18+)', price: 100, selected: false },
+      primary_child: { label: 'Child Primary Care', price: 50, selected: false },
       rx: { label: 'Pharmacy', price: 25, selected: false },
       dental: { label: 'Dental', price: 40, selected: false },
       vision: { label: 'Vision', price: 10, selected: false },
     },
-  };
+  });
   const planDefaults = {
-    individual: { label: 'Individual membership', price: 100 },
-    family: { label: 'Family membership (2 adults + 2 kids)', price: 300 },
+    standard: { label: 'Standard' },
   };
 
   const loadMembership = () => {
     try {
+      const defaultMembership = createDefaultMembership();
       const storedRaw = localStorage.getItem(STORAGE_KEY) || getCookie(STORAGE_KEY);
       const stored = storedRaw ? JSON.parse(storedRaw) : null;
-      if (!stored) return { ...defaultMembership };
+      if (!stored) return defaultMembership;
       const storedPlan = stored.plan || {};
-      const planKey = storedPlan.key || defaultMembership.plan.key;
+      const planKey = planDefaults[storedPlan.key] ? storedPlan.key : defaultMembership.plan.key;
       const normalizedPlan = {
         ...defaultMembership.plan,
         ...storedPlan,
@@ -154,20 +188,33 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       if (planDefaults[planKey]) {
         normalizedPlan.label = planDefaults[planKey].label;
-        normalizedPlan.price = planDefaults[planKey].price;
       }
 
       const storedAddons = stored.addons || {};
+      const legacyPrimarySelection =
+        typeof storedAddons.primary?.selected === 'boolean'
+          ? storedAddons.primary.selected
+          : undefined;
+      const getStoredSelection = (key, fallback = defaultMembership.addons[key]?.selected) =>
+        typeof storedAddons[key]?.selected === 'boolean'
+          ? storedAddons[key].selected
+          : fallback;
+
       return {
         plan: normalizedPlan,
         addons: {
-          rx: { ...defaultMembership.addons.rx, selected: Boolean(storedAddons.rx?.selected) },
-          dental: { ...defaultMembership.addons.dental, selected: Boolean(storedAddons.dental?.selected) },
-          vision: { ...defaultMembership.addons.vision, selected: Boolean(storedAddons.vision?.selected) },
+          primary_adult: {
+            ...defaultMembership.addons.primary_adult,
+            selected: getStoredSelection('primary_adult', legacyPrimarySelection ?? defaultMembership.addons.primary_adult.selected),
+          },
+          primary_child: { ...defaultMembership.addons.primary_child, selected: getStoredSelection('primary_child') },
+          rx: { ...defaultMembership.addons.rx, selected: getStoredSelection('rx') },
+          dental: { ...defaultMembership.addons.dental, selected: getStoredSelection('dental') },
+          vision: { ...defaultMembership.addons.vision, selected: getStoredSelection('vision') },
         },
       };
     } catch (error) {
-      return { ...defaultMembership };
+      return createDefaultMembership();
     }
   };
 
@@ -182,11 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const getAddonPrice = (addon, planKey) => {
-    const basePrice = Number(addon.price || 0);
-    if (planKey === 'family') {
-      return basePrice * FAMILY_SIZE * (1 - FAMILY_DISCOUNT);
-    }
-    return basePrice;
+    return Number(addon.price || 0);
   };
 
   const updateSummary = (data) => {
@@ -197,22 +240,26 @@ document.addEventListener('DOMContentLoaded', () => {
     orderItems.innerHTML = '';
     let total = 0;
     const planKey = data.plan?.key;
+    const addonOrder = ['primary_adult', 'primary_child', 'rx', 'dental', 'vision'];
+    let selectedCount = 0;
 
-    if (data.plan) {
-      total += Number(data.plan.price || 0);
-      const li = document.createElement('li');
-      li.innerHTML = `<span>${data.plan.label}</span><span>$${formatPrice(data.plan.price)}</span>`;
-      orderItems.appendChild(li);
-    }
-
-    Object.values(data.addons || {}).forEach((addon) => {
+    addonOrder.forEach((addonKey) => {
+      const addon = data.addons?.[addonKey];
+      if (!addon) return;
       if (!addon.selected) return;
       const addonPrice = getAddonPrice(addon, planKey);
       total += addonPrice;
       const li = document.createElement('li');
       li.innerHTML = `<span>${addon.label}</span><span>$${formatPrice(addonPrice)}</span>`;
       orderItems.appendChild(li);
+      selectedCount += 1;
     });
+
+    if (!selectedCount) {
+      const li = document.createElement('li');
+      li.innerHTML = '<span>Select at least one service</span><span>$0</span>';
+      orderItems.appendChild(li);
+    }
 
     orderTotal.textContent = `$${formatPrice(total)} / month`;
   };
@@ -230,10 +277,27 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const membershipData = loadMembership();
+  const primaryAddonKeys = ['primary_adult', 'primary_child'];
+  let membershipDataNormalized = false;
+  if (
+    membershipData.addons?.primary_adult?.selected &&
+    membershipData.addons?.primary_child?.selected
+  ) {
+    membershipData.addons.primary_child.selected = false;
+    membershipDataNormalized = true;
+  }
   const urlParams = new URLSearchParams(window.location.search);
   const addParam = urlParams.get('add');
   if (addParam && membershipData.addons[addParam]) {
     membershipData.addons[addParam].selected = true;
+    if (addParam === 'primary_adult') {
+      membershipData.addons.primary_child.selected = false;
+    } else if (addParam === 'primary_child') {
+      membershipData.addons.primary_adult.selected = false;
+    }
+    membershipDataNormalized = true;
+  }
+  if (membershipDataNormalized) {
     saveMembership(membershipData);
   }
 
@@ -246,8 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!input.checked) return;
       membershipData.plan = {
         key: input.dataset.planKey,
-        label: input.dataset.label || 'Membership',
-        price: Number(input.dataset.price || 0),
+        label: input.dataset.label || 'Pricing mode',
       };
       saveMembership(membershipData);
       updateSummary(membershipData);
@@ -263,6 +326,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     input.addEventListener('change', () => {
       if (!membershipData.addons[key]) return;
+
+      // Adult and Child primary care are mutually exclusive, but both can be off.
+      if (primaryAddonKeys.includes(key) && input.checked) {
+        primaryAddonKeys.forEach((primaryKey) => {
+          if (primaryKey === key || !membershipData.addons[primaryKey]) return;
+          membershipData.addons[primaryKey].selected = false;
+          const relatedInput = document.querySelector(`[data-addon-key="${primaryKey}"]`);
+          if (relatedInput) {
+            relatedInput.checked = false;
+          }
+        });
+      }
+
       membershipData.addons[key].selected = input.checked;
       saveMembership(membershipData);
       updateSummary(membershipData);
@@ -342,11 +418,293 @@ if (document.getElementById('location-search')) {
   const locationCountContainer = document.getElementById('location-count');
   const locationCountText = document.getElementById('location-count-text');
   const noResults = document.getElementById('no-results');
+  const nearbyResults = document.getElementById('nearby-results');
+  const nearbyTitleQuery = document.getElementById('nearby-title-query');
+  const nearbyResultsGrid = document.getElementById('nearby-results-grid');
   const totalLocations = locationCards.length;
 
   const STATUS_FILTERS = new Set(['open', 'planned']);
   const SERVICE_FILTERS = new Set(['primary-care', 'pharmacy', 'dental', 'vision']);
   let activeFilters = new Set();
+  const geocodeCache = new Map();
+  let nearbyLookupToken = 0;
+  let nearbyLookupTimer = null;
+  const clinicsForLookup = Array.from(locationCards).map((card) => {
+    const title = card.querySelector('.location-card-glass-overlay h3')?.textContent?.trim() || 'Onevia Clinic';
+    return {
+      id: card.dataset.locationId || '',
+      name: title,
+      city: (card.dataset.city || '').toLowerCase(),
+      status: card.dataset.status || '',
+      services: (card.dataset.services || '').split(',').map((value) => value.trim()).filter(Boolean),
+      lat: Number(card.dataset.lat),
+      lon: Number(card.dataset.lon),
+      href: card.getAttribute('href') || '#',
+    };
+  });
+
+  const CITY_COORDINATES = {
+    missoula: { lat: 46.8721, lon: -113.9940 },
+    bozeman: { lat: 45.6770, lon: -111.0429 },
+    billings: { lat: 45.7833, lon: -108.5007 },
+    'great falls': { lat: 47.5002, lon: -111.3008 },
+    helena: { lat: 46.5884, lon: -112.0245 },
+    kalispell: { lat: 48.1958, lon: -114.3124 },
+    butte: { lat: 46.0038, lon: -112.5348 },
+    havre: { lat: 48.5431, lon: -109.6841 },
+    whitefish: { lat: 48.4111, lon: -114.3376 },
+    livingston: { lat: 45.6624, lon: -110.5610 },
+    belgrade: { lat: 45.7769, lon: -111.1763 },
+    hamilton: { lat: 46.2471, lon: -114.1548 },
+    polson: { lat: 47.6936, lon: -114.1632 },
+    laurel: { lat: 45.6691, lon: -108.7707 },
+    sidney: { lat: 47.7161, lon: -104.1563 },
+    glendive: { lat: 47.1052, lon: -104.7125 },
+    hardin: { lat: 45.7314, lon: -107.6120 },
+    lewistown: { lat: 47.0622, lon: -109.4282 },
+    'miles city': { lat: 46.4083, lon: -105.8406 },
+    dillon: { lat: 45.2166, lon: -112.6378 },
+    anaconda: { lat: 46.1285, lon: -112.9426 },
+    'deer lodge': { lat: 46.3958, lon: -112.7306 },
+    'columbia falls': { lat: 48.3725, lon: -114.1818 },
+    libby: { lat: 48.3883, lon: -115.5554 },
+    shelby: { lat: 48.5075, lon: -111.8558 },
+    ronan: { lat: 47.5291, lon: -114.1018 },
+    'st ignatius': { lat: 47.3183, lon: -114.1063 },
+    stevensville: { lat: 46.5099, lon: -114.0937 },
+    lolo: { lat: 46.7583, lon: -114.0834 },
+    bigfork: { lat: 48.0633, lon: -114.0720 },
+    'red lodge': { lat: 45.1858, lon: -109.2465 },
+    chinook: { lat: 48.5919, lon: -109.2299 },
+    browning: { lat: 48.5569, lon: -113.0151 },
+    'wolf point': { lat: 48.0906, lon: -105.6406 },
+    roundup: { lat: 46.4458, lon: -108.5418 },
+    ennis: { lat: 45.3488, lon: -111.7316 },
+    'west yellowstone': { lat: 44.6621, lon: -111.1041 },
+    cutbank: { lat: 48.6336, lon: -112.3375 },
+    'cut bank': { lat: 48.6336, lon: -112.3375 },
+    plains: { lat: 47.4607, lon: -114.8821 },
+    thompsonfalls: { lat: 47.5941, lon: -115.3452 },
+    'thompson falls': { lat: 47.5941, lon: -115.3452 },
+    colstrip: { lat: 45.8844, lon: -106.6239 },
+    harlowton: { lat: 46.4350, lon: -109.8343 },
+    'two dot': { lat: 46.4194, lon: -110.0490 },
+    superior: { lat: 47.1916, lon: -114.8916 },
+    darby: { lat: 46.0233, lon: -114.1784 },
+    eureka: { lat: 48.8791, lon: -115.0530 },
+    rexford: { lat: 48.9029, lon: -115.2093 },
+    wilsall: { lat: 46.0391, lon: -110.6520 },
+  };
+
+  const ZIP_COORDINATES = {
+    '59801': { lat: 46.8536, lon: -114.0210 },
+    '59802': { lat: 46.8877, lon: -113.9931 },
+    '59715': { lat: 45.6769, lon: -111.0429 },
+    '59101': { lat: 45.7833, lon: -108.5007 },
+    '59401': { lat: 47.5002, lon: -111.3008 },
+    '59601': { lat: 46.5884, lon: -112.0245 },
+    '59901': { lat: 48.1958, lon: -114.3124 },
+    '59701': { lat: 46.0038, lon: -112.5348 },
+  };
+
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+  }
+
+  function titleCase(value) {
+    return value
+      .split(' ')
+      .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : word))
+      .join(' ');
+  }
+
+  function normalizeSearchValue(value) {
+    return value.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+  }
+
+  function haversineMiles(lat1, lon1, lat2, lon2) {
+    const toRadians = (degrees) => degrees * (Math.PI / 180);
+    const radiusMiles = 3959;
+    const dLat = toRadians(lat2 - lat1);
+    const dLon = toRadians(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return radiusMiles * c;
+  }
+
+  function hideNearbyResults() {
+    if (nearbyResults) {
+      nearbyResults.style.display = 'none';
+    }
+    if (nearbyResultsGrid) {
+      nearbyResultsGrid.innerHTML = '';
+    }
+  }
+
+  function setNoResultsVisible(visible) {
+    if (noResults) {
+      noResults.style.display = visible ? 'block' : 'none';
+    }
+  }
+
+  async function geocodeSearchTerm(searchTerm) {
+    const normalized = normalizeSearchValue(searchTerm);
+    if (!normalized || normalized.length < 3) return null;
+
+    if (geocodeCache.has(normalized)) {
+      return geocodeCache.get(normalized);
+    }
+
+    const lookupPromise = fetch(
+      `https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=us&limit=5&q=${encodeURIComponent(searchTerm.trim())}`,
+      { headers: { 'Accept-Language': 'en-US,en' } }
+    )
+      .then(async (response) => {
+        if (!response.ok) return null;
+        const payload = await response.json();
+        if (!Array.isArray(payload) || !payload.length) return null;
+
+        const preferred =
+          payload.find((item) => {
+            const type = String(item.type || '').toLowerCase();
+            return ['city', 'town', 'village', 'hamlet', 'administrative', 'county', 'postcode', 'suburb'].includes(type);
+          }) || payload[0];
+
+        const lat = Number(preferred.lat);
+        const lon = Number(preferred.lon);
+        if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+        return { lat, lon };
+      })
+      .catch(() => null);
+
+    geocodeCache.set(normalized, lookupPromise);
+    const resolved = await lookupPromise;
+    geocodeCache.set(normalized, resolved);
+    return resolved;
+  }
+
+  async function resolveSearchCoordinates(rawSearchTerm) {
+    const normalized = normalizeSearchValue(rawSearchTerm);
+    if (!normalized) return null;
+
+    if (/^\d{5}$/.test(normalized) && ZIP_COORDINATES[normalized]) {
+      return ZIP_COORDINATES[normalized];
+    }
+
+    if (CITY_COORDINATES[normalized]) {
+      return CITY_COORDINATES[normalized];
+    }
+
+    for (const [city, coords] of Object.entries(CITY_COORDINATES)) {
+      if (normalized.includes(city) || city.includes(normalized)) {
+        return coords;
+      }
+    }
+
+    return geocodeSearchTerm(rawSearchTerm);
+  }
+
+  function scheduleNearbyLookup(searchTerm, activeStatusFilters, activeServiceFilters, visibleCount, hasCriteria) {
+    if (nearbyLookupTimer) {
+      window.clearTimeout(nearbyLookupTimer);
+    }
+    nearbyLookupTimer = window.setTimeout(() => {
+      void renderNearbyResults(searchTerm, activeStatusFilters, activeServiceFilters, visibleCount, hasCriteria);
+    }, 180);
+  }
+
+  async function renderNearbyResults(searchTerm, activeStatusFilters, activeServiceFilters, visibleCount, hasCriteria) {
+    const currentLookup = ++nearbyLookupToken;
+    if (!nearbyResults || !nearbyResultsGrid || !nearbyTitleQuery) {
+      setNoResultsVisible(visibleCount === 0 && hasCriteria);
+      return;
+    }
+
+    if (!hasCriteria) {
+      hideNearbyResults();
+      setNoResultsVisible(false);
+      return;
+    }
+
+    if (visibleCount > 0) {
+      hideNearbyResults();
+      setNoResultsVisible(false);
+      return;
+    }
+
+    if (!searchTerm || searchTerm.length < 3) {
+      hideNearbyResults();
+      setNoResultsVisible(true);
+      return;
+    }
+
+    setNoResultsVisible(false);
+    const coords = await resolveSearchCoordinates(searchTerm);
+    if (currentLookup !== nearbyLookupToken) return;
+
+    if (!coords) {
+      hideNearbyResults();
+      setNoResultsVisible(true);
+      return;
+    }
+
+    const rankedClinics = clinicsForLookup
+      .filter((clinic) => Number.isFinite(clinic.lat) && Number.isFinite(clinic.lon))
+      .filter((clinic) => {
+        if (activeStatusFilters.length > 0 && !activeStatusFilters.includes(clinic.status)) {
+          return false;
+        }
+        if (activeServiceFilters.length > 0) {
+          return activeServiceFilters.every((serviceFilter) => clinic.services.includes(serviceFilter));
+        }
+        return true;
+      })
+      .map((clinic) => ({
+        ...clinic,
+        distance: haversineMiles(coords.lat, coords.lon, clinic.lat, clinic.lon),
+      }))
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, 2);
+
+    if (!rankedClinics.length) {
+      hideNearbyResults();
+      setNoResultsVisible(true);
+      return;
+    }
+
+    const userQuery = searchInput.value.trim();
+    nearbyTitleQuery.textContent = userQuery || 'your search';
+    nearbyResultsGrid.innerHTML = rankedClinics.map((clinic) => {
+      const distance = Math.round(clinic.distance);
+      const statusLabel = clinic.status === 'planned' ? 'Coming Soon' : 'Open Now';
+      const services = clinic.services
+        .map((service) => `<span class="service-badge">${escapeHtml(titleCase(service.replace('-', ' ')))}</span>`)
+        .join('');
+
+      return `
+        <article class="nearby-clinic-card">
+          <div class="nearby-clinic-meta">
+            <h4>${escapeHtml(clinic.name)}</h4>
+            <span class="location-status-pill${clinic.status === 'planned' ? ' location-status-pill-planned' : ''}">${statusLabel}</span>
+          </div>
+          <p>${distance} miles away</p>
+          <div class="services-available">${services}</div>
+          <a class="text-link" href="${escapeHtml(clinic.href)}">View clinic &#8594;</a>
+        </article>
+      `;
+    }).join('');
+
+    nearbyResults.style.display = 'block';
+    setNoResultsVisible(false);
+  }
 
   function updateChipVisuals() {
     const allChip = document.querySelector('.filter-chip[data-filter="all"]');
@@ -395,7 +753,8 @@ if (document.getElementById('location-search')) {
   });
 
   function runFilter() {
-    const searchTerm = searchInput.value.toLowerCase().trim();
+    const searchTerm = searchInput.value.trim();
+    const searchTermLower = searchTerm.toLowerCase();
     let visibleCount = 0;
 
     // Separate active filters into status and service groups
@@ -413,7 +772,7 @@ if (document.getElementById('location-search')) {
       if (searchTerm) {
         const cardText = card.textContent.toLowerCase();
         const cardCity = (card.dataset.city || '').toLowerCase();
-        if (!cardText.includes(searchTerm) && !cardCity.includes(searchTerm)) {
+        if (!cardText.includes(searchTermLower) && !cardCity.includes(searchTermLower)) {
           showCard = false;
         }
       }
@@ -453,10 +812,8 @@ if (document.getElementById('location-search')) {
     });
 
     updateLocationCount(visibleCount);
-
-    if (noResults) {
-      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
-    }
+    const hasCriteria = activeFilters.size > 0 || Boolean(searchTerm);
+    scheduleNearbyLookup(searchTerm, activeStatusFilters, activeServiceFilters, visibleCount, hasCriteria);
   }
 
   // Reset filters (global for button onclick)
@@ -1294,16 +1651,10 @@ window.addEventListener('scroll', () => {
   if (!ticking) {
     window.requestAnimationFrame(() => {
       const currentScrollY = window.scrollY;
-      const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
-
-      // Add scroll direction class to header for hiding/showing on scroll
       const header = document.querySelector('.topbar');
       if (header && window.innerWidth <= 768) {
-        if (scrollDirection === 'down' && currentScrollY > 100) {
-          header.style.transform = 'translateY(-100%)';
-        } else if (scrollDirection === 'up') {
-          header.style.transform = 'translateY(0)';
-        }
+        // Keep top navigation persistently visible on mobile.
+        header.style.transform = 'translateY(0)';
       }
 
       lastScrollY = currentScrollY;
@@ -1472,7 +1823,7 @@ function updateMembershipNavigation() {
       if (nextStep.service && serviceNames[nextStep.service]) {
         nextLink.textContent = `Next: ${serviceNames[nextStep.service]}`;
       } else if (nextStep.page === 'membership-details.html') {
-        nextLink.textContent = 'Next: Your Details';
+        nextLink.textContent = 'Next: View your Details';
       }
     }
   }
@@ -1490,7 +1841,7 @@ document.addEventListener('DOMContentLoaded', () => {
    HERO SLIDER - AUTO-ROTATING TAGLINES
    ============================================ */
 
-function initHeroSlider(sliderId, dotsId, interval) {
+function initHeroSlider(sliderId, dotsId, interval, options = {}) {
   const slider = document.getElementById(sliderId);
   const dotsContainer = document.getElementById(dotsId);
   if (!slider || !dotsContainer) return null;
@@ -1499,15 +1850,31 @@ function initHeroSlider(sliderId, dotsId, interval) {
   const dots = dotsContainer.querySelectorAll('.hero-dot');
   if (slides.length === 0) return null;
 
+  const {
+    onChange = null,
+    enableWheel = false,
+    interactionSelector = null,
+    enableTapCycle = false,
+  } = options;
   let current = 0;
   let timer = null;
 
   function goTo(index) {
     slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
+    if (dots[current]) {
+      dots[current].classList.remove('active');
+    }
     current = index % slides.length;
+    if (current < 0) {
+      current = slides.length - 1;
+    }
     slides[current].classList.add('active');
-    dots[current].classList.add('active');
+    if (dots[current]) {
+      dots[current].classList.add('active');
+    }
+    if (typeof onChange === 'function') {
+      onChange(current);
+    }
   }
 
   function next() {
@@ -1536,21 +1903,269 @@ function initHeroSlider(sliderId, dotsId, interval) {
   slider.addEventListener('mouseenter', stopAutoPlay);
   slider.addEventListener('mouseleave', startAutoPlay);
 
+  if (enableWheel || enableTapCycle) {
+    const explicitTarget = interactionSelector ? document.querySelector(interactionSelector) : null;
+    const wheelTarget = explicitTarget || slider.closest('.glass-hero-tagline-card') || slider;
+    let wheelLocked = false;
+    let touchStartY = null;
+
+    if (enableWheel) {
+      wheelTarget.addEventListener(
+        'wheel',
+        (event) => {
+          if (Math.abs(event.deltaY) < 8 || wheelLocked) return;
+          event.preventDefault();
+          wheelLocked = true;
+          if (event.deltaY > 0) {
+            next();
+          } else {
+            goTo(current - 1);
+          }
+          stopAutoPlay();
+          startAutoPlay();
+          setTimeout(() => {
+            wheelLocked = false;
+          }, 320);
+        },
+        { passive: false }
+      );
+    }
+
+    wheelTarget.addEventListener('touchstart', (event) => {
+      touchStartY = event.touches[0].clientY;
+    });
+
+    wheelTarget.addEventListener('touchend', (event) => {
+      if (touchStartY === null) return;
+      const touchEndY = event.changedTouches[0].clientY;
+      const delta = touchStartY - touchEndY;
+      touchStartY = null;
+      if (Math.abs(delta) < 24) return;
+      if (delta > 0) {
+        next();
+      } else {
+        goTo(current - 1);
+      }
+      stopAutoPlay();
+      startAutoPlay();
+    });
+
+    if (enableTapCycle) {
+      wheelTarget.addEventListener('click', (event) => {
+        if (
+          event.target.closest('.hero-dot') ||
+          event.target.closest('.btn') ||
+          event.target.closest('.text-link') ||
+          event.target.closest('a')
+        ) {
+          return;
+        }
+        next();
+        stopAutoPlay();
+        startAutoPlay();
+      });
+    }
+  }
+
   // Respect reduced motion preference
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!prefersReducedMotion) {
     startAutoPlay();
   }
 
+  if (typeof onChange === 'function') {
+    onChange(0);
+  }
+
   return { goTo, next, startAutoPlay, stopAutoPlay };
+}
+
+function initTestimonialCarousel(trackId, interval = 4800) {
+  const track = document.getElementById(trackId);
+  if (!track) return null;
+
+  const wrap = track.closest('.video-testimonial-track-wrap');
+  const prevButton = document.getElementById('story-prev');
+  const nextButton = document.getElementById('story-next');
+  const slides = Array.from(track.querySelectorAll('.video-testimonial-slide'));
+  if (!slides.length) return null;
+
+  let current = 0;
+  let timer = null;
+  let touchStartX = null;
+  let wheelLocked = false;
+
+  function capVideo(video, onCap) {
+    const maxSeconds = Number(video.dataset.maxSeconds || 0);
+    if (!maxSeconds) return;
+    video.addEventListener('timeupdate', () => {
+      if (video.currentTime >= maxSeconds) {
+        video.pause();
+        video.currentTime = 0;
+        if (typeof onCap === 'function') onCap();
+      }
+    });
+  }
+
+  function stopStoryVideo(slide) {
+    if (!slide) return;
+    const video = slide.querySelector('.video-testimonial-video');
+    if (!video) return;
+    video.pause();
+    video.currentTime = 0;
+  }
+
+  function syncCenterVideo() {
+    slides.forEach((slide, index) => {
+      const video = slide.querySelector('.video-testimonial-video');
+      if (!video) return;
+      const isCenter = index === current;
+      if (isCenter) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+        video.currentTime = 0;
+      }
+    });
+  }
+
+  function applyPositions() {
+    const total = slides.length;
+    slides.forEach((slide, index) => {
+      let relative = index - current;
+      if (relative > total / 2) relative -= total;
+      if (relative < -total / 2) relative += total;
+
+      let position = 'hidden';
+      if (relative === 0) position = 'center';
+      else if (relative === -1) position = 'left-1';
+      else if (relative === -2) position = 'left-2';
+      else if (relative === 1) position = 'right-1';
+      else if (relative === 2) position = 'right-2';
+
+      slide.dataset.position = position;
+      slide.classList.toggle('is-active', position === 'center');
+    });
+  }
+
+  function goTo(index, isManual = false) {
+    const total = slides.length;
+    current = ((index % total) + total) % total;
+    applyPositions();
+    syncCenterVideo();
+    if (isManual) {
+      stopAutoPlay();
+      startAutoPlay();
+    }
+  }
+
+  function next(isManual = false) {
+    goTo(current + 1, isManual);
+  }
+
+  function previous(isManual = false) {
+    goTo(current - 1, isManual);
+  }
+
+  function startAutoPlay() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(() => next(false), interval);
+  }
+
+  function stopAutoPlay() {
+    if (timer) clearInterval(timer);
+  }
+
+  slides.forEach((slide, index) => {
+    const spineButton = slide.querySelector('.story-spine');
+    const video = slide.querySelector('.video-testimonial-video');
+
+    if (spineButton) {
+      spineButton.addEventListener('click', () => {
+        goTo(index, true);
+      });
+    }
+
+    // Clicking a side card promotes it to center.
+    slide.addEventListener('click', (event) => {
+      if (event.target.closest('.video-testimonial-video')) return;
+      if (slide.dataset.position !== 'center') {
+        goTo(index, true);
+      }
+    });
+
+    if (video) {
+      capVideo(video, () => {
+        if (slide.dataset.position === 'center') {
+          video.play().catch(() => {});
+        }
+      });
+    }
+  });
+
+  if (prevButton) {
+    prevButton.addEventListener('click', () => previous(true));
+  }
+
+  if (nextButton) {
+    nextButton.addEventListener('click', () => next(true));
+  }
+
+  if (wrap) {
+    wrap.addEventListener(
+      'wheel',
+      (event) => {
+        const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+        if (Math.abs(delta) < 8 || wheelLocked) return;
+        event.preventDefault();
+        wheelLocked = true;
+        if (delta > 0) {
+          next(true);
+        } else {
+          previous(true);
+        }
+        setTimeout(() => {
+          wheelLocked = false;
+        }, 260);
+      },
+      { passive: false }
+    );
+
+    wrap.addEventListener('touchstart', (event) => {
+      touchStartX = event.touches[0].clientX;
+    });
+
+    wrap.addEventListener('touchend', (event) => {
+      if (touchStartX === null) return;
+      const delta = touchStartX - event.changedTouches[0].clientX;
+      touchStartX = null;
+      if (Math.abs(delta) < 24) return;
+      if (delta > 0) {
+        next(true);
+      } else {
+        previous(true);
+      }
+    });
+
+    wrap.addEventListener('mouseenter', stopAutoPlay);
+    wrap.addEventListener('mouseleave', startAutoPlay);
+  }
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  goTo(0, false);
+  if (!prefersReducedMotion) {
+    startAutoPlay();
+  }
+
+  return { next, previous, goTo, stopAutoPlay, startAutoPlay };
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   // Hero slider (3 taglines, 4s interval)
   initHeroSlider('hero-slider', 'hero-dots', 4000);
 
-  // Why Onevia slider (4 taglines, 5s interval)
-  initHeroSlider('why-slider', 'why-dots', 5000);
+  // Patient stories carousel (bookshelf layout, infinite rotation).
+  initTestimonialCarousel('why-slider', 4800);
 });
 
 // Progress bar functionality for membership flow
@@ -1729,28 +2344,6 @@ function updateDetailsBackButton() {
   backButton.href = previousPage;
 }
 
-// Header hide/show on scroll
-let lastScrollTop = 0;
-let scrollTimer = null;
-
-window.addEventListener('scroll', () => {
-  const header = document.querySelector('.topbar');
-  if (!header) return;
-
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-  // If scrolling down, hide header
-  if (scrollTop > lastScrollTop && scrollTop > 100) {
-    header.classList.add('header-hidden');
-  }
-  // If scrolling up, show header
-  else if (scrollTop < lastScrollTop) {
-    header.classList.remove('header-hidden');
-  }
-
-  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-}, { passive: true });
-
 // Progress bar sticky state detection
 document.addEventListener('DOMContentLoaded', () => {
   const progressBar = document.querySelector('.progress-bar-container');
@@ -1771,4 +2364,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* End of scripts */
-

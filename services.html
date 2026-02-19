@@ -27,71 +27,115 @@
           <span></span>
         </button>
         <nav class="nav-links" id="nav-links">
-          <a href="#primary-care">Primary Care</a>
-          <a href="#rx">Pharmacy</a>
-          <a href="#dental">Dental</a>
-          <a href="#vision">Vision</a>
+          <a href="index.html#savings">Savings</a>
+          <div class="nav-dropdown">
+            <a class="nav-dropdown-link" href="index.html#why">Why Onevia</a>
+            <button class="nav-dropdown-toggle" type="button" aria-label="Open Why Onevia menu" aria-expanded="false">
+              <span aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="about.html">Our Story</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <a class="nav-dropdown-link" href="services.html">Services</a>
+            <button class="nav-dropdown-toggle" type="button" aria-label="Open Services menu" aria-expanded="false">
+              <span aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="services.html">All Services</a>
+              <a href="services.html#primary-care">Primary Care</a>
+              <a href="services.html#rx">Pharmacy</a>
+              <a href="services.html#dental">Dental</a>
+              <a href="services.html#vision">Vision</a>
+            </div>
+          </div>
+          <a href="index.html#testimonials">Patient Stories</a>
+          <a href="index.html#faq">FAQ</a>
         </nav>
-        <a class="btn btn-primary nav-cta" href="locations.html">Find a Clinic</a>
+        <a class="btn btn-primary nav-cta" href="locations.html">Find Your Clinic</a>
+        <a class="text-link nav-portal-inline" href="patient-portal.html">Patient Portal</a>
       </div>
     </header>
 
-    <main>
-      <section class="signup-hero" id="services">
+    <main class="services-hub">
+      <section class="signup-hero services-hero" id="services">
         <div class="container">
           <span class="badge">Services</span>
           <h1>Explore Onevia Services</h1>
           <p class="muted">
-            Each service is designed to deliver more time, more access, and more savings. Build the mix that fits your
-            life, then add services as you grow.
+            One membership model, four coordinated services. Start with primary care, then add Pharmacy, Dental, and
+            Vision based on what your life needs now.
           </p>
         </div>
       </section>
 
-      <section class="section primary-hero" id="primary-care">
-        <div class="container experience-grid">
-          <div class="experience-copy" data-reveal>
-            <div class="glass-hero service-glass" style="--glass-image: url('assets/images/consultation.jpg')">
-              <img src="assets/images/consultation.jpg" alt="Primary care consultation" class="glass-image" />
-              <div class="glass-overlay">
-                <span class="eyebrow">Primary Care</span>
-                <h2 class="service-title">Primary Care</h2>
-                <span class="service-price">Starting at $100/month</span>
-                <ul class="service-list glass-list">
-                  <li>Same- or next-day appointments</li>
-                  <li>Annual wellness planning and preventive care</li>
-                  <li>Chronic disease management</li>
-                  <li>At-cost labs and imaging</li>
-                </ul>
+      <section class="section services-jump">
+        <div class="container">
+          <div class="services-jump-grid" data-reveal>
+            <a class="service-jump-card" href="#primary-care">
+              <img src="assets/images/Primary_Care_1.jpeg" alt="Primary care physician with patient" />
+              <div class="service-jump-overlay">
+                <span>Primary Care</span>
+                <strong>Starting at $100/mo</strong>
               </div>
-            </div>
+            </a>
+            <a class="service-jump-card" href="#rx">
+              <img src="assets/images/Pharmacist_1.jpeg" alt="Pharmacist supporting a patient" />
+              <div class="service-jump-overlay">
+                <span>Pharmacy</span>
+                <strong>$25/mo</strong>
+              </div>
+            </a>
+            <a class="service-jump-card" href="#dental">
+              <img src="assets/images/Dentist_1.jpeg" alt="Dental specialist with patient" />
+              <div class="service-jump-overlay">
+                <span>Dental</span>
+                <strong>$40/mo</strong>
+              </div>
+            </a>
+            <a class="service-jump-card" href="#vision">
+              <img src="assets/images/Optometry_1.jpeg" alt="Optometrist examining a patient" />
+              <div class="service-jump-overlay">
+                <span>Vision</span>
+                <strong>$10/mo</strong>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-showcase" id="primary-care">
+        <div class="container service-showcase-grid">
+          <figure class="service-showcase-media" data-reveal>
+            <img src="assets/images/Primary_Care.jpeg" alt="Primary care physician in a one-on-one consultation" />
+            <figcaption class="service-showcase-caption">
+              <span class="service-chip">Primary Care</span>
+              <strong>Starting at $100/month</strong>
+            </figcaption>
+          </figure>
+          <div class="service-showcase-content" data-reveal>
+            <span class="eyebrow">Your care foundation</span>
+            <h2>Primary care that finally gives you time.</h2>
             <p>
-              This is the foundation of Onevia. Longer visits, proactive care, and direct access mean you are treated
-              like a person, not a billing code.
+              Onevia primary care centers around long visits, fast access, and proactive planning. It is designed to
+              catch issues earlier and reduce expensive last-minute care.
             </p>
-            <p class="muted">
-              Ideal for individuals and families who want a physician who knows their story and helps prevent problems
-              before they become expensive.
-            </p>
-            <p class="muted">
-              Expect a care plan that looks ahead: wellness strategy, chronic condition tracking, and same-week follow
-              ups that keep you on track without the runaround.
-            </p>
-            <div class="service-savings">
-              <h4>Primary care savings snapshot</h4>
-              <div class="service-savings-grid">
-                <div class="service-savings-item">
-                  <span class="eyebrow">Typical cash</span>
-                  <strong>$150-$250</strong>
-                  <span class="muted">Standard office visit</span>
-                </div>
-                <div class="service-savings-item">
-                  <span class="eyebrow">Onevia member</span>
-                  <strong>Included</strong>
-                  <span class="muted">Visits covered by membership</span>
-                </div>
+            <ul class="service-value-list">
+              <li>Same-day or next-day appointment access</li>
+              <li>Longer visits built for listening and planning</li>
+              <li>Direct physician relationship and clear follow-through</li>
+              <li>At-cost labs and imaging coordination</li>
+            </ul>
+            <div class="service-compare-inline">
+              <div>
+                <span>Typical cash visit</span>
+                <strong>$150-$250</strong>
               </div>
-              <p class="service-savings-note">Example pricing only. Actual costs vary by market.</p>
+              <div>
+                <span>With Onevia</span>
+                <strong>Included in membership</strong>
+              </div>
             </div>
             <div class="service-actions">
               <a class="btn btn-primary" href="locations.html?filter=primary-care">Find Primary Care</a>
@@ -100,49 +144,37 @@
         </div>
       </section>
 
-      <section class="section" id="rx">
-        <div class="container experience-grid">
-          <div class="experience-copy" data-reveal>
-            <div class="glass-hero service-glass" style="--glass-image: url('assets/images/pharmacy.jpg')">
-              <img src="assets/images/pharmacy.jpg" alt="Pharmacy support in clinic" class="glass-image" />
-              <div class="glass-overlay">
-                <span class="eyebrow">Onevia Rx</span>
-                <h2 class="service-title">Pharmacy</h2>
-                <span class="service-price">$25/month</span>
-                <ul class="service-list glass-list">
-                  <li>Medication reviews and optimization</li>
-                  <li>Chronic disease medication support</li>
-                  <li>Refill coordination with your physician</li>
-                  <li>At-cost medication pricing</li>
-                </ul>
-              </div>
-            </div>
+      <section class="section service-showcase service-showcase-alt" id="rx">
+        <div class="container service-showcase-grid">
+          <figure class="service-showcase-media" data-reveal>
+            <img src="assets/images/Pharmacist.jpeg" alt="Pharmacist reviewing medications with a patient" />
+            <figcaption class="service-showcase-caption">
+              <span class="service-chip">Pharmacy</span>
+              <strong>$25/month</strong>
+            </figcaption>
+          </figure>
+          <div class="service-showcase-content" data-reveal>
+            <span class="eyebrow">Onevia Rx</span>
+            <h2>Pharmacy support that saves money every month.</h2>
             <p>
-              Pharmacists are part of the care team, optimizing medications and preventing unnecessary costs. Members
-              typically add Pharmacy (Onevia Rx) for the savings alone.
+              Onevia Pharmacy aligns your medication plan with your physician and keeps pricing transparent. It is one
+              of the fastest ways members feel immediate financial relief.
             </p>
-            <p class="muted">
-              Perfect for anyone on long-term medications or managing chronic conditions.
-            </p>
-            <p class="muted">
-              Pharmacy membership connects your pharmacist directly with your physician, so adjustments happen fast and
-              side effects are addressed before they become setbacks.
-            </p>
-            <div class="service-savings">
-              <h4>Pharmacy savings snapshot</h4>
-              <div class="service-savings-grid">
-                <div class="service-savings-item">
-                  <span class="eyebrow">Typical cash</span>
-                  <strong>$25-$60</strong>
-                  <span class="muted">Common generic Rx</span>
-                </div>
-                <div class="service-savings-item">
-                  <span class="eyebrow">Onevia at cost</span>
-                  <strong>$3-$10</strong>
-                  <span class="muted">Transparent medication pricing</span>
-                </div>
+            <ul class="service-value-list">
+              <li>Medication reviews and optimization</li>
+              <li>At-cost generic pricing where available</li>
+              <li>Refill coordination with your Onevia care team</li>
+              <li>Pharmacist support for chronic condition management</li>
+            </ul>
+            <div class="service-compare-inline">
+              <div>
+                <span>Typical generic Rx</span>
+                <strong>$25-$60</strong>
               </div>
-              <p class="service-savings-note">Example pricing only. Actual costs vary by market.</p>
+              <div>
+                <span>With Onevia</span>
+                <strong>$3-$10 (common meds)</strong>
+              </div>
             </div>
             <div class="service-actions">
               <a class="btn btn-primary" href="locations.html?filter=pharmacy">Find Pharmacy</a>
@@ -151,49 +183,37 @@
         </div>
       </section>
 
-      <section class="section" id="dental">
-        <div class="container experience-grid">
-          <div class="experience-copy" data-reveal>
-            <div class="glass-hero service-glass" style="--glass-image: url('assets/images/dental.jpg')">
-              <img src="assets/images/dental.jpg" alt="Dental care clinic" class="glass-image" />
-              <div class="glass-overlay">
-                <span class="eyebrow">Dental</span>
-                <h2 class="service-title">Dental</h2>
-                <span class="service-price">$40/month per member</span>
-                <ul class="service-list glass-list">
-                  <li>Routine exams and cleanings</li>
-                  <li>Basic imaging and screenings</li>
-                  <li>At-cost restorative procedures</li>
-                  <li>Coordinated care with your primary team</li>
-                </ul>
-              </div>
-            </div>
+      <section class="section service-showcase" id="dental">
+        <div class="container service-showcase-grid">
+          <figure class="service-showcase-media" data-reveal>
+            <img src="assets/images/Dentist.jpeg" alt="Dentist speaking with a patient during a preventive visit" />
+            <figcaption class="service-showcase-caption">
+              <span class="service-chip">Dental</span>
+              <strong>$40/month per member</strong>
+            </figcaption>
+          </figure>
+          <div class="service-showcase-content" data-reveal>
+            <span class="eyebrow">Preventive-first</span>
+            <h2>Dental care built around prevention, not surprise bills.</h2>
             <p>
-              Preventive-first dentistry keeps patients healthy and costs predictable. The membership removes insurance
-              pressure and rewards long-term oral health.
+              Onevia Dental focuses on consistent preventive care and straightforward pricing so members can protect
+              long-term oral health without insurance games.
             </p>
-            <p class="muted">
-              Best for members who want routine dental care without surprise bills.
-            </p>
-            <p class="muted">
-              Dental membership keeps you on a consistent preventive schedule, with transparent pricing when
-              restorative work is needed.
-            </p>
-            <div class="service-savings">
-              <h4>Dental savings snapshot</h4>
-              <div class="service-savings-grid">
-                <div class="service-savings-item">
-                  <span class="eyebrow">Typical cash</span>
-                  <strong>$180-$250</strong>
-                  <span class="muted">Cleaning + exam</span>
-                </div>
-                <div class="service-savings-item">
-                  <span class="eyebrow">Onevia member</span>
-                  <strong>Included</strong>
-                  <span class="muted">Routine preventive care</span>
-                </div>
+            <ul class="service-value-list">
+              <li>Routine exams, cleanings, and preventive screenings</li>
+              <li>Clear pricing before restorative work begins</li>
+              <li>Integrated planning with your primary care strategy</li>
+              <li>Simple monthly access to keep you on schedule</li>
+            </ul>
+            <div class="service-compare-inline">
+              <div>
+                <span>Typical cleaning + exam</span>
+                <strong>$180-$250</strong>
               </div>
-              <p class="service-savings-note">Example pricing only. Actual costs vary by market.</p>
+              <div>
+                <span>With Onevia</span>
+                <strong>Included preventive cadence</strong>
+              </div>
             </div>
             <div class="service-actions">
               <a class="btn btn-primary" href="locations.html?filter=dental">Find Dental</a>
@@ -202,49 +222,37 @@
         </div>
       </section>
 
-      <section class="section" id="vision">
-        <div class="container experience-grid">
-          <div class="experience-copy" data-reveal>
-            <div class="glass-hero service-glass" style="--glass-image: url('assets/images/vision.jpg')">
-              <img src="assets/images/vision.jpg" alt="Vision care clinic" class="glass-image" />
-              <div class="glass-overlay">
-                <span class="eyebrow">Vision</span>
-                <h2 class="service-title">Vision</h2>
-                <span class="service-price">$10/month</span>
-                <ul class="service-list glass-list">
-                  <li>Comprehensive eye health reviews</li>
-                  <li>Preventive screenings and monitoring</li>
-                  <li>Coordinated referrals when needed</li>
-                  <li>Transparent membership pricing</li>
-                </ul>
-              </div>
-            </div>
+      <section class="section service-showcase service-showcase-alt" id="vision">
+        <div class="container service-showcase-grid">
+          <figure class="service-showcase-media" data-reveal>
+            <img src="assets/images/Optometry.jpeg" alt="Optometrist providing a routine vision exam" />
+            <figcaption class="service-showcase-caption">
+              <span class="service-chip">Vision</span>
+              <strong>$10/month</strong>
+            </figcaption>
+          </figure>
+          <div class="service-showcase-content" data-reveal>
+            <span class="eyebrow">Early detection</span>
+            <h2>Vision care that keeps your baseline clear and current.</h2>
             <p>
-              Vision care is designed for early detection and long-term eye health, coordinated with your primary care
-              team for better outcomes.
+              Onevia Vision supports routine eye-health monitoring and early detection, with coordinated follow-up when
+              specialized care is needed.
             </p>
-            <p class="muted">
-              Ideal for members who want proactive screening and continuity over time.
-            </p>
-            <p class="muted">
-              Vision membership focuses on early detection, eye health tracking, and coordinated referrals if you ever
-              need advanced care.
-            </p>
-            <div class="service-savings">
-              <h4>Vision savings snapshot</h4>
-              <div class="service-savings-grid">
-                <div class="service-savings-item">
-                  <span class="eyebrow">Typical cash</span>
-                  <strong>$120-$180</strong>
-                  <span class="muted">Comprehensive eye exam</span>
-                </div>
-                <div class="service-savings-item">
-                  <span class="eyebrow">Onevia member</span>
-                  <strong>Included</strong>
-                  <span class="muted">Preventive eye health visits</span>
-                </div>
+            <ul class="service-value-list">
+              <li>Comprehensive eye-health reviews and screening</li>
+              <li>Proactive monitoring over time</li>
+              <li>Coordinated referrals when advanced care is needed</li>
+              <li>Transparent monthly pricing for routine care access</li>
+            </ul>
+            <div class="service-compare-inline">
+              <div>
+                <span>Typical eye exam</span>
+                <strong>$120-$180</strong>
               </div>
-              <p class="service-savings-note">Example pricing only. Actual costs vary by market.</p>
+              <div>
+                <span>With Onevia</span>
+                <strong>Included preventive visits</strong>
+              </div>
             </div>
             <div class="service-actions">
               <a class="btn btn-primary" href="locations.html?filter=vision">Find Vision</a>
@@ -258,9 +266,9 @@
           <div class="cta-banner" data-reveal>
             <div>
               <h3>Ready to build your membership?</h3>
-              <p>Choose your plan and add the services that fit you best.</p>
+              <p>Choose your location, then add the service mix that fits your life.</p>
             </div>
-            <a class="btn btn-primary" href="locations.html">Find a Clinic</a>
+            <a class="btn btn-primary" href="locations.html">Find Your Clinic</a>
           </div>
         </div>
       </section>
@@ -272,7 +280,6 @@
           <a href="index.html#savings">Savings</a>
           <a href="index.html#why">Why Onevia</a>
           <a href="about.html">Our Story</a>
-          <a href="index.html#testimonials">Patient Stories</a>
           <a href="index.html#faq">FAQ</a>
         </div>
         <div>
@@ -283,11 +290,9 @@
           <a href="services.html#vision">Vision</a>
         </div>
         <div>
-          <h4>Locations</h4>
-          <a href="locations.html">Find a Clinic</a>
-          <a href="missoula/index.html">Missoula</a>
-          <a href="bozeman/index.html">Bozeman</a>
-          <a href="billings/index.html">Billings</a>
+          <h4>Care Access</h4>
+          <a href="locations.html">Find Your Clinic</a>
+          <a href="patient-portal.html">Patient Portal</a>
         </div>
         <div>
           <h4>Contact</h4>
@@ -296,7 +301,7 @@
         </div>
       </div>
       <div class="container footer-bottom">
-        <p>(c) 2026 Onevia. All rights reserved.</p>
+        <p>&copy; 2026 Onevia. All rights reserved.</p>
       </div>
     </footer>
 

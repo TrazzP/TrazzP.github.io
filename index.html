@@ -31,12 +31,33 @@
         </button>
         <nav class="nav-links" id="nav-links">
           <a href="#savings">Savings</a>
-          <a href="#why">Why Onevia</a>
-          <a href="#services-preview">Services</a>
+          <div class="nav-dropdown">
+            <a class="nav-dropdown-link" href="#why">Why Onevia</a>
+            <button class="nav-dropdown-toggle" type="button" aria-label="Open Why Onevia menu" aria-expanded="false">
+              <span aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="about.html">Our Story</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <a class="nav-dropdown-link" href="services.html">Services</a>
+            <button class="nav-dropdown-toggle" type="button" aria-label="Open Services menu" aria-expanded="false">
+              <span aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="services.html">All Services</a>
+              <a href="services.html#primary-care">Primary Care</a>
+              <a href="services.html#rx">Pharmacy</a>
+              <a href="services.html#dental">Dental</a>
+              <a href="services.html#vision">Vision</a>
+            </div>
+          </div>
           <a href="#testimonials">Patient Stories</a>
           <a href="#faq">FAQ</a>
         </nav>
-        <a class="btn btn-primary nav-cta" href="locations.html">Find a Clinic</a>
+        <a class="btn btn-primary nav-cta" href="locations.html">Find Your Clinic</a>
+        <a class="text-link nav-portal-inline" href="patient-portal.html">Patient Portal</a>
       </div>
     </header>
 
@@ -49,7 +70,7 @@
           Content: Warm, welcoming family or patient consultation scene
         -->
         <video class="video-hero-bg" autoplay muted loop playsinline poster="assets/images/hero-consult.jpg">
-          <source src="assets/videos/VistaCreate-610324082-stock-video-healthy-black-male-patient-having-routine-check-senior-physician-closeup.mp4" type="video/mp4">
+          <source src="assets/videos/Hero_Video.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
         <div class="video-hero-overlay"></div>
@@ -61,9 +82,9 @@
               <h1 class="hero-title-glass">One Membership. Complete Care.</h1>
 
               <div class="hero-slider" id="hero-slider">
-                <p class="hero-slide active"><strong>How often can I see my doctor?</strong><br />As often as you need — unlimited visits with no copays.</p>
-                <p class="hero-slide"><strong>What's included in my membership?</strong><br />Everything. No copays, no surprise bills, no waiting rooms.</p>
-                <p class="hero-slide"><strong>How quickly can I be seen?</strong><br />Same day. Plus 24/7 text and phone access to your doctor.</p>
+                <p class="hero-slide active"><strong>Same-day access.</strong><br />See your care team quickly when something comes up.</p>
+                <p class="hero-slide"><strong>One-hour visits.</strong><br />Get real time to talk, plan, and be heard.</p>
+                <p class="hero-slide"><strong>Transparent membership model.</strong><br />Primary care starts at $100/month, with clear add-on options by clinic.</p>
               </div>
               <div class="hero-dots" id="hero-dots">
                 <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
@@ -133,39 +154,105 @@
         </div>
       </section>
 
-      <!-- Why Onevia - Video Background -->
-      <section class="video-hero" id="why">
-        <video class="video-hero-bg" autoplay muted loop playsinline poster="assets/images/hero-consult.jpg">
-          <source src="assets/videos/VistaCreate-610324082-stock-video-healthy-black-male-patient-having-routine-check-senior-physician-closeup.mp4" type="video/mp4">
-        </video>
-        <div class="video-hero-overlay"></div>
-
+      <!-- Why Onevia + Patient Stories -->
+      <section class="section section-glass-bg why-testimonials" id="why">
         <div class="container">
-          <div class="video-hero-content hero-split-layout hero-split-three">
-            <div class="glass-hero-card glass-hero-title-card" data-reveal>
-              <h2 class="hero-title-glass">Live Life Uninterrupted</h2>
-              <p class="hero-lead-glass">Happy • Healthy • Connected</p>
-            </div>
+          <div class="section-title" data-reveal>
+            <span class="eyebrow">Why Onevia</span>
+            <h2>Real patients. Real relief.</h2>
+            <p>Five quick stories from people who wanted faster access, clearer plans, and fewer surprises.</p>
+          </div>
 
-            <div class="glass-hero-card glass-hero-tagline-card" data-reveal>
-              <div class="hero-slider" id="why-slider">
-                <p class="hero-slide active"><strong>Tired of healthcare getting in the way of your life?</strong><br />Get care that fits your schedule. Focus on what matters.</p>
-                <p class="hero-slide"><strong>Want to stop worrying and start living?</strong><br />Your doctor is a text away. Stop Googling symptoms at midnight.</p>
-                <p class="hero-slide"><strong>Ready to feel like yourself again?</strong><br />Feel energized and fully present for the moments that matter.</p>
-                <p class="hero-slide"><strong>Missing out because of health complications?</strong><br />Life doesn't happen 9-to-5, and neither should your healthcare.</p>
-              </div>
-              <div class="hero-dots" id="why-dots">
-                <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
-                <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
-                <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
-                <button class="hero-dot" data-slide="3" aria-label="Slide 4"></button>
-              </div>
-            </div>
+          <div class="video-testimonial-carousel" id="testimonials" data-reveal>
+            <div class="video-testimonial-track-wrap">
+              <button class="story-nav story-nav-prev" id="story-prev" type="button" aria-label="Previous story">&#8592;</button>
+              <div class="video-testimonial-track" id="why-slider" aria-live="polite">
+                <article class="video-testimonial-slide is-active" data-story="0">
+                  <button class="story-spine" type="button" aria-label="Open Anna story">
+                    <span class="story-spine-name">Anna</span>
+                  </button>
+                  <div class="story-face">
+                    <div class="video-testimonial-media">
+                      <video class="video-testimonial-video" poster="assets/images/testimonial-1.jpg" muted playsinline preload="metadata" data-max-seconds="5">
+                        <source src="assets/videos/Testominial_1.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    <div class="story-copy-card">
+                      <p class="video-testimonial-id">Anna * Teacher</p>
+                      <p class="video-testimonial-copy">"I got seen the same day and we made a real plan in one visit. It finally felt proactive instead of reactive."</p>
+                    </div>
+                  </div>
+                </article>
 
-            <div class="glass-hero-card glass-hero-story-card" data-reveal>
-              <a class="story-cta-link" href="about.html">
-                Read Our Story <span>&rarr;</span>
-              </a>
+                <article class="video-testimonial-slide" data-story="1">
+                  <button class="story-spine" type="button" aria-label="Open Joe story">
+                    <span class="story-spine-name">Joe</span>
+                  </button>
+                  <div class="story-face">
+                    <div class="video-testimonial-media">
+                      <video class="video-testimonial-video" poster="assets/images/testimonial-2.jpg" muted playsinline preload="metadata" data-max-seconds="5">
+                        <source src="assets/videos/Testominial_2.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    <div class="story-copy-card">
+                      <p class="video-testimonial-id">Joe * Contractor</p>
+                      <p class="video-testimonial-copy">"The longer visits changed everything. I leave knowing exactly what to do, and my care actually fits my schedule."</p>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="video-testimonial-slide" data-story="2">
+                  <button class="story-spine" type="button" aria-label="Open Maya story">
+                    <span class="story-spine-name">Maya</span>
+                  </button>
+                  <div class="story-face">
+                    <div class="video-testimonial-media">
+                      <video class="video-testimonial-video" poster="assets/images/testimonial-3.jpg" muted playsinline preload="metadata" data-max-seconds="5">
+                        <source src="assets/videos/Testominial_3.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    <div class="story-copy-card">
+                      <p class="video-testimonial-id">Maya * Small Business Owner</p>
+                      <p class="video-testimonial-copy">"Transparent pricing made this easy to budget. I am saving on meds and labs without sacrificing quality."</p>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="video-testimonial-slide" data-story="3">
+                  <button class="story-spine" type="button" aria-label="Open Daniel story">
+                    <span class="story-spine-name">Daniel</span>
+                  </button>
+                  <div class="story-face">
+                    <div class="video-testimonial-media">
+                      <video class="video-testimonial-video" poster="assets/images/consultation.jpg" muted playsinline preload="metadata" data-max-seconds="5">
+                        <source src="assets/videos/Testominial_4.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    <div class="story-copy-card">
+                      <p class="video-testimonial-id">Daniel * Parent</p>
+                      <p class="video-testimonial-copy">"Our family care is finally coordinated. We are not bouncing between offices anymore, and that is huge."</p>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="video-testimonial-slide" data-story="4">
+                  <button class="story-spine" type="button" aria-label="Open Elena story">
+                    <span class="story-spine-name">Elena</span>
+                  </button>
+                  <div class="story-face">
+                    <div class="video-testimonial-media">
+                      <video class="video-testimonial-video" poster="assets/images/hero-consult.jpg" muted playsinline preload="metadata" data-max-seconds="5">
+                        <source src="assets/videos/Testominial_5.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    <div class="story-copy-card">
+                      <p class="video-testimonial-id">Elena * Nurse</p>
+                      <p class="video-testimonial-copy">"I joined for convenience and stayed for trust. This is the first time my care has felt this personal."</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <button class="story-nav story-nav-next" id="story-next" type="button" aria-label="Next story">&#8594;</button>
             </div>
           </div>
         </div>
@@ -176,8 +263,8 @@
         <div class="container">
           <div class="section-title" data-reveal>
             <span class="eyebrow">Services</span>
-            <h2>Everything under one roof. One membership.</h2>
-            <p>Primary care is the foundation. Add pharmacy, dental, and vision as you need them.</p>
+            <h2>Build the care setup that fits your life.</h2>
+            <p>Primary care is the membership foundation. Add Pharmacy, Dental, and Vision based on your clinic and needs.</p>
           </div>
           <div class="services-grid-2x2" data-reveal>
             <div class="service-preview-card">
@@ -224,90 +311,6 @@
         </div>
       </section>
 
-      <section class="section" id="testimonials">
-        <div class="container">
-          <div class="section-title" data-reveal>
-            <span class="eyebrow">Testimonials</span>
-            <h2>Members feel the difference.</h2>
-            <p>Relationship-based care changes the entire experience. Here is what members say.</p>
-          </div>
-          <div class="testimonial-photo-grid" data-reveal>
-            <article class="testimonial-photo-card">
-              <!--
-                PHOTO BACKGROUND: Use assets/images/testimonial-1.jpg
-                Content: Happy patient in healthcare setting
-              -->
-              <div class="testimonial-photo-bg" style="background-image: url('assets/images/testimonial-1.jpg');"></div>
-              <div class="testimonial-photo-overlay"></div>
-              <div class="testimonial-glass-content">
-                <p>
-                  "I finally feel heard. Visits are longer, and my doctor knows my history. I'm healthier and spend less
-                  time navigating paperwork."
-                </p>
-                <span>- Patient story (composite)</span>
-              </div>
-            </article>
-            <article class="testimonial-photo-card">
-              <!--
-                PHOTO BACKGROUND: Use assets/images/testimonial-2.jpg
-                Content: Employer/business owner
-              -->
-              <div class="testimonial-photo-bg" style="background-image: url('assets/images/testimonial-2.jpg');"></div>
-              <div class="testimonial-photo-overlay"></div>
-              <div class="testimonial-glass-content">
-                <p>
-                  "We switched our team to Onevia and saw better retention, fewer sick days, and clearer costs month to
-                  month."
-                </p>
-                <span>- Employer partner (composite)</span>
-              </div>
-            </article>
-            <article class="testimonial-photo-card">
-              <!--
-                PHOTO BACKGROUND: Use assets/images/testimonial-3.jpg
-                Content: Member with care team
-              -->
-              <div class="testimonial-photo-bg" style="background-image: url('assets/images/testimonial-3.jpg');"></div>
-              <div class="testimonial-photo-overlay"></div>
-              <div class="testimonial-glass-content">
-                <p>
-                  "The at-cost pharmacy savings alone justify membership. It feels like a care team, not a system."
-                </p>
-                <span>- Member story (composite)</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- For Employers -->
-      <section class="section section-glass-bg" id="employers">
-        <div class="container">
-          <div class="section-title" data-reveal>
-            <span class="eyebrow">For Employers</span>
-            <h2>Better care for your team. Lower costs for your business.</h2>
-            <p>Onevia employer plans give your team direct access to primary care, pharmacy, dental, and vision - with predictable monthly costs and zero claims to manage.</p>
-          </div>
-          <div class="employer-benefits-grid" data-reveal>
-            <div class="employer-benefit">
-              <h4>Predictable costs</h4>
-              <p>Flat monthly rate per employee. No surprise claims, no deductible negotiations, no annual premium hikes.</p>
-            </div>
-            <div class="employer-benefit">
-              <h4>Healthier employees</h4>
-              <p>Same-day access and preventive focus mean fewer sick days, fewer ER visits, and faster return to work.</p>
-            </div>
-            <div class="employer-benefit">
-              <h4>Retention advantage</h4>
-              <p>Direct care is a benefit employees actually value. Teams that feel cared for stay longer.</p>
-            </div>
-          </div>
-          <div class="employer-cta" data-reveal>
-            <a class="btn btn-primary" href="mailto:employers@onevia.health">Contact Us About Employer Plans</a>
-          </div>
-        </div>
-      </section>
-
       <section class="section faq" id="faq">
         <div class="container">
           <div class="section-title" data-reveal>
@@ -321,7 +324,7 @@
             </details>
             <details>
               <summary>What does membership include?</summary>
-              <p>All primary care visits, preventive care, chronic disease management, telemedicine, and direct access.</p>
+              <p>Primary care is included in membership. Pharmacy, Dental, and Vision are optional add-ons depending on clinic availability.</p>
             </details>
             <details>
               <summary>How quickly can I be seen?</summary>
@@ -343,37 +346,18 @@
         </div>
       </section>
 
-      <!-- Not in your city yet? -->
-      <section class="section" id="notify">
+      <section class="section" id="portal">
         <div class="container">
-          <div class="notify-card" data-reveal>
-            <div class="section-title">
-              <span class="eyebrow">Not in your city yet?</span>
-              <h2>We're growing across Montana.</h2>
-              <p>Leave your email and we'll let you know when Onevia is coming to your area. Early supporters get priority access and founding member pricing.</p>
+          <div class="cta-banner" data-reveal>
+            <div>
+              <h3>Already a patient?</h3>
+              <p>Access the future patient portal for chart access and secure doctor messaging.</p>
             </div>
-            <form class="notify-form" onsubmit="handleNotifySubmit(event)">
-              <div class="notify-form-row">
-                <input type="email" id="notify-email" placeholder="you@email.com" required aria-label="Email address" />
-                <button type="submit" class="btn btn-primary">Notify Me</button>
-              </div>
-              <p class="form-note">No spam. Just updates when we expand to new cities.</p>
-            </form>
+            <a class="btn btn-primary" href="patient-portal.html">Open Patient Portal</a>
           </div>
         </div>
       </section>
 
-      <section class="section" id="contact">
-        <div class="container">
-          <div class="cta-banner" data-reveal>
-            <div>
-              <h3>Ready to join Onevia?</h3>
-              <p>Find your clinic and get started today.</p>
-            </div>
-            <a class="btn btn-primary" href="locations.html">Get Started</a>
-          </div>
-        </div>
-      </section>
     </main>
     <footer class="footer">
       <div class="container footer-grid">
@@ -382,7 +366,6 @@
           <a href="index.html#savings">Savings</a>
           <a href="index.html#why">Why Onevia</a>
           <a href="about.html">Our Story</a>
-          <a href="index.html#testimonials">Patient Stories</a>
           <a href="index.html#faq">FAQ</a>
         </div>
         <div>
@@ -393,11 +376,9 @@
           <a href="services.html#vision">Vision</a>
         </div>
         <div>
-          <h4>Locations</h4>
-          <a href="locations.html">Find a Clinic</a>
-          <a href="missoula/index.html">Missoula</a>
-          <a href="bozeman/index.html">Bozeman</a>
-          <a href="billings/index.html">Billings</a>
+          <h4>Care Access</h4>
+          <a href="locations.html">Find Your Clinic</a>
+          <a href="patient-portal.html">Patient Portal</a>
         </div>
         <div>
           <h4>Contact</h4>
@@ -407,7 +388,7 @@
       </div>
       <div class="container footer-bottom">
         <p class="footer-note"><sup>1</sup> Actual costs vary by market and supply.</p>
-        <p>(c) 2026 Onevia. All rights reserved.</p>
+        <p>&copy; 2026 Onevia. All rights reserved.</p>
       </div>
     </footer>
 
