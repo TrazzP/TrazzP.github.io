@@ -2378,6 +2378,10 @@ img {
 .video-hero-content.hero-split-layout {
   display: flex;
   max-width: none;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 75vh;
+  padding-bottom: 3rem;
 }
 
 /* Glass Hero Card */
@@ -2390,6 +2394,31 @@ img {
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   animation: none;
+}
+
+/* Combined Hero Card - Single card at bottom center */
+.glass-hero-combined {
+  max-width: 480px;
+  padding: 1.3rem 1.6rem;
+}
+
+.glass-hero-combined .hero-title-glass {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  white-space: nowrap;
+}
+
+.glass-hero-combined .hero-services-label {
+  margin-bottom: 0.4rem;
+  font-size: 0.7rem;
+}
+
+.glass-hero-combined .hero-slider {
+  margin-top: 1rem;
+}
+
+.glass-hero-combined .hero-dots {
+  margin-top: 0.8rem;
 }
 
 @keyframes float {
@@ -5525,6 +5554,41 @@ img[data-src] {
     max-width: 84% !important;
   }
 
+  .glass-hero-combined {
+    max-width: 90% !important;
+    padding: 1rem 1.2rem !important;
+    margin: 0 auto;
+  }
+
+  .glass-hero-combined .hero-title-glass {
+    margin-bottom: 0.8rem;
+    font-size: 1.15rem !important;
+    white-space: normal !important;
+  }
+
+  .glass-hero-combined .hero-services-label {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.3rem;
+  }
+
+  .glass-hero-combined .hero-slider {
+    margin-top: 0.8rem;
+  }
+
+  .glass-hero-combined .hero-slide {
+    font-size: 0.8rem !important;
+  }
+
+  .glass-hero-combined .hero-dots {
+    margin-top: 0.6rem;
+  }
+
+  .video-hero-content.hero-split-layout {
+    justify-content: center;
+    min-height: 65vh;
+    padding-bottom: 2rem;
+  }
+
   .hero-title-glass {
     font-size: 1.25rem !important;
   }
@@ -6151,6 +6215,29 @@ img[data-src] {
   .glass-hero-tagline-card,
   .glass-hero-story-card {
     max-width: 96%;
+  }
+
+  .glass-hero-combined {
+    max-width: 92% !important;
+    padding: 0.85rem 1rem !important;
+  }
+
+  .glass-hero-combined .hero-title-glass {
+    font-size: 1rem !important;
+    margin-bottom: 0.6rem;
+  }
+
+  .glass-hero-combined .hero-services-label {
+    font-size: 0.6rem !important;
+  }
+
+  .glass-hero-combined .hero-slide {
+    font-size: 0.75rem !important;
+  }
+
+  .video-hero-content.hero-split-layout {
+    min-height: 60vh;
+    padding-bottom: 1.5rem;
   }
 
   .hero-split-layout {
