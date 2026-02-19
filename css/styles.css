@@ -4416,6 +4416,12 @@ img {
     min-height: 44px;
     padding: 0.75rem 1.4rem;
     font-size: 1rem;
+    border-width: 1px;
+  }
+
+  .btn-primary,
+  .nav-cta.btn-primary {
+    border: 1px solid transparent;
   }
 
   .filter-chip {
@@ -4765,6 +4771,11 @@ img {
   .btn {
     padding: 0.7rem 1.2rem;
     font-size: 0.95rem;
+    border-width: 1px;
+  }
+
+  .btn-primary {
+    border: 1px solid transparent !important;
   }
 
   .glass-overlay {
@@ -5509,26 +5520,26 @@ img[data-src] {
 @media (max-width: 768px) {
   /* Further reduce glass card size on mobile so video shows through more */
   .glass-hero-card {
-    padding: 0.9rem 1.1rem !important;
+    padding: 0.85rem 1rem !important;
     border-radius: 16px !important;
-    max-width: 88% !important;
+    max-width: 84% !important;
   }
 
   .hero-title-glass {
-    font-size: 1.3rem !important;
+    font-size: 1.25rem !important;
   }
 
   .hero-lead-glass {
-    font-size: 0.88rem !important;
+    font-size: 0.85rem !important;
   }
 
   .hero-slide {
-    font-size: 0.88rem !important;
+    font-size: 0.86rem !important;
     line-height: 1.4;
   }
 
   .hero-slider {
-    min-height: 2.5rem !important;
+    min-height: 2.4rem !important;
   }
 
   .urgency-badge {
@@ -5539,6 +5550,13 @@ img[data-src] {
   .location-hero-actions-inline .btn {
     padding: 0.5rem 0.9rem !important;
     font-size: 0.82rem !important;
+  }
+
+  /* Ensure buttons on location pages have clean borders */
+  .location-hero-actions-inline .btn-primary,
+  .location-hero-actions .btn-primary {
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(31, 111, 178, 0.25);
   }
 }
 
@@ -5553,9 +5571,9 @@ img[data-src] {
   /* Ensure video overlay is strong enough on small screens */
   .video-hero-overlay {
     background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.4) 0%,
-      rgba(0, 0, 0, 0.6) 100%
+      135deg,
+      rgba(11, 30, 51, 0.5) 0%,
+      rgba(31, 111, 178, 0.35) 100%
     );
   }
 
@@ -5715,8 +5733,9 @@ img[data-src] {
   }
 
   .hero-dot {
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
+    border-width: 1px;
   }
 
   .hero-dot.active {
@@ -5737,18 +5756,18 @@ img[data-src] {
   /* Location glass card - tighter on mobile so background image shows */
   .glass-location-card,
   .glass-location-card-compact {
-    padding: 1.2rem;
-    max-width: 88%;
+    padding: 1.1rem 1.3rem;
+    max-width: 84%;
     margin: 0 auto;
   }
 
   .location-title {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
     margin-bottom: 0.25rem;
   }
 
   .location-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     margin-bottom: 0.8rem;
   }
 
@@ -5777,22 +5796,26 @@ img[data-src] {
     padding: 0.7rem 1rem;
     font-size: 0.9rem;
   }
+
+  .location-hero-actions .btn-primary {
+    border: none !important;
+  }
 }
 
 @media (max-width: 480px) {
   .glass-location-card,
   .glass-location-card-compact {
-    padding: 1rem;
-    max-width: 92%;
+    padding: 0.95rem 1.1rem;
+    max-width: 86%;
     border-radius: 16px;
   }
 
   .location-title {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
   }
 
   .location-subtitle {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     margin-bottom: 0.6rem;
   }
 
@@ -6118,7 +6141,7 @@ img[data-src] {
 
   /* Brand text minimum */
   .brand-text-lg {
-    font-size: clamp(0.95rem, 4vw, 1.5rem);
+    font-size: clamp(1.25rem, 4.5vw, 1.6rem);
   }
 }
 
@@ -6135,12 +6158,13 @@ img[data-src] {
   }
 
   .hero-dot {
-    width: 6px !important;
-    height: 6px !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-width: 1px !important;
   }
 
   .hero-dot.active {
-    transform: scale(1.1) !important;
+    transform: scale(1.15) !important;
   }
 
   .membership-progress-bar {
